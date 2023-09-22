@@ -3,7 +3,7 @@
     MULTI AUTH STATE 
   
 */
-
+require('../config');
 const app = require("express")();
 const {
   default: DsanConnect,
@@ -29,59 +29,51 @@ const store = makeInMemoryStore({
     }) 
     })
 
-async function startDsan() {
+  async function startDsan() {
 
   let { version } = await fetchLatestBaileysVersion()
   const { state, saveState } = useSingleFileAuthState("./neko.json");
 
 const clearState = () => {
-  fs.unlinkSync("./neko.json");
+fs.unlinkSync("./neko.json");
 }
   const dsan = DsanConnect({
     logger: P({ level: "silent" }),
     printQRInTerminal: false,
-    browser: ["DSAN", "Chrome", "1.0.0"],
+    browser: ["vorterx", "Firefox", "1.0.0"],
     qrTimeout: 5000,
     auth: state,
     version
   })
 
-  store.bind(dsan.ev)
-
-  dsan.cmd = new Collection()
-
-  dsan.DB = new QuickDB({
-    driver
+  store.bind(vorterx.ev) vorterx.cmd = new Collection()
+  vorterx.DB = new QuickDB({driver
   })
 
-  dsan.mods = process.env.MODS || "7047584741";
+  vorterx.mods = process.env.MODS || "7047584741";
 
-  dsan.contactDB = dsan.DB.table('contacts')
+  vorterx.contactDB = vorterx.DB.table('contacts')
 
-  dsan.contact = contact
+  vorterx.contact = contact
 
-  dsan.prefix = process.env.PREFIX || '?'
+  vorterx.prefix = process.env.PREFIX || '?'
 
 
-  async function readcommands() {
+    async function readcommands() {
     const cmdfile = fs
-      .readdirSync("./Commands")
-      .filter((file) => file.endsWith(".js"));
+    .readdirSync("./Commands")
+    .filter((file) => file.endsWith(".js"));
     for (const file of cmdfile) {
-      const command = require(`./Commands/${file}`);
-      dsan.cmd.set(command.name, command);
+    const command = require(`./Commands/${file}`);
+    vorterx.cmd.set(command.name, command);
     }
-  };
+    };
 
   readcommands()
+  vorterx.ev.on('creds.update', saveState)
+  vorterx.ev.on('connection.update', async (update) => {
 
-
-
-  dsan.ev.on('creds.update', saveState)
-
-  dsan.ev.on('connection.update', async (update) => {
-
-    const { connection, lastDisconnect } = update
+  const { connection, lastDisconnect } = update
 
 
     if (connection === "close") {
