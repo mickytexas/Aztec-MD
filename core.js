@@ -37,7 +37,7 @@ const store = makeInMemoryStore({
 const clearState = () => {
 fs.unlinkSync("./neko.json");
 }
-  const dsan = AztecConnect({
+  const vorterx = AztecConnect({
     logger: P({ level: "silent" }),
     printQRInTerminal: false,
     browser: ["vorterx", "Firefox", "1.0.0"],
@@ -107,10 +107,6 @@ fs.unlinkSync("./neko.json");
    vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx))
    vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx))
    }
-   if (!MONGOURL) return console.error('You have not provided any MongoDB URL!!')
-   driver
-   .connect() .then(() => {
-   console.log(`Connected to the database!`)
    startAztec()
    })
   .catch((err) => console.error(err))
