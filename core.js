@@ -3,7 +3,8 @@
     MULTI AUTH STATE 
   
 */
-require('../config');
+require('./lib/message/vorterx.js');
+require('./config');
 const app = require("express")();
 const {
   default: AztecConnect,
