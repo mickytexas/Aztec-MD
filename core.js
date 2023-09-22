@@ -6,7 +6,7 @@
 require('../config');
 const app = require("express")();
 const {
-  default: DsanConnect,
+  default: AztecConnect,
   DisconnectReason,
   fetchLatestBaileysVersion,
   makeInMemoryStore,
@@ -37,7 +37,7 @@ const store = makeInMemoryStore({
 const clearState = () => {
 fs.unlinkSync("./neko.json");
 }
-  const dsan = DsanConnect({
+  const dsan = AztecConnect({
     logger: P({ level: "silent" }),
     printQRInTerminal: false,
     browser: ["vorterx", "Firefox", "1.0.0"],
@@ -78,54 +78,40 @@ fs.unlinkSync("./neko.json");
 
     if (connection === "close") {
       let reason = new Boom(lastDisconnect?.error)?.output.statusCode; if (reason === DisconnectReason.connectionClosed) {
-        console.log("Connection closed, reconnecting....");
-        startDsan();
+      console.log("Connection closed, reconnecting....");
+      startDsan();
       } else if (reason === DisconnectReason.connectionLost) {
-        console.log("Connection Lost from Server, reconnecting...");
-        startDsan();
+      console.log("Connection Lost from Server, reconnecting...");
+      startDsan();
       } else if (reason === DisconnectReason.loggedOut) {
-        clearState();
-        console.log(
-          ` Device Logged Out, Please Delete Session and Scan Again.`
-        );
-        process.exit();
+      clearState();
+      console.log(` Device Logged Out, Please Delete Session and Scan Again.`);
+      process.exit();
       } else if (reason === DisconnectReason.restartRequired) {
-        console.log("Server starting...");
-        startDsan();
+      console.log("Server starting...");
+      startDsan();
       } else if (reason === DisconnectReason.timedOut) {
-        console.log("Connection Timed Out, Trying to Reconnect....");
-        startDsan();
+      console.log("Connection Timed Out, Trying to Reconnect....");
+      startDsan();
       } else {
-        console.log(
-          `Server Disconnected: Maybe Your WhatsApp Account got banned !`
-        );
-        clearState();
+     console.log(`Server Disconnected: Maybe Your WhatsApp Account got banned !` );
+     clearState();
       }
-    }
-    if (update.qr) {
-      dsan.QR = qr.imageSync(update.qr)
-    }
-  }
-  )
-
-  app.get("/", (req, res) => {
-    res.end(dsan.QR)
-  })
-  dsan.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, dsan))
-
-  dsan.ev.on('contacts.update', async (update) => await contact.saveContacts(update, dsan))
-
-
-}
+      }
+     if (update.qr) {
+     dsan.QR = qr.imageSync(update.qr)
+     }
+     }
+     )
+   app.get("/", (req, res) => {res.end(dsan.QR) })
+   dsan.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, dsan))
+   dsan.ev.on('contacts.update', async (update) => await contact.saveContacts(update, dsan))
+   }
 if (!MONGOURL) return console.error('You have not provided any MongoDB URL!!')
 driver
-  .connect()
-  .then(() => {
-    console.log(`Connected to the database!`)
-
-    startDsan()
-  })
-  .catch((err) => console.error(err))
-
-
+.connect() .then(() => {
+console.log(`Connected to the database!`)
+startDsan()
+})
+.catch((err) => console.error(err))
 app.listen(PORT)
