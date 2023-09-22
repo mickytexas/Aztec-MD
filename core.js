@@ -15,6 +15,7 @@ const {
 } = require('@whiskeysockets/baileys');
 const { Boom } = require('@hapi/boom');
 const P = require('pino');
+const express = require("express");
 const { QuickDB } = require('quick.db')
 const { MongoDriver } = require('quickmongo');
 const fs = require("fs");
@@ -68,6 +69,9 @@ fs.unlinkSync("./creds.json");
     };
 
   readcommands()
+ const PORT = port;
+ const app = express();
+      
   vorterx.ev.on('creds.update', saveState)
   vorterx.ev.on('connection.update', async (update) => {
 
@@ -108,4 +112,5 @@ fs.unlinkSync("./creds.json");
    startAztec()
    })
   .catch((err) => console.error(err))
-  app.listen(PORT)
+  app.listen(PORT, () => { 
+            console.log(`🎎AZTEC IS CURRENTLY RUNNING ON PORT ${PORT}`);});
