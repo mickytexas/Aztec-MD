@@ -22,8 +22,7 @@ const { Collection } = require('discord.js')
 const qr = require("qr-image");
 const contact = require("./mangoes/contact.js");
 const MessageHandler = require('./lib/message/vorterx.js');
-const MONGOURL = process.env.URL || "mongodb+srv://nekosenpai269:1234@shibam.qw9rlw0.mongodb.net/?retryWrites=true&w=majority"
-const driver = new MongoDriver(MONGOURL)
+const driver = new MongoDriver(MONGODB)
 const store = makeInMemoryStore({ 
     logger: P().child(
     { level: 'silent', stream: 'store'
@@ -33,10 +32,10 @@ const store = makeInMemoryStore({
   async function startDsan() {
 
   let { version } = await fetchLatestBaileysVersion()
-  const { state, saveState } = useSingleFileAuthState("./neko.json");
+  const { state, saveState } = useMultiFileAuthState("./creds.json");
 
 const clearState = () => {
-fs.unlinkSync("./neko.json");
+fs.unlinkSync("./creds.json");
 }
   const vorterx = AztecConnect({
     logger: P({ level: "silent" }),
