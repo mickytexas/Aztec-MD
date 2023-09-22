@@ -16,6 +16,7 @@ const {
 const { Boom } = require('@hapi/boom');
 const P = require('pino');
 const express = require("express");
+const vorterx= require('./lib/message/vorterx.js');
 const { QuickDB } = require('quick.db')
 const { MongoDriver } = require('quickmongo');
 const fs = require("fs");
@@ -48,7 +49,8 @@ fs.unlinkSync("./creds.json");
     version
   })
 
-  store.bind(vorterx.ev) vorterx.cmd = new Collection()
+  store.bind(vorterx.ev)
+  vorterx.cmd = new Collection()
   vorterx.DB = new QuickDB({driver
   })
 
