@@ -1,0 +1,46 @@
+{
+  "name": "vorterx",
+  "version": "3.0.0",
+  "main": "core.js",
+  "scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1"
+   },
+  "keywords": [],
+  "author": "Diegoson",
+  "dependencies": {
+    "@adiwajshing/baileys": "^4.4.0",
+    "@adiwajshing/keyed-db": "^0.2.4",
+    "@consumet/extensions": "^1.4.18",
+    "@hapi/boom": "^10.0.1",
+    "@types/node": "^18.0.6",
+    "async-g-i-s": "^1.4.0",
+    "axios": "^1.4.0",
+    "chalk": "^4.1.1",
+    "discord.js": "^14.11.0",
+    "emoji-strip": "^1.0.1",
+    "express": "^4.18.2",
+    "ffmpeg": "^0.0.4",
+    "file-type": "^14.3.0",
+    "form-data": "^4.0.0",
+    "mumaker": "^1.0.0",
+    "node-fetch": "^3.2.6",
+    "openai": "^3.2.1",
+    "pino": "^8.14.1",
+    "qr-image": "^3.2.0",
+    "quick.db": "^9.1.6",
+    "quickmongo": "^5.2.0",
+    "wa-sticker-formatter": "^4.4.4"
+    },
+    "directories": {
+    "lib": "lib"
+    },
+    "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vorterx/Aztec-MD.git"
+    },
+    "bugs": {
+    "url": "https://github.com/Vorterx/Aztec-MD/issues"
+     },
+     "homepage": "https://github.com/Vorterx/Aztec-MD#readme",
+     "description": ""
+     }
