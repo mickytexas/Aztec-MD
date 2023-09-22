@@ -1,4 +1,4 @@
-const axios = require('axios');
+/*const axios = require('axios');
 
 module.exports = {
   name: 'alive',
@@ -9,4 +9,4 @@ module.exports = {
    let nxn = ` HI THERE LM ALIVE REALLY ALIVE`;
    vorterx.sendMessage(m.from,{ caption: nxn}, {quoted: m}
  } 
-   
+   */
