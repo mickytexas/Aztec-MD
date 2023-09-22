@@ -1,10 +1,7 @@
-      const getContact = async (jid, dsan) => {
+      const getContact = async (jid, vorterx) => {
       
-      const contact = await dsan.contactDB.get(jid);
-  
-    
+      const contact = await vorterx.contactDB.get(jid);
       const username = contact?.name ?? 'User';
-  
       return { username, jid };
       };
   
