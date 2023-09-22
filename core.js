@@ -112,7 +112,6 @@ fs.unlinkSync("./creds.json");
    vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx))
    }
    startAztec()
-   })
   .catch((err) => console.error(err))
   app.listen(PORT, () => { 
             console.log(`🎎AZTEC IS CURRENTLY RUNNING ON PORT ${PORT}`);});
