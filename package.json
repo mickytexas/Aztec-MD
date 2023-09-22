@@ -4,7 +4,8 @@
   "main": "core.js",
   "scripts": {
   "test": "echo \"Error: no test specified\" && exit 1"
-   },
+  "start": "node --max-old-space-size=4096 core.js"
+  },
   "keywords": [],
   "author": "Diegoson",
   "dependencies": {
