@@ -29,6 +29,7 @@ const store = makeInMemoryStore({
     }) 
     })
 
+  vorterx.config = config()
   async function startDsan() {
 
   let { version } = await fetchLatestBaileysVersion()
@@ -50,14 +51,11 @@ fs.unlinkSync("./creds.json");
   vorterx.DB = new QuickDB({driver
   })
 
-  vorterx.mods = process.env.MODS || "7047584741";
-
+  
   vorterx.contactDB = vorterx.DB.table('contacts')
-
   vorterx.contact = contact
 
-  vorterx.prefix = process.env.PREFIX || '?'
-
+  
 
     async function readcommands() {
     const cmdfile = fs
