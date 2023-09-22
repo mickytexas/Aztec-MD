@@ -5,14 +5,13 @@
 */
 
 const app = require("express")();
-const PORT = process.env.PORT || 8080;
 const {
   default: DsanConnect,
   DisconnectReason,
   fetchLatestBaileysVersion,
   makeInMemoryStore,
-  useSingleFileAuthState
-} = require('@adiwajshing/baileys');
+  useMultiFileAuthState
+} = require('@whiskeysockets/baileys');
 const { Boom } = require('@hapi/boom');
 const P = require('pino');
 const { QuickDB } = require('quick.db')
@@ -20,12 +19,15 @@ const { MongoDriver } = require('quickmongo');
 const fs = require("fs");
 const { Collection } = require('discord.js')
 const qr = require("qr-image");
-const contact = require("./lib/contact.js");
-const MessageHandler = require('./CONNECTION/message');
+const contact = require("./mangoes/contact.js");
+const MessageHandler = require('./lib/message/vorterx.js');
 const MONGOURL = process.env.URL || "mongodb+srv://nekosenpai269:1234@shibam.qw9rlw0.mongodb.net/?retryWrites=true&w=majority"
-console.log(`Bot Is Running Baby`);
 const driver = new MongoDriver(MONGOURL)
-const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) })
+const store = makeInMemoryStore({ 
+    logger: P().child(
+    { level: 'silent', stream: 'store'
+    }) 
+    })
 
 async function startDsan() {
 
