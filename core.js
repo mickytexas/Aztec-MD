@@ -79,39 +79,39 @@ fs.unlinkSync("./neko.json");
     if (connection === "close") {
       let reason = new Boom(lastDisconnect?.error)?.output.statusCode; if (reason === DisconnectReason.connectionClosed) {
       console.log("Connection closed, reconnecting....");
-      startDsan();
+      startAztec();
       } else if (reason === DisconnectReason.connectionLost) {
       console.log("Connection Lost from Server, reconnecting...");
-      startDsan();
+      startAztec();
       } else if (reason === DisconnectReason.loggedOut) {
-      clearState();
+      clearAztec();
       console.log(` Device Logged Out, Please Delete Session and Scan Again.`);
       process.exit();
       } else if (reason === DisconnectReason.restartRequired) {
       console.log("Server starting...");
-      startDsan();
+      startAztec();
       } else if (reason === DisconnectReason.timedOut) {
       console.log("Connection Timed Out, Trying to Reconnect....");
-      startDsan();
+      startAztec();
       } else {
-     console.log(`Server Disconnected: Maybe Your WhatsApp Account got banned !` );
-     clearState();
+      console.log(`Server Disconnected: Maybe Your WhatsApp Account got banned !` );
+      clearState();
       }
       }
      if (update.qr) {
-     dsan.QR = qr.imageSync(update.qr)
+     vorterx.QR = qr.imageSync(update.qr)
      }
      }
      )
-   app.get("/", (req, res) => {res.end(dsan.QR) })
-   dsan.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, dsan))
-   dsan.ev.on('contacts.update', async (update) => await contact.saveContacts(update, dsan))
+   app.get("/", (req, res) => {res.end(vorterx.QR) })
+   vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx))
+   vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx))
    }
-if (!MONGOURL) return console.error('You have not provided any MongoDB URL!!')
-driver
-.connect() .then(() => {
-console.log(`Connected to the database!`)
-startDsan()
-})
-.catch((err) => console.error(err))
-app.listen(PORT)
+   if (!MONGOURL) return console.error('You have not provided any MongoDB URL!!')
+   driver
+   .connect() .then(() => {
+   console.log(`Connected to the database!`)
+   startAztec()
+   })
+  .catch((err) => console.error(err))
+  app.listen(PORT)
