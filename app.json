@@ -1,0 +1,40 @@
+  {
+  "name": "aztec",
+  "description": "multi bot with rich features made by Vorterx team",
+  "keywords": [
+    "aztec",
+    "diego"
+  ],
+  "repository": "https://github.com/Vorterx/Aztec-MD.git",
+  "logo": "https://i.ibb.co/wKzdRH6/vorterx.png",
+  "env": {
+    "PREFIX": {
+     "description": "Prefix of your bot Ex: . , / , # , & etc. Put anythong except @ (Default is .)",
+     "required": false
+    },
+    "BOTNAME": {
+     "description": "Put your bot name here as its required."
+    },
+    "SESSION_ID": {
+    "description": "A random string for your bot session. Which works as an OTP to get qr code. You have to change session every time to get a new qr."
+    },
+    "MODS": {
+    "description": "Put any phone number without + , () and spaces \",\" Ex: 27686881509 )",
+    "required": false
+    },
+    "MONGODB": {
+    "description": "Mongodb Url is required add mongoUrl."
+    }
+   },
+  "buildpacks": [
+   {
+   "url": "heroku/nodejs"
+   },
+   {
+   "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
+   },
+   {
+   "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+   }
+   ]
+   }
