@@ -108,8 +108,8 @@ console.log(chalk.green.bold("👨‍💻You have connected to Aztec-MD"));
       } else 
           vorterx.end(`Server Disconnected: ${reason} | ${connection}`);
       }
-      }
-     }
+      })
+          }
      )
    app.get('/', (req, res) => {
    res.status(200).setHeader('Content-Type', 'image/png').send(vorterx.QR)
@@ -118,6 +118,7 @@ console.log(chalk.green.bold("👨‍💻You have connected to Aztec-MD"));
    vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx))
    })
     }
+          
    startAztec()
   .catch((err) => console.error(err))
   app.listen(PORT, () => { 
