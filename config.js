@@ -1,4 +1,6 @@
+const fs = require('fs');
 require('dotenv').config()
+const chalk = require('chalk');
 
         global.botName = process.env.BOTNAME || 'AZTEC MD',
         global.prefix = process.env.PREFIX || '.',
