@@ -32,7 +32,7 @@ const store = makeInMemoryStore({
     }) 
     })
 
-  vorterx.config = config()
+  //vorterx.config = config()
   async function startDsan() {
 
   let { version } = await fetchLatestBaileysVersion()
