@@ -70,12 +70,6 @@ const store = makeInMemoryStore({
     vorterx.cmd.set(command.name, command);
     }
     };
-if(!MONGODB) return 
-console.error('❌Error Provide a MONGODB URL to continue the process')
-driver
-.connect() .then(() => {
-console.log(chalk.green.bold("👨‍💻You have connected to Aztec-MD"));
-        
 
   readcommands()
  const PORT = port;
@@ -112,7 +106,6 @@ console.log(chalk.green.bold("👨‍💻You have connected to Aztec-MD"));
       }
       })
           }
-     )
    app.get('/', (req, res) => {
    res.status(200).setHeader('Content-Type', 'image/png').send(vorterx.QR)
     })
@@ -121,6 +114,14 @@ console.log(chalk.green.bold("👨‍💻You have connected to Aztec-MD"));
    }
           
    startAztec()
-  .catch((err) => console.error(err))
-  app.listen(PORT, () => { 
+if(!MONGODB) return 
+console.error('❌Error Provide a MONGODB URL to continue the process')
+driver
+.connect() .then(() => {
+console.log(chalk.green.bold("👨‍💻You have connected to Aztec-MD"));
+        
+.catch((err) => console.error(err))
+ app.listen(PORT, () => { 
             console.log(`🎎AZTEC IS CURRENTLY RUNNING ON PORT ${PORT}`);});
+      }
+);
