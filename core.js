@@ -5,7 +5,6 @@
 */
 require('./lib/message/vorterx.js');
 require('./config');
-const app = require("express")();
 const {
   default: AztecConnect,
   DisconnectReason,
