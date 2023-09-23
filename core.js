@@ -20,6 +20,7 @@ const express = require("express");
 const config = require('./config');
 const vorterx= require('./lib/message/vorterx.js');
 const { QuickDB } = require('quick.db')
+const MONGODB = global.mongodb;
 const { MongoDriver } = require('quickmongo');
 const fs = require("fs");
 const { Collection } = require('discord.js')
