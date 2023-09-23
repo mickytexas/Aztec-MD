@@ -112,11 +112,11 @@ const store = makeInMemoryStore({
     vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx))
    vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx))
      }
- if(!MONGODB) return 
-console.error('❌Error Provide a MONGODB URL to continue the process')
-driver
+ if(!process.env.MONGODB) return 
+ console.error('❌Error Provide a MONGODB URL to continue the process')
+ driver
 .connect() .then(() => {
-console.log(chalk.green.bold("👨‍💻You have connected to Aztec-MD"));
+ console.log(chalk.green.bold("👨‍💻You have connected to Aztec-MD"));
         
     startAztec()
     })
