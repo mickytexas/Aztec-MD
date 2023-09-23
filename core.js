@@ -24,6 +24,7 @@ const { MongoDriver } = require('quickmongo');
 const fs = require("fs");
 const { Collection } = require('discord.js')
 const qr = require("qr-image");
+const { imageSync } = require('qr-image');
 const contact = require("./mangoes/contact.js");
 const MessageHandler = require('./lib/message/vorterx.js');
 const driver = new MongoDriver(process.env.MONGODB)
@@ -36,12 +37,8 @@ const store = makeInMemoryStore({
   //vorterx.config = config()
   async function startAztec() {
 
-  const { state, saveState } = useMultiFileAuthState('./lib/anexa.json');
+  const { state, saveState } = useMultiFileAuthState('session');
 
-
-      const clearState = () => {
-  fs.unlinkSync("./lib/anexa.json");
-}
   const vorterx = AztecConnect({
     logger: P({ level: "silent" }),
     printQRInTerminal: false,
@@ -87,7 +84,7 @@ console.log(chalk.green.bold("👨‍💻You have connected to Aztec-MD"));
   vorterx.ev.on('connection.update', async (update) => {
 
   const { connection, lastDisconnect } = update
-if (update.qr) {
+ if (update.qr) {
             vorterx.log(`[${chalk.red('!')}]`, 'white')
             vorterx.log(`Scan the QR code above | You can also authenicate in http://localhost:${PORT}`, 'blue')
             vorterx.QR = imageSync(update.qr)
