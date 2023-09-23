@@ -7,7 +7,8 @@ require('dotenv').config()
         global.port = process.env.PORT || '8000',
         global.caption = process.env.CAPTION || 'By Aztec MD',
         global.mods = (process.env.MODS || '').split(',')
-        }
+
+
 module.exports = {
 mongodb: global.mongodb,
   };
