@@ -43,7 +43,7 @@ const store = makeInMemoryStore({
 
   const vorterx = AztecConnect({
     logger: P({ level: "silent" }),
-    printQRInTerminal: false,
+    printQRInTerminal: true,
     browser: ["vorterx", "Firefox", "1.0.0"],
     qrTimeout: 5000,
     auth: state,
@@ -82,7 +82,6 @@ const store = makeInMemoryStore({
   const { connection, lastDisconnect } = update
  if (update.qr) {
             console.log(`[${chalk.red('!')}]`, 'white')
-            console.log(`Scan the QR code above | You can also authenicate in http://localhost:${PORT}`, 'blue')
             vorterx.QR = imageSync(update.qr)
         }
       if (connection === "close") {
