@@ -24,7 +24,7 @@ const { Collection } = require('discord.js')
 const qr = require("qr-image");
 const contact = require("./mangoes/contact.js");
 const MessageHandler = require('./lib/message/vorterx.js');
-const driver = new MongoDriver(MONGODB)
+const driver = new MongoDriver(process.env.MONGODB)
 const store = makeInMemoryStore({ 
     logger: P().child(
     { level: 'silent', stream: 'store'
