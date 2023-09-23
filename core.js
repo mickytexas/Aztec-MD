@@ -33,7 +33,7 @@ const store = makeInMemoryStore({
     })
 
   //vorterx.config = config()
-  async function startDsan() {
+  async function startAztec() {
 
   let { version } = await fetchLatestBaileysVersion()
   const { state, saveState } = useMultiFileAuthState("./creds.json");
