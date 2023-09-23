@@ -37,10 +37,10 @@ const store = makeInMemoryStore({
   async function startAztec() {
 
   let { version } = await fetchLatestBaileysVersion()
-  const { state, saveState } = useMultiFileAuthState("./creds.json");
+  const { state, saveState } = useMultiFileAuthState("session");
 
 const clearState = () => {
-fs.unlinkSync("./creds.json");
+fs.unlinkSync("session");
 }
   const vorterx = AztecConnect({
     logger: P({ level: "silent" }),
