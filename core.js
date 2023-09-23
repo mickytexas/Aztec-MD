@@ -36,9 +36,12 @@ const store = makeInMemoryStore({
   //vorterx.config = config()
   async function startAztec() {
 
-  const { state, saveState } = useMultiFileAuthState("session");
+  const { state, saveState } = useMultiFileAuthState('./lib/anexa.json');
 
 
+      const clearState = () => {
+  fs.unlinkSync("./lib/anexa.json");
+}
   const vorterx = AztecConnect({
     logger: P({ level: "silent" }),
     printQRInTerminal: false,
