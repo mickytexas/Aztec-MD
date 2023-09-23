@@ -36,19 +36,17 @@ const store = makeInMemoryStore({
   //vorterx.config = config()
   async function startAztec() {
 
-  let { version } = await fetchLatestBaileysVersion()
   const { state, saveState } = useMultiFileAuthState("session");
 
-const clearState = () => {
-fs.unlinkSync("session");
-}
+
   const vorterx = AztecConnect({
     logger: P({ level: "silent" }),
     printQRInTerminal: false,
     browser: ["vorterx", "Firefox", "1.0.0"],
     qrTimeout: 5000,
     auth: state,
-    version
+    version: (await fetchLatestBaileysVersion()).version,
+    
   })
 
   store.bind(vorterx.ev)
