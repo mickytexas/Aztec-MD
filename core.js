@@ -37,7 +37,7 @@ const store = makeInMemoryStore({
   //vorterx.config = config()
   async function startAztec() {
 
-  const { state, saveState } = useMultiFileAuthState('session');
+  const { state, saveCreds } = useMultiFileAuthState('session');
 
   const vorterx = AztecConnect({
     logger: P({ level: "silent" }),
@@ -80,7 +80,7 @@ console.log(chalk.green.bold("👨‍💻You have connected to Aztec-MD"));
  const PORT = port;
  const app = express();
       
-  vorterx.ev.on('creds.update', saveState)
+  vorterx.ev.on('creds.update', saveCreds)
   vorterx.ev.on('connection.update', async (update) => {
 
   const { connection, lastDisconnect } = update
