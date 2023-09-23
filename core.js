@@ -117,7 +117,6 @@ console.log(chalk.green.bold("👨‍💻You have connected to Aztec-MD"));
     vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx))
    vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx))
    }
-    }
           
    startAztec()
   .catch((err) => console.error(err))
