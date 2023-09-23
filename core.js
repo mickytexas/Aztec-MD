@@ -88,11 +88,11 @@ console.log(chalk.green.bold("👨‍💻You have connected to Aztec-MD"));
 
   const { connection, lastDisconnect } = update
 if (update.qr) {
-            client.log(`[${chalk.red('!')}]`, 'white')
-            client.log(`Scan the QR code above | You can also authenicate in http://localhost:${PORT}`, 'blue')
-            client.QR = imageSync(update.qr)
+            vorterx.log(`[${chalk.red('!')}]`, 'white')
+            vorterx.log(`Scan the QR code above | You can also authenicate in http://localhost:${PORT}`, 'blue')
+            vorterx.QR = imageSync(update.qr)
         }
- if (connection === "close") {
+      if (connection === "close") {
       let reason = new Boom(lastDisconnect?.error)?.output.statusCode; if (reason === DisconnectReason.connectionClosed) {
       console.log("Connection closed, reconnecting....");
       startAztec();
@@ -109,9 +109,8 @@ if (update.qr) {
       } else if (reason === DisconnectReason.timedOut) {
       console.log("Connection Timed Out, Trying to Reconnect....");
       startAztec();
-      } else {
-      console.log(`Server Disconnected: Maybe Your WhatsApp Account got banned !` );
-      clearState();
+      } else 
+          vorterx.end(`Server Disconnected: ${reason} | ${connection}`);
       }
       }
      }
