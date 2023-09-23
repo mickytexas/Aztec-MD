@@ -1,4 +1,4 @@
-weconst fs = require('fs');
+const fs = require('fs');
 require('dotenv').config()
 const chalk = require('chalk');
 
