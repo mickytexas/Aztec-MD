@@ -87,9 +87,12 @@ console.log(chalk.green.bold("👨‍💻You have connected to Aztec-MD"));
   vorterx.ev.on('connection.update', async (update) => {
 
   const { connection, lastDisconnect } = update
-
-
-    if (connection === "close") {
+if (update.qr) {
+            client.log(`[${chalk.red('!')}]`, 'white')
+            client.log(`Scan the QR code above | You can also authenicate in http://localhost:${PORT}`, 'blue')
+            client.QR = imageSync(update.qr)
+        }
+ if (connection === "close") {
       let reason = new Boom(lastDisconnect?.error)?.output.statusCode; if (reason === DisconnectReason.connectionClosed) {
       console.log("Connection closed, reconnecting....");
       startAztec();
@@ -111,9 +114,6 @@ console.log(chalk.green.bold("👨‍💻You have connected to Aztec-MD"));
       clearState();
       }
       }
-     if (update.qr) {
-     vorterx.QR = qr.imageSync(update.qr)
-     }
      }
      )
    app.get("/", (req, res) => {res.end(vorterx.QR) })
