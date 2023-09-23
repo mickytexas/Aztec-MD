@@ -16,6 +16,7 @@ const {
 const { Boom } = require('@hapi/boom');
 const P = require('pino');
 const express = require("express");
+const config = require('./config');
 const vorterx= require('./lib/message/vorterx.js');
 const { QuickDB } = require('quick.db')
 const { MongoDriver } = require('quickmongo');
