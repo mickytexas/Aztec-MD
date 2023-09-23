@@ -64,10 +64,10 @@ const store = makeInMemoryStore({
 
     async function readcommands() {
     const cmdfile = fs
-    .readdirSync("./Commands")
+    .readdirSync("./commands")
     .filter((file) => file.endsWith(".js"));
     for (const file of cmdfile) {
-    const command = require(`./Commands/${file}`);
+    const command = require(`./commands/${file}`);
     vorterx.cmd.set(command.name, command);
     }
     };
