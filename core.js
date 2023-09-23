@@ -111,7 +111,6 @@ const store = makeInMemoryStore({
     })
     vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx))
    vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx))
-   }
           
    startAztec()
 if(!MONGODB) return 
