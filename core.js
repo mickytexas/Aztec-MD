@@ -83,6 +83,15 @@ const store = makeInMemoryStore({
             console.log(`[${chalk.red('!')}]`, 'white')
             vorterx.QR = imageSync(update.qr)
         }
+        if (connection === "open") {
+        console.log("💗 You have successfully logged in to Aztec");
+        let max = `\`\`\`👾*AZTEC WABOT HAS BEEN CONNECTED*👾\n*VERSION* : ${
+        require(__dirname + "/package.json").version
+        }\n*BOTNAME* : ${process.env.BOTNANE}\n*UPDATED* : LATEST\`\`\``;
+        vorterx.sendMessage(vorterx.user.id, {
+        text: max,
+        });
+        }
       if (connection === "close") {
       let reason = new Boom(lastDisconnect?.error)?.output.statusCode; if (reason === DisconnectReason.connectionClosed) {
       console.log("Connection closed, reconnecting....");
