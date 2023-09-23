@@ -45,7 +45,6 @@ const store = makeInMemoryStore({
     logger: P({ level: "silent" }),
     printQRInTerminal: true,
     browser: ["vorterx", "Firefox", "1.0.0"],
-    qrTimeout: 5000,
     auth: state,
     version: (await fetchLatestBaileysVersion()).version,
     
