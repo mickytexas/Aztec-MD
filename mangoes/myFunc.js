@@ -15,6 +15,15 @@ exports.runtime = function(seconds) {
 	var sDisplay = s > 0 ? s + (s == 1 ? " s" : " s") : "";
 	return dDisplay + hDisplay + mDisplay + sDisplay;
 }
+exports.formatp = sizeFormatter({
+    std: 'JEDEC',
+    decimalPlaces: 2,
+    keepTrailingZeroes: false,
+    render: (literal, symbol) => `${literal} ${symbol}B`,
+})
+function format(...args) {
+	return util.format(...args)
+}
 
 exports.getBuffer = async (url) => {
   try {
