@@ -51,10 +51,10 @@ const store = makeInMemoryStore({
     version: (await fetchLatestBaileysVersion()).version,
     
   })
-
+ await console.log("[🚀AZTEC WABOT HAS STARTED TO LAUNCH]");
   store.bind(vorterx.ev)
   vorterx.cmd = new Collection()
-  vorterx.DB = new QuickDB({driver
+  vorterx.DB = new 
   })
 
   
