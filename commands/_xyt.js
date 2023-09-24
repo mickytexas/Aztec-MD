@@ -3,7 +3,7 @@
 //  AZTEC MD V3.0.0
 
 //================================>
-const {fetchBuffer} = require("../mangoes/myFunc.js");
+const {getBuffer} = require("../mangoes/myFunc.js");
 const yts = require("youtube-yts");
 
 module.exports = {
@@ -18,7 +18,7 @@ if (!args) { await xReact("⛔"); return m.reply("*Please give a term example  y
 let search = await yts(text)
 url = search.videos[0].url
 let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
-diego = await fetchBuffer(anu.thumbnail)
+diego = await getBuffer(anu.thumbnail)
 let aztec = `*╭────❰*\n
 *❒* *Title* : *${anu.title}*\n
 *❒* *ID* : *${anu.videoId}*\n
