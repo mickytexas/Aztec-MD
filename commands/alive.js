@@ -5,7 +5,7 @@ module.exports = {
    name: 'alive',
    category: 'General',
    description: 'An cmd to test if its on',
-   async xstart(vorterx, m, {m.pushName, xReact }) => {
+   async xstart(vorterx, m, {m.pushName, xReact })  {
       await toReact("💗");
    //let aztec = fs.readFileSync("./lib/connect/aztec.png");
      // let anexa = fs.readFileSync("./lib/connect/anexa.png");
