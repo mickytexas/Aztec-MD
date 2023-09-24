@@ -17,7 +17,7 @@ module.exports = {
               externalAdReply: {
                  title: `vorterx team`,
                  body: 'ʙᴇsᴛ ᴛᴏ ᴜsᴇ',
-                 thumbnail: ,
+    //             thumbnail: ,
                  mediaType: 1,
                  mediaUrl: ``,
                  sourceUrl: `vorterx.com/`,
