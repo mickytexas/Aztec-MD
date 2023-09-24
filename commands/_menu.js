@@ -16,9 +16,9 @@ module.exports = {
         .toLocaleString("en-IN", { timeZone: "Africa/Johannesburg" })
         .split(",");
       const { pushName, sender } = m;
-    if (args[0]) {
+    if (args) {
       let data = [];
-      let name = args[0].toLowerCase();
+      let name = args.toLowerCase();
       let cmd =
         commands.get(name) ||
         Array.from(commands.values()).find((v) => v.alias.includes(name));
