@@ -107,16 +107,16 @@ const store = makeInMemoryStore({
       } else if (reason === DisconnectReason.loggedOut) {
       clearAztec();
       console.log(`[👾 AZTEC ] Device Logged Out, Please Delete Session and Scan Again.`);
-      await remove('session')
+      process.exit();
       } else if (reason === DisconnectReason.restartRequired) {
       console.log("[👾 CONNECT ] Server starting...");
       startAztec();
       } else if (reason === DisconnectReason.timedOut) {
       console.log("[👾 CONNECT ] Connection Timed Out, Trying to Reconnect....");
       startAztec();
-      } else 
+      } else {
       vorterx.end(`[👾 SERVER ] Server Disconnected: ${reason} | ${connection}`);
-          process.exit(0);
+    
       }
       })
    app.get('/', (req, res) => {
