@@ -124,7 +124,7 @@ const store = makeInMemoryStore({
     })
     vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx))
    vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx))
-     }
+     })
  if(!process.env.MONGODB) return 
  console.error('❌Error Provide a MONGODB URL to continue the process')
  driver
