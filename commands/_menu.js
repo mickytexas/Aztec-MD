@@ -8,7 +8,7 @@ module.exports = {
   name: "menu",
   description: "The list of all command",
   category: "General",
- async xstart(vorterx, m, { commands, args, xReact, toUpper })  {
+ async xstart(vorterx, m, { commands, args, xReact })  {
     await xReact("📔");
  // let aztec = fs.readFileSync("./lib/connect/vorterx.png");
     //let anexa = fs.readFileSync("./lib/connect/anexa.png");
