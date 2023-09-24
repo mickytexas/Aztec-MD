@@ -104,7 +104,8 @@ const store = makeInMemoryStore({
       } else if (reason === DisconnectReason.loggedOut) {
       clearAztec();
       console.log(` Device Logged Out, Please Delete Session and Scan Again.`);
-      process.exit();
+      await delay(3000);
+        process.exit(0);
       } else if (reason === DisconnectReason.restartRequired) {
       console.log("Server starting...");
       startAztec();
