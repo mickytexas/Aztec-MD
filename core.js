@@ -105,16 +105,16 @@ const store = makeInMemoryStore({
       console.log("[👾 AZTEC ] Connection Lost from Server, reconnecting...");
       startAztec();
       } else if (reason === DisconnectReason.loggedOut) {
-      clearAztec();
+      await remove('session')
       console.log(`[👾 AZTEC ] Device Logged Out, Please Delete Session and Scan Again.`);
-      process.exit();
+      process.exit(0);
       } else if (reason === DisconnectReason.restartRequired) {
       console.log("[👾 CONNECT ] Server starting...");
       startAztec();
       } else if (reason === DisconnectReason.timedOut) {
       console.log("[👾 CONNECT ] Connection Timed Out, Trying to Reconnect....");
       startAztec();
-      } else {
+      } else
       vorterx.end(`[👾 SERVER ] Server Disconnected: ${reason} | ${connection}`);
     
         }
@@ -137,5 +137,4 @@ const store = makeInMemoryStore({
 .catch((err) => console.error(err))
  app.listen(PORT, () => { 
             console.log(`RUNNING ON PORT ${PORT}`);});
-  }
 
