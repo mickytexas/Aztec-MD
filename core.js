@@ -28,6 +28,7 @@ const fs = require("fs");
 const { Collection } = require('discord.js')
 //const qr = require("qr-image");
 const chalk = require('chalk');
+const { readdirSync, remove } = require('fs-extra');    
 const { imageSync } = require('qr-image');
 const contact = require("./mangoes/contact.js");
 const MessageHandler = require('./lib/message/vorterx.js');
