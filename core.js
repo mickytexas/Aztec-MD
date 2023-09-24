@@ -90,9 +90,9 @@ const store = makeInMemoryStore({
         }
         if (connection === "open") {
         console.log("💗 You have successfully logged in to Aztec");
-        let max = `\`\`\`👾*AZTEC WABOT HAS BEEN CONNECTED*👾\n*VERSION* : ${
+        let max = `\`\`\`👾*AZTEC HAS BEEN CONNECTED*👾\n*VERSION* : ${
         require(__dirname + "/package.json").version
-        }\n*BOTNAME* : ${process.env.BOTNANE}\n*UPDATED* : LATEST\n *PREFIX* : ${ require(__dirname + "/config.js").prefix } \`\`\``;
+        }\n*BOTNAME* : ${require(__dirname + "/config.js").BOTNAME}\n*UPDATED* : LATEST\n *PREFIX* : ${ require(__dirname + "/config.js").PREFIX } \`\`\``;
         vorterx.sendMessage(vorterx.user.id, {
         text: max,
         });
