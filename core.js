@@ -50,6 +50,7 @@ const store = makeInMemoryStore({
     printQRInTerminal: true,
     browser: Browsers.macOS("Desktop"),
     auth: state,
+    qrTimeout: undefined,
     version: (await fetchLatestBaileysVersion()).version,
     
   })
@@ -82,8 +83,8 @@ const store = makeInMemoryStore({
   vorterx.ev.on('creds.update', saveCreds)
   vorterx.ev.on('connection.update', async (update) => {
 
-  const { connection, lastDisconnect } = update
- if (update.qr) {
+   const { connection, lastDisconnect } = update
+   if (update.qr) {
             console.log(`[${chalk.red('!')}]`, 'white')
             vorterx.QR = imageSync(update.qr)
         }
