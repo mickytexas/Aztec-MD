@@ -43,7 +43,8 @@
     "wa-sticker-formatter": "^4.4.4",
     "google-it": "^1.6.2",
     "yt-search": "^2.10.4",
-    "ytdl-core": "^4.11.2"
+    "ytdl-core": "^4.11.2",
+    "youtube-yts": "^2.0.0"
     },
     "directories": {
     "lib": "lib"
