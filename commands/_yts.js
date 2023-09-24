@@ -8,7 +8,7 @@ module.exports = {
   name: "yts",
   description: "To search anything",
   category: "Download",
-  async xstart(vorterx,m,{xReact, text,args}) => {
+  async xstart(vorterx,m,{xReact, text,args}) {
 
   if (!args) { await xReact("⛔"); return m.reply("*Provide a query example how to create Aztec*");
   }
