@@ -137,3 +137,5 @@ const store = makeInMemoryStore({
 .catch((err) => console.error(err))
  app.listen(PORT, () => { 
             console.log(`RUNNING ON PORT ${PORT}`);});
+  }
+
