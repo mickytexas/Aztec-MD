@@ -122,7 +122,7 @@ const store = makeInMemoryStore({
       }
       })
    app.get('/', (req, res) => {
-   res/*.status(200).setHeader('Content-Type', 'image/png')*/.send(vorterx.QR)
+   res.status(200).setHeader('Content-Type', 'image/png').send(vorterx.QR)
     })
     vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx))
    vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx))
