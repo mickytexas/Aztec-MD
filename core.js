@@ -96,24 +96,24 @@ const store = makeInMemoryStore({
         }
       if (connection === "close") {
       let reason = new Boom(lastDisconnect?.error)?.output.statusCode; if (reason === DisconnectReason.connectionClosed) {
-      console.log("Connection closed, reconnecting....");
+      console.log("[👾 AZTEC ] Connection closed, reconnecting....");
       startAztec();
       } else if (reason === DisconnectReason.connectionLost) {
-      console.log("Connection Lost from Server, reconnecting...");
+      console.log("[👾 AZTEC ] Connection Lost from Server, reconnecting...");
       startAztec();
       } else if (reason === DisconnectReason.loggedOut) {
       clearAztec();
-      console.log(` Device Logged Out, Please Delete Session and Scan Again.`);
+      console.log(`[👾 AZTEC ] Device Logged Out, Please Delete Session and Scan Again.`);
       await delay(3000);
         process.exit(0);
       } else if (reason === DisconnectReason.restartRequired) {
-      console.log("Server starting...");
+      console.log("[👾 CONNECT ] Server starting...");
       startAztec();
       } else if (reason === DisconnectReason.timedOut) {
-      console.log("Connection Timed Out, Trying to Reconnect....");
+      console.log("[👾 CONNECT ] Connection Timed Out, Trying to Reconnect....");
       startAztec();
       } else 
-          vorterx.end(`Server Disconnected: ${reason} | ${connection}`);
+          vorterx.end(`[👾 SERVER ] Server Disconnected: ${reason} | ${connection}`);
       }
       })
    app.get('/', (req, res) => {
