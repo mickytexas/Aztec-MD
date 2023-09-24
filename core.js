@@ -46,7 +46,7 @@ const store = makeInMemoryStore({
   const vorterx = AztecConnect({
     logger: P({ level: "silent" }),
     printQRInTerminal: true,
-    browser: ["vorterx", "Firefox", "1.0.0"],
+    browser: Browsers.macOS("Desktop"),
     auth: state,
     version: (await fetchLatestBaileysVersion()).version,
     
