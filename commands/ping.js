@@ -6,6 +6,7 @@ module.exports = {
   category: 'ccc',
  async xstart(vorterx,m,{xReact}) {
 
+   await xReact('👺');
     var inital = new Date().getTime();
     const { key } = await vorterx.sendMessage(m.from, {text: '_Checking ping!!!_'});
     var final = new Date().getTime();
