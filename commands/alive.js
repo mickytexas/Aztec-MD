@@ -7,17 +7,17 @@ module.exports = {
    description: 'An cmd to test if its on',
    async xstart(vorterx, m, {args, xReact })  {
       await xReact("💗");
-   //let aztec = fs.readFileSync("./lib/connect/aztec.png");
+     let aztec = fs.readFileSync("./lib/imogs.jpg");
      // let anexa = fs.readFileSync("./lib/connect/anexa.png");
       let msg = `*Hey ${m.pushName} This is ${process.env.BOTNAME} developed by Diegoson*\n\n*👾Descripto*: WhatsApp user bot\n\n*👾Prefix*: ${process.env.Prefix}\n\n*📲Version*: 3.0.0\n\n\nType ${process.env.Prefix}menu to get my full command list`;
       let Amarok = {
-        // image: aztec,
+         image: aztec,
          caption: msg,
          contextInfo: {
               externalAdReply: {
                  title: `vorterx team`,
                  body: 'ʙᴇsᴛ ᴛᴏ ᴜsᴇ',
-    //             thumbnail: ,
+                thumbnail: aztec,
                  mediaType: 1,
                  mediaUrl: ``,
                  sourceUrl: `vorterx.com/`,
