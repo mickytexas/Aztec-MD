@@ -91,7 +91,7 @@ const store = makeInMemoryStore({
         console.log("💗 You have successfully logged in to Aztec");
         let max = `\`\`\`👾*AZTEC WABOT HAS BEEN CONNECTED*👾\n*VERSION* : ${
         require(__dirname + "/package.json").version
-        }\n*BOTNAME* : ${process.env.BOTNANE}\n*UPDATED* : LATEST\`\`\``;
+        }\n*BOTNAME* : ${process.env.BOTNANE}\n*UPDATED* : LATEST\n *PREFIX* : ${ require(__dirname + "/config.js").prefix \`\`\``;
         vorterx.sendMessage(vorterx.user.id, {
         text: max,
         });
