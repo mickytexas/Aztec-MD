@@ -24,7 +24,7 @@ module.exports = {
         Array.from(commands.values()).find((v) => v.alias.includes(name));
 } else {
       const { pushName, sender } = m;
-      let cm = commands.keys();
+      let cm = commands.push
       let category = [];
 
       for (let cmd of cm) {
