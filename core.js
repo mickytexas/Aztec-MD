@@ -116,9 +116,9 @@ const store = makeInMemoryStore({
       console.log("[👾 CONNECT ] Connection Timed Out, Trying to Reconnect....");
       startAztec();
       } else 
-     console.log(`[👾 SERVER ] Server Disconnected: ${reason} | ${connection}`);
+      console.log(`[👾 SERVER ] Server Disconnected: ${reason} | ${connection}`);
           await remove('session')
-     console.log(`[ 👾 AZTEC ] Is starting...!`);
+      console.log(`[ 👾 AZTEC ] Is starting...!`);
           setTimeout(() => startAztec(), 2000)
       }
       })
