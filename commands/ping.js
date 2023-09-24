@@ -1,4 +1,4 @@
-const axios = require ('axios');
+/*const axios = require ('axios');
 
 module.exports = {
   name: 'ping',
@@ -14,3 +14,4 @@ module.exports = {
    return await vorterx.sendMessage(m.from, {text: '*𝘗𝘐𝘕𝘎*\n *' + (final - inital) + ' 𝘔𝘚* ', edit: key});
   }
 };
+*/
