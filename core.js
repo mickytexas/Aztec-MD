@@ -117,8 +117,6 @@ const store = makeInMemoryStore({
       } else 
       vorterx.end(`[👾 SERVER ] Server Disconnected: ${reason} | ${connection}`);
           process.exit(0);
-      console.log(`[ 👾 AZTEC ] Is starting...!`);
-          setTimeout(() => startAztec(), 2000)
       }
       })
    app.get('/', (req, res) => {
