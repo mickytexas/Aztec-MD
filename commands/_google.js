@@ -4,7 +4,7 @@ module.exports = {
    name: "google",
    description: "Search random stuff",
    category: "Search",
-   async xstart(vorterx,m,{xReact, text, args}) => {
+   async xstart(vorterx,m,{xReact, text, args})  {
 
 await xReact("📍");
 google({'query': text}).then(res => {
