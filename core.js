@@ -38,7 +38,6 @@ const store = makeInMemoryStore({
     }) 
     })
 
-  //vorterx.config = config()
   async function startAztec() {
 
   const { state, saveCreds } = await useMultiFileAuthState('session');
