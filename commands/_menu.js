@@ -1,4 +1,4 @@
-const fs = require("fs")
+/*const fs = require("fs")
 const os = require('os');
 const {runtime} = require("../mangoes/myFunc.js");
 const moment = require("moment-timezone");
@@ -107,5 +107,5 @@ const keys = Object.keys(category);
 await vorterx.sendMessage(m.from, DieGosOn,  { quoted: m})
       }
   }
-};
+};*/
           
