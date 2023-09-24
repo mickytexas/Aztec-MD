@@ -1,6 +1,6 @@
 const fs = require("fs")
 const os = require('os');
-const {runtime} = require("../lib/module/function.js");
+const {runtime} = require("../mangoes/myFunc.js");
 const moment = require("moment-timezone");
 const { tiny } = require("@viper-x/fancytext");
 
