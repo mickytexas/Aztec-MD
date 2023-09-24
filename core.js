@@ -11,6 +11,7 @@ const {
   DisconnectReason,
   fetchLatestBaileysVersion,
   makeInMemoryStore,
+  Browsers,
   useMultiFileAuthState
 } = require('@whiskeysockets/baileys');
 const { Boom } = require('@hapi/boom');
