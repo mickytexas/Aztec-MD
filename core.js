@@ -117,7 +117,7 @@ const store = makeInMemoryStore({
       } else {
       vorterx.end(`[👾 SERVER ] Server Disconnected: ${reason} | ${connection}`);
     
-      }
+        }
       }
    app.get('/', (req, res) => {
    res.status(200).setHeader('Content-Type', 'image/png').send(vorterx.QR)
