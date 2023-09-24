@@ -136,4 +136,4 @@ const store = makeInMemoryStore({
 
 .catch((err) => console.error(err))
  app.listen(PORT, () => { 
-            console.log(`🎎AZTEC IS CURRENTLY RUNNING ON PORT ${PORT}`);});
+            console.log(`RUNNING ON PORT ${PORT}`);});
