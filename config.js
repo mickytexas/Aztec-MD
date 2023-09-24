@@ -6,7 +6,7 @@ const chalk = require('chalk');
         global.prefix = process.env.PREFIX || '.',
         global.session = process.env.SESSION || 'add something', //replace this to any text
         global.mongodb = process.env.MONGODB || 'mongodb+srv://amarokaztec:d3centx@vorterx.2yhhna0.mongodb.net/?retryWrites=true&w=majority',
-        global.port = process.env.PORT || '8000',
+        global.port = process.env.PORT || '2000',
         global.caption = process.env.CAPTION || 'By Aztec MD',
         global.mods = (process.env.MODS || '').split(',')
 
