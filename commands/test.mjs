@@ -1,7 +1,6 @@
 import NetworkSpeed from 'network-speed'
 
 const test = new NetworkSpeed()
-import { path } from 'path'
 
 import { tmpdir } from 'os'
 
@@ -43,6 +42,6 @@ return speed
        let text = '🚦◦ *Downloads* : ' + download.mbps + ' mbps\n'
        text += '🚦◦ *Uploads* : ' + upload.mbps + ' mbps\n'
        text += '🚦◦ *Response* : ' + ((new Date - old) * 1) + ' ms'
-       vorterx.reply(m.from, text, m)
+       vorterx.sendMessage(m.from, { caption: text}, {quoted:m})
     },
 }
