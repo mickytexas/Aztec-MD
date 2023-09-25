@@ -1,4 +1,8 @@
-//var fetch = require('node-fetch');
+//===================°°°°°°°
+//
+//AZTEC MD WABOT VERSION 3.0.0
+//
+//===================°°°°°°°
 
 module.exports = {
     name: "gpt",
@@ -11,10 +15,11 @@ module.exports = {
               return m.reply('*Provide me a query ex Who is Aztec*');
           } 
       await xReact('🤖');
-         var ai = await fetch(`https://xzn.wtf/api/openai?text=${text}&apikey=toxickichu`);
+         var ai = await fetch(`https://aemt.me/openai?text=${text}`);
         var receive= await ai.json();
 
         try {
+            
         await vorterx.sendMessage(m.from,{
 text: receive.result,
 contextInfo: {
