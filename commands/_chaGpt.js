@@ -16,7 +16,7 @@ module.exports = {
 
         try {
         await vorterx.sendMessage(m.from,{
-text: receive.results,
+text: receive.result,
 contextInfo: {
 externalAdReply: { 
 title: 'CHAT_GPT',
