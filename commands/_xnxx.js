@@ -5,7 +5,7 @@ module.exports = {
   name: "xnxxsh",
   description: "18 videos only",
   category: "Download",
-  async xstart(vorterx,m,{xReact, text,args}) => {
+  async xstart(vorterx,m,{xReact, text,args})  {
 
   let me = fs.readFileSync("./lib/inogs.jpg");
   if(!text) {
