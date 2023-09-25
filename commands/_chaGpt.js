@@ -1,8 +1,8 @@
 const fetch = require('node-fetch')
 
 module.exports = {
-    name: "ai",
-    alias: ["gpt", "openai", "chatgpt"],
+    name: "gpt",
+    alias: ["ai", "openai"],
     category: "CHATGPT",
     desc: "To research something",
     async xstart(vorterx,m,{xReact, text,args }) {
@@ -21,7 +21,7 @@ contextInfo: {
 externalAdReply: { 
 title: 'CHAT_GPT',
 body: '',
-thumbnailUrl: "https://telegra.ph/file/7a385897829927b981dfa.jpg",
+thumbnailUrl: "https://i.ibb.co/C7TXRcH/photo-1678483789107-0029c61fdcca.jpg",
 sourceUrl: "wa.me/27686881509",
 mediaType: 1,
 renderLargerThumbnail: true
