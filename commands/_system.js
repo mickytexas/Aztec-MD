@@ -14,7 +14,7 @@ module.exports = {
     await xReact("📟");
   let aztec =  `*乂 SYSTEM - STATUS*\n\n`;
   aztec += `❲❒❳ *BotName :* ${process.env.BOTNAME}\n`;
-  aztec += `❲❒❳ *Version :* 3.0.0*\n`;
+  aztec += `❲❒❳ *Version :* 3.0.0\n`;
   aztec += `❲❒❳ *RAM :* _${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}_\n`;
   aztec += `❲❒❳ *Speed : _${latensi.toFixed(4)}sec_*\n`;
   aztec += `❲❒❳ *Runtime :* _${runtime(process.uptime())}_\n`;
