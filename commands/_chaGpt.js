@@ -11,7 +11,7 @@ module.exports = {
               return m.reply('*Provide me a query ex Who is Aztec*');
           } 
       await xReact('🤖');
-         var ai = await fetch(`https://xzn.wtf/api/openai?text=${text}&apikey=aztec`);
+         var ai = await fetch(`https://xzn.wtf/api/openai?text=${text}&apikey=toxickichu`);
         var receive= await ai.json();
 
         try {
