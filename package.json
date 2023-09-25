@@ -19,6 +19,10 @@
     "chalk": "^4.1.2",
     "child_process": "^1.0.2",
     "express": "^4.18.2",
+    "btch-downloader": "^2.0.8",
+    "@bochilteam/scraper": "^4.2.3",
+    "api-dylux": "^1.4.4",
+    "fb-info-video":"^1.0.2",
     "discord.js": "^14.11.0",
     "dotenv": "^16.3.1",
     "emoji-strip": "^1.0.1",
@@ -42,6 +46,7 @@
     "quickmongo": "^5.2.0",
     "wa-sticker-formatter": "^4.4.4",
     "google-it": "^1.6.2",
+    "aztec-md-ytdl": "3.0.0",
     "yt-search": "^2.10.4",
     "ytdl-core": "^4.11.2",
     "youtube-yts": "^2.0.0"
