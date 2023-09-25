@@ -9,13 +9,13 @@ module.exports = {
     alias: ["ai", "openai"],
     category: "CHATGPT",
     desc: "To research something",
-    async xstart(vorterx,m,{xReact, text,args }) {
+    async xstart(vorterx,m,{xReact, doReply,text,args }) {
       if(!text) 
       { await xReact('❌');
-              return m.reply('*Provide me a query ex Who is Aztec*');
+              return doReply('*Provide me a query ex Who is Aztec*');
           } 
       await xReact('🤖');
-         var ai = await fetch(`https://xzn.wtf/api/openai?text=${text}&apikey=aztec`);
+         var ai = await fetch(`https://aemt.me/openai?text=${text}`);
         var receive= await ai.json();
 
         try {
