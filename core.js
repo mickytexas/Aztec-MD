@@ -155,6 +155,7 @@ const {
 const { Boom } = require('@hapi/boom');
 const P = require('pino');
 const PORT = global.port;
+const { imageSync } = require('qr-image');
 const path = require('path');
 const express = require("express");
 const config = require('./config');
