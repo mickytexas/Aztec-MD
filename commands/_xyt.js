@@ -12,7 +12,7 @@ module.exports = {
    category: "Download",
    async xstart(vorterx,m,{xReact,text,args})  {
 
-if (!args) { await xReact("⛔"); return m.reply("*Please give a term example  yts hope*");
+if (!text) { await xReact("⛔"); return m.reply("*Please give a term example  xyt hope*");
            }
     await xReact("🌛");
 let search = await yts(text)
