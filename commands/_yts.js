@@ -10,7 +10,7 @@ module.exports = {
   category: "Download",
   async xstart(vorterx,m,{xReact, text,args}) {
 
-  if (!args) { await xReact("⛔"); return m.reply("*Provide a query example how to create Aztec*");
+  if (!text) { await xReact("⛔"); return m.reply("*Provide a query example how to create Aztec*");
   }
     await xReact("🔍");
                 const yts = require("yt-search")
