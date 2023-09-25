@@ -10,7 +10,7 @@ module.exports = {
     category: "Download",
     async xstart(vorterx, m, {
          xReact, text, args
-    }) => {
+    }) {
         try {
             if (!text) {
                 await xReact("⛔");
