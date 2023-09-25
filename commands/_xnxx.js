@@ -7,7 +7,7 @@ module.exports = {
   category: "Download",
   async xstart(vorterx,m,{xReact, text,args})  {
 
-  let me = fs.readFileSync("./lib/inogs.jpg");
+  let me = fs.readFileSync("./lib/imogs.jpg");
   if(!text) {
     await xReact("⛔");
     return m.reply("Giv me a search term please*");
