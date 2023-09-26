@@ -39,7 +39,7 @@ module.exports = {
  const speed = await test.checkUploadSpeed(options, fileSizeInBytes)
 return speed
         }
-       let text = '🚦◦ *Downloads* : ' + download.mbps + ' mbps\n'
+       let txt = '🚦◦ *Downloads* : ' + download.mbps + ' mbps\n'
        text += '🚦◦ *Uploads* : ' + upload.mbps + ' mbps\n'
        text += '🚦◦ *Response* : ' + ((new Date - old) * 1) + ' ms'
        vorterx.sendMessage(m.from, { caption: text}, {quoted:m})
