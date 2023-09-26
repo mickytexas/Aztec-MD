@@ -16,6 +16,8 @@ const {
 const { Boom } = require('@hapi/boom');
 const P = require('pino');
 const PORT = global.port;
+const PREFIX = global.prefix;
+const BOTNAME = global.botname;
 const { imageSync } = require('qr-image');
 const path = require('path');
 const {
@@ -83,9 +85,9 @@ async function startAztec() {
     }
     if (connection === "open") {
       console.log("💗 You have successfully logged in to Aztec");
-      const max = `\`\`\`👾*AZTEC HAS BEEN CONNECTED*👾\n*VERSION* : ${
+      const max = `\`\`\`*👾AZTEC  BEEN CONNECTED👾*\n*VERSION* : ${
         require(__dirname + "/package.json").version
-      }\n*BOTNAME* : ${require(__dirname + "/config.js").BOTNAME}\n*UPDATED* : LATEST\n *PREFIX* : ${require(__dirname + "/config.js").PREFIX} \`\`\``;
+      }\n*BOTNAME* : ${global.botname}\n*UPDATED* : LATEST\n *PREFIX* : ${global.prefix} \`\`\``;
       vorterxInstance.sendMessage(vorterxInstance.user.id, {
         text: max,
       });
