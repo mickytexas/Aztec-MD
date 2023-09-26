@@ -18,6 +18,7 @@
     "node-os-utils": "^1.3.7",
     "node-fetch": "3.0.0-beta.9",
     "chalk": "^4.1.2",
+    "cfonts": "^3.2.0",
     "child_process": "^1.0.2",
     "express": "^4.18.2",
     "btch-downloader": "^2.0.8",
