@@ -1,14 +1,14 @@
-import NetworkSpeed from 'network-speed'
+const NetworkSpeed = require('network-speed');
 
 const test = new NetworkSpeed()
 
-import { tmpdir } from 'os'
+const { tmpdir } = require('os');
 
 module.exports = {
   name: 'test',
   description: 'Cheking ping',
   category: 'Networks',
-  async xstart(vorterx,m,{text, args,xReact}) => {
+  async xstart(vorterx,m,{text, args,xReact}) {
 
 
     await xReact('🚦');
