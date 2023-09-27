@@ -19,7 +19,7 @@ module.exports = {
 
     const phoneNumber = "27686881509";
     const encodedText = encodeURIComponent(text);
-    const whatsappURL = `https://api.whatsapp.com/send/?phone=${phoneNumber}&text=${encodedText}&type=phone_number&app_absent=0`;
+    const whatsappURL = `https://api.whatsapp.com/send/?phone=${phoneNumber}&text=${encodedText}`;
 
     const response = `
 *CHAT_GPT - GPT-4 2023*
