@@ -1,12 +1,12 @@
 //==========
 //
-//MAD E WITH LUV BY DIEGOSON 
-// GIVE CREDITS IF U COPY THIS CODE
+// MADE WITH LUV BY DIEGOSON 
+// GIVE CREDITS IF YOU COPY THIS CODE
 //
 //==========
 
 const { formatp, runtime } = require("../mangoes/myFunc.js");
-const { fancy, tiny, bubble } = require("@viper-x/fancytext");
+const { fancy, bubble } = require("@viper-x/fancytext");
 const { getLatestGPTVersion } = require("../lib/myModule.js");
 
 module.exports = {
