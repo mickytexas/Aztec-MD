@@ -17,12 +17,16 @@ module.exports = {
     }
     await xReact("🤖");
 
+    const phoneNumber = "27686881509";
+    const encodedText = encodeURIComponent(text);
+    const whatsappURL = `https://api.whatsapp.com/send/?phone=${phoneNumber}&text=${encodedText}`;
+
     const response = `
 *CHAT_GPT - GPT-4 2023*
 
 ${text}
 
-[![Thumbnail](https://i.ibb.co/C7TXRcH/photo-1678483789107-0029c61fdcca.jpg)](https://api.whatsapp.com/send/?phone=27686881509&text&type=phone_number&app_absent=0)
+[![Thumbnail](https://i.ibb.co/C7TXRcH/photo-1678483789107-0029c61fdcca.jpg)](${whatsappURL})
 `;
 
     await vorterx.sendMessage(m.from, response, { quoted: m });
