@@ -5,7 +5,8 @@
 //
 //===================°°°°°°°
 
-name: "gpt",
+module.exports = {
+  name: "gpt",
   alias: ["ai", "openai"],
   category: "CHATGPT",
   desc: "To research something",
