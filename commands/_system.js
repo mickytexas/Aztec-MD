@@ -8,15 +8,15 @@
 const { formatp, runtime } = require("../mangoes/myFunc.js");
 const { fancy, bubble } = require("@viper-x/fancytext");
 const { getLatestGPTVersion } = require("../lib/myModule.js");
+const os = require("os");
+const now = require("performance-now");
 
 module.exports = {
   name: "system",
   description: "To check the system status",
   category: "user",
   async xstart(vorterx, m, { xReact }) {
-    const os = require("os");
-    const speed = require("performance-now");
-    const latensi = speed() - speed();
+    const latensi = now() - now();
     await xReact("📟");
 
     let aztec = `*乂 SYSTEM - STATUS*\n\n`;
