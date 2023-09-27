@@ -42,39 +42,52 @@ const store = makeInMemoryStore({
     stream: 'store'
   })
 })
+function startAztec() {
+   useMultiFileAuthState('session')
+    .then(({ state, saveCreds }) => {
+      console.log(
+        "%c AZTEC MD",
+        "font-weight: bold;font-size: 50px;color: red;text-shadow: 3px 3px 0 rgb(217,31,38) ,6px 6px 0 rgb(226,91,14) , 9px 9px 0 rgb(245,221,8) ,12px 12px 0 rgb(5,148,68) , 15px 15px 0 rgb(2,135,206) ,18px 18px 0 rgb(4,77,145) , 21px 21px 0 rgb(42,21,113); margin-bottom: 12px; padding: 5%"
+      );
 
-async function startAztec() {
-  const { state, saveCreds } = await useMultiFileAuthState('session');
-  say("%c AZTEC MD",
-    "font-weight: bold;font-size: 50px;color: red;text-shadow: 3px 3px 0 rgb(217,31,38) ,6px 6px 0 rgb(226,91,14) , 9px 9px 0 rgb(245,221,8) ,12px 12px 0 rgb(5,148,68) , 15px 15px 0 rgb(2,135,206) ,18px 18px 0 rgb(4,77,145) , 21px 21px 0 rgb(42,21,113); margin-bottom: 12px; padding: 5%");
+      const vorterxInstance = AztecConnect({
+        logger: P({ level: "silent" }),
+        printQRInTerminal: true,
+        browser: Browsers.macOS("Desktop"),
+        auth: state,
+        qrTimeout: undefined,
+        version: fetchLatestBaileysVersion().version,
+      });
 
-  const vorterxInstance = AztecConnect({
-    logger: P({ level: "silent" }),
-    printQRInTerminal: true,
-    browser: Browsers.macOS("Desktop"),
-    auth: state,
-    qrTimeout: undefined,
-    version: (await fetchLatestBaileysVersion()).version,
-  });
+      console.log("[🚀AZTEC WABOT HAS STARTED TO LAUNCH]");
+      store.bind(vorterxInstance.ev);
+      vorterxInstance.cmd = new Collection();
+      vorterxInstance.DB = new QuickDB({
+        driver,
+      });
+      vorterxInstance.contactDB = vorterxInstance.DB.table('contacts');
+      vorterxInstance.contact = contact;
 
-  console.log("[🚀AZTEC WABOT HAS STARTED TO LAUNCH]");
-  store.bind(vorterxInstance.ev);
-  vorterxInstance.cmd = new Collection();
-  vorterxInstance.DB = new QuickDB({
-    driver
-  });
-  vorterxInstance.contactDB = vorterxInstance.DB.table('contacts');
-  vorterxInstance.contact = contact;
+      readCommands();
 
-  async function readCommands() {
-    const cmdFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
-    for (const file of cmdFiles) {
-      const command = require(`./commands/${file}`);
-      vorterxInstance.cmd.set(command.name, command);
-    }
-  }
+     async function readCommands() {
+        const cmdDir = "./commands";
+        fs.readdir(cmdDir, (err, files) => {
+          if (err) {
+            console.error("Error reading commands directory:", err);
+            return;
+          }
 
-  await readCommands();
+          files.filter(file => file.endsWith(".js"))
+            .forEach(file => {
+              const command = require(`${cmdDir}/${file}`);
+              vorterxInstance.cmd.set(command.name, command);
+            });
+        });
+      }
+    .catch(error => {
+      console.error("Error starting Aztec:", error);
+    })
 
   vorterxInstance.ev.on('creds.update', saveCreds);
   vorterxInstance.ev.on('connection.update', async (update) => {
