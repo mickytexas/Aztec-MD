@@ -136,18 +136,43 @@ function startAztec() {
   vorterxInstance.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterxInstance));
   vorterxInstance.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterxInstance));
 }
+let connectionEstablished = false;
+let serverStarted = false;
 
+const establishConnection = async () => {
+  try {
+    await driver.connect();
+    console.log(chalk.green.bold("👨‍💻You have connected to Aztec-MD"));
+    connectionEstablished = true;
+
+    if (serverStarted) {
+      startAztec();
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const startServer = () => {
+  app.listen(PORT, () => {
+    console.log(`RUNNING ON PORT ${PORT}`);
+    serverStarted = true;
+
+    if (connectionEstablished) {
+      startAztec();
+    }
+  });
+};
 if (!process.env.MONGODB) {
   console.error('❌Error: Provide a MONGODB URL to continue the process');
 } else {
-  driver.connect()
-    .then(() => {
-      console.log(chalk.green.bold("👨‍💻You have connected to Aztec-MD"));
-      startAztec();
-    })
-    .catch((err) => console.error(err));
+  const connectionPromise = establishConnection();
+  const serverPromise = new Promise((resolve) => {
+    startServer();
+    resolve();
+  });
 
-  app.listen(PORT, () => {
-    console.log(`RUNNING ON PORT ${PORT}`);
+  Promise.all([connectionPromise, serverPromise]).catch((error) => {
+    console.error('❌Error:', error);
   });
 }
