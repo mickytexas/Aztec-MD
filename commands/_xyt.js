@@ -48,3 +48,6 @@ module.exports = {
     `;
 
     vorterx.sendMessage(m.from, { image: thumbnail, caption: caption }, { quoted: m });
+    }
+}
+  
