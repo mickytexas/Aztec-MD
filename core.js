@@ -159,4 +159,4 @@ console.log(
     .catch(console.error);
 }
 startAztec();
-   }
+   });
