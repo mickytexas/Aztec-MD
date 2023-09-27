@@ -1,6 +1,7 @@
 //==========
 //
 //MAD E WITH LUV BY DIEGOSON 
+// GIVE CREDITS IF U COPY THIS CODE
 //
 //==========
 
