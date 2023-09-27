@@ -16,7 +16,7 @@ module.exports = {
         aztec += `🌐 *Link*: ${g.link}\n\n───────────────────────\n\n`;
       }
 
-      const formattedAztec = chalk.bold(aztec); // Formatting with chalk
+      const formattedAztec = chalk.bold(aztec);
 
       const img = "https://i.ibb.co/k2mkzHJ/IMG-20230723-WA0071.jpg";
       vorterx.sendMessage(m.from, { image: { url: img }, caption: formattedAztec }, { quoted: m });
