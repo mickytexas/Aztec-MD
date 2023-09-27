@@ -150,7 +150,7 @@ console.log(
   console.error('❌Error: Provide a MONGODB URL to continue the process');
 } else {
   driver.connect()
-     .then(() => {
+     .then(()) => {
 
       app.listen(PORT, () => {
         console.log(`[🌐 AZTEC ] Web server is running on port ${PORT}`);
@@ -159,4 +159,5 @@ console.log(
     .catch(console.error);
 }
 startAztec();
-   });
+   }
+    }
