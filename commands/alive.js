@@ -5,6 +5,8 @@
 //================
 
 const fs = require("fs");
+const BOTNAME = global.botname;
+const PREFIX = global.prefix;
 require("../config");
 
 module.exports = {
@@ -15,18 +17,20 @@ module.exports = {
     await xReact("💗");
 
     const aztec = fs.readFileSync("./lib/imogs.jpg");
-    const msg = `*Hey ${m.pushName}! This is ${process.env.BOTNAME}, developed by Diegoson*\n\n👾 *Description*: WhatsApp user bot\n\n👾 *Prefix*: ${process.env.Prefix}\n\n📲 *Version*: 3.0.0\n\nType ${process.env.Prefix}menu to get the full command list`;
+    const msg = `*Hey ${m.pushName}!* 👋\n\nWelcome to ${global.BOTNAME}! 🤖\n\nI am a WhatsApp user bot developed by Diegoson.\n\n✨ Let's explore the world of automation together!\n\n📌 *Prefix*: ${global.prefix}\n📌 *Version*: 3.0.0\n\nType ${global.prefix}menu to get the full command list.`;
 
     const template = `
 ╭─💗 *Bot Status*
 │
-├ Hey ${m.pushName}! This is ${process.env.BOTNAME}, developed by Diegoson
+├ Hey ${m.pushName}! 👋
+├ Welcome to ${global.BOTNAME}! 🤖
+├ I am a WhatsApp user bot developed by Diegoson.
+├ ✨ Let's explore the world of automation together!
 ├
-├ 👾 *Description*: WhatsApp user bot
-├ 👾 *Prefix*: ${process.env.Prefix}
-├ 📲 *Version*: 3.0.0
+├ 📌 *Prefix*: ${global.prefix}
+├ 📌 *Version*: 3.0.0
 │
-├ Type ${process.env.Prefix}menu to get the full command list
+├ Type ${global.prefix}menu to get the full command list.
 │
 ╰──────────⭑ ©vorterx
     `;
