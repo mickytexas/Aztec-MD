@@ -146,11 +146,17 @@ console.log(
       app.get("/", (req, res) => {
         res.sendFile(path.join(__dirname, "public", "index.html"));
       });
+  if (!process.env.MONGODB) {
+  console.error('❌Error: Provide a MONGODB URL to continue the process');
+} else {
+  driver.connect()
+     .then(() => {
 
       app.listen(PORT, () => {
         console.log(`[🌐 AZTEC ] Web server is running on port ${PORT}`);
       });
-    })
+     })
     .catch(console.error);
 }
 startAztec();
+   }
