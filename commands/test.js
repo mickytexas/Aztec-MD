@@ -16,10 +16,10 @@ module.exports = {
     const upload = await getNetworkUploadSpeed();
 
     const txt = '🚦◦ *Downloads*: ' + download.mbps + ' mbps\n';
-    text += '🚦◦ *Uploads*: ' + upload.mbps + ' mbps\n';
-    text += '🚦◦ *Response*: ' + (new Date() - old) + ' ms';
+    txt += '🚦◦ *Uploads*: ' + upload.mbps + ' mbps\n';
+    txt += '🚦◦ *Response*: ' + (new Date() - old) + ' ms';
 
-    vorterx.sendMessage(m.from, { caption: text }, { quoted: m });
+    vorterx.sendMessage(m.from, { caption: txt }, { quoted: m });
 
     async function getNetworkDownloadSpeed() {
       const baseUrl = 'https://eu.httpbin.org/stream-bytes/500000';
