@@ -1,47 +1,50 @@
 const NetworkSpeed = require('network-speed');
-
-const test = new NetworkSpeed()
-
 const { tmpdir } = require('os');
+
+const test = new NetworkSpeed();
 
 module.exports = {
   name: 'test',
-  description: 'Cheking ping',
+  description: 'Checking ping',
   category: 'Networks',
-  async xstart(vorterx,m,{text, args,xReact}) {
-
-
+  async xstart(vorterx, m, { text, args, xReact }) {
     await xReact('🚦');
-      let old = new Date()
-      let download = await getNetworkDownloadSpeed()
-      async function getNetworkDownloadSpeed() {
 
-      const baseUrl = 'https://eu.httpbin.org/stream-bytes/500000'
-      const fileSizeInBytes = 500000
-      const speed = await test.checkDownloadSpeed(baseUrl, fileSizeInBytes)
+    const old = new Date();
 
-         return speed
+    const download = await getNetworkDownloadSpeed();
+    const upload = await getNetworkUploadSpeed();
+
+    const txt = '🚦◦ *Downloads*: ' + download.mbps + ' mbps\n';
+    text += '🚦◦ *Uploads*: ' + upload.mbps + ' mbps\n';
+    text += '🚦◦ *Response*: ' + (new Date() - old) + ' ms';
+
+    vorterx.sendMessage(m.from, { caption: text }, { quoted: m });
+
+    async function getNetworkDownloadSpeed() {
+      const baseUrl = 'https://eu.httpbin.org/stream-bytes/500000';
+      const fileSizeInBytes = 500000;
+
+      const speed = await test.checkDownloadSpeed(baseUrl, fileSizeInBytes);
+
+      return speed;
     }
-    let upload = await getNetworkUploadSpeed()
+
     async function getNetworkUploadSpeed() {
-    const options = {
+      const options = {
+        hostname: 'www.google.com',
+        port: 80,
+        path: tmpdir(),
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
 
-            hostname: 'www.google.com',
-            port: 80,
-            path: tmpdir(),
-            method: 'POST',
-            headers: {
-           'Content-Type': 'application/json',
-       }
+      const fileSizeInBytes = 2000000;
+      const speed = await test.checkUploadSpeed(options, fileSizeInBytes);
 
-   }
- const fileSizeInBytes = 2000000
- const speed = await test.checkUploadSpeed(options, fileSizeInBytes)
-return speed
-        }
-       let txt = '🚦◦ *Downloads* : ' + download.mbps + ' mbps\n'
-       text += '🚦◦ *Uploads* : ' + upload.mbps + ' mbps\n'
-       text += '🚦◦ *Response* : ' + ((new Date - old) * 1) + ' ms'
-       vorterx.sendMessage(m.from, { caption: text}, {quoted:m})
-    },
-}
+      return speed;
+    }
+  },
+};
