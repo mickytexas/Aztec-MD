@@ -1,7 +1,3 @@
-/*
-    AZTEC WABOT V3.0.0
-    MULTI AUTH STATE
-*/
 require('./lib/message/vorterx.js');
 require('./config');
 const app = require('express')();
@@ -21,8 +17,8 @@ const BOTNAME = global.botname;
 const { imageSync } = require('qr-image');
 const path = require('path');
 const {
-    say 
-          } = require('cfonts');
+  say
+} = require('cfonts');
 const express = require("express");
 const config = require('./config');
 const vorterx = require('./lib/message/vorterx.js');
@@ -41,14 +37,15 @@ const store = makeInMemoryStore({
     level: 'silent',
     stream: 'store'
   })
-})
+});
+
 function startAztec() {
-   useMultiFileAuthState('session')
+  useMultiFileAuthState('session')
     .then(({ state, saveCreds }) => {
       console.log(
         "%c AZTEC MD",
         "font-weight: bold;font-size: 50px;color: red;text-shadow: 3px 3px 0 rgb(217,31,38) ,6px 6px 0 rgb(226,91,14) , 9px 9px 0 rgb(245,221,8) ,12px 12px 0 rgb(5,148,68) , 15px 15px 0 rgb(2,135,206) ,18px 18px 0 rgb(4,77,145) , 21px 21px 0 rgb(42,21,113); margin-bottom: 12px; padding: 5%"
-          } );
+      );
 
       const vorterxInstance = AztecConnect({
         logger: P({ level: "silent" }),
@@ -70,7 +67,7 @@ function startAztec() {
 
       readCommands();
 
-     async function readCommands() {
+      async function readCommands() {
         const cmdDir = "./commands";
         fs.readdir(cmdDir, (err, files) => {
           if (err) {
@@ -85,85 +82,80 @@ function startAztec() {
             });
         });
       }
-    .catch(error => {
-      console.error("Error starting Aztec:", error);
-    })
 
-  vorterxInstance.ev.on('creds.update', saveCreds);
-  vorterxInstance.ev.on('connection.update', async (update) => {
-    const { connection, lastDisconnect } = update;
-    if (update.qr) {
-      console.log(`[${chalk.red('!')}]`, 'white');
-      vorterxInstance.QR = imageSync(update.qr);
-    }
-    if (connection === "open") {
-      console.log("💗 You have successfully logged in to Aztec");
-      const max = `\`\`\`*👾AZTEC  BEEN CONNECTED👾*\n*VERSION* : ${
-        require(__dirname + "/package.json").version
-      }\n*BOTNAME* : ${global.botname}\n*UPDATED* : LATEST\n *PREFIX* : ${global.prefix} \`\`\``;
-      vorterxInstance.sendMessage(vorterxInstance.user.id, {
-        text: max,
+      vorterxInstance.ev.on('creds.update', saveCreds);
+      vorterxInstance.ev.on('connection.update', async (update) => {
+        const { connection, lastDisconnect } = update;
+        if (update.qr) {
+          console.log(`[${chalk.red('!')}]`, 'white');
+          vorterxInstance.QR = imageSync(update.qr);
+        }
+        if (connection === "open") {
+          console.log("💗 You have successfully logged in to Aztec");
+          const max = `\`\`\`*👾AZTEC  BEEN CONNECTED👾*\n*VERSION* : ${
+            require(__dirname + "/package.json").version
+          }\n*BOTNAME* : ${global.botname}\n*UPDATED* : LATEST\n *PREFIX* : ${global.prefix} \`\`\``;
+          vorterxInstance.sendMessage(vorterxInstance.user.id, {
+            text: max,
+          });
+        }
+        if (connection === "close") {
+          const reason = new Boom(lastDisconnect?.error)?.output.statusCode;
+          if (reason === DisconnectReason.connectionClosed) {
+            console.log("[👾 AZTEC ] Connection closed, reconnecting....");
+            startAztec();
+          } else if (reason=== DisconnectReason.invalidSession) {
+            console.log("[👾 AZTEC ] Invalid session, reconnecting....");
+            startAztec();
+          } else if (reason === DisconnectReason.invalidCredentials) {
+            console.log("[👾 AZTEC ] Invalid credentials, please check your session file...");
+            console.log("Exiting...");
+            process.exit(1);
+          } else {
+            console.log("[👾 AZTEC ] Connection closed with reason:", reason);
+            console.log("Exiting...");
+            process.exit(1);
+          }
+        }
       });
-    }
-    if (connection === "close") {
-      const reason = new Boom(lastDisconnect?.error)?.output.statusCode;
-      if (reason === DisconnectReason.connectionClosed) {
-        console.log("[👾 AZTEC ] Connection closed, reconnecting....");
-        startAztec();
-      } else if (reason === DisconnectReason.connectionLost) {
-        console.log("[👾AZTEC ] Connection Lost from Server, reconnecting...");
-        startAztec();
-      } else if (reason === DisconnectReason.loggedOut) {
-        await remove('session');
-        console.log("[👾 AZTEC ] Device Logged Out, Please Delete Session and Scan Again.");
-        process.exit(0);
-      } else if (reason === DisconnectReason.restartRequired) {
-        console.log("[👾 CONNECT ] Server starting...");
-        startAztec();
-      } else if (reason === DisconnectReason.timedOut) {
-        console.log("[👾 CONNECT ] Connection Timed Out, Trying to Reconnect....");
-        startAztec();
-      } else {
-        vorterxInstance.end(`[👾 SERVER ] Server Disconnected: ${reason} | ${connection}`);
-      }
-    }
-  });
 
-  app.get('/', (req, res) => {
-    res.status(200).setHeader('Content-Type', 'image/png').send(vorterxInstance.QR);
-  });
+      vorterxInstance.ev.on('login.2fa', async ({ close }) => {
+        console.log("[📲 AZTEC ] Please enter the 2FA code:");
+        const rl = require('readline').createInterface({
+          input: process.stdin,
+          output: process.stdout,
+        });
+        rl.on('line', async (line) => {
+          rl.close();
+          close(line);
+        });
+      });
 
-  vorterxInstance.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterxInstance));
-  vorterxInstance.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterxInstance));
+      vorterxInstance.ev.on('chats.update', async ({ chats }) => {
+        const unread = chats.filter(chat => chat.unreadCount > 0);
+        if (unread.length > 0) {
+          console.log(`[🔔 AZTEC ] You have ${unread.length} unread chats.`);
+        }
+      });
+
+      vorterxInstance.ev.on('chat.update', async ({ jid, count, chat }) => {
+        console.log(`[🆕 AZTEC ] New message from ${jid}, message count: ${count}`);
+      });
+
+      app.use(express.static(path.join(__dirname, 'public')));
+
+      app.get("/", (req, res) => {
+        res.sendFile(path.join(__dirname, "public", "index.html"));
+      });
+
+      app.listen(PORT, () => {
+        console.log(`[🌐 AZTEC ] Web server is running on port ${PORT}`);
+      });
+    })
+    .catch(console.error);
 }
+startAztec();
 
-let connectionEstablished = false;
-let serverStarted = false;
-
-const establishConnection = async () => {
-  try {
-    await driver.connect();
-    console.log(chalk.green.bold("👨‍💻You have connected to Aztec-MD"));
-    connectionEstablished = true;
-
-    if (serverStarted) {
-      startAztec();
-    }
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-const startServer = () => {
-  app.listen(PORT, () => {
-    console.log(`RUNNING ON PORT ${PORT}`);
-    serverStarted = true;
-
-    if (connectionEstablished) {
-      startAztec();
-    }
-  });
-};
 if (!process.env.MONGODB) {
   console.error('❌Error: Provide a MONGODB URL to continue the process');
 } else {
@@ -177,3 +169,4 @@ if (!process.env.MONGODB) {
     console.error('❌Error:', error);
   });
 }
+
