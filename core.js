@@ -154,18 +154,3 @@ console.log(
     .catch(console.error);
 }
 startAztec();
-
-if (!process.env.MONGODB) {
-  console.error('❌Error: Provide a MONGODB URL to continue the process');
-} else {
-  const connectionPromise = establishConnection();
-  const serverPromise = new Promise((resolve) => {
-    startServer();
-    resolve();
-});
-
-  Promise.all([connectionPromise, serverPromise]).catch((error) => {
-    console.error('❌Error:', error);
-  });
-}
-
