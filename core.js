@@ -31,7 +31,7 @@ const chalk = require('chalk');
 const { remove } = require('fs-extra');
 const contact = require("./mangoes/contact.js");
 const MessageHandler = require('./lib/message/vorterx.js');
-const driver = new MongoDriver(process.env.MONGODB)
+const driver = new MongoDriver(global.mongodb)
 const store = makeInMemoryStore({
   logger: P().child({
     level: 'silent',
@@ -145,13 +145,7 @@ console.log(
 
       app.get("/", (req, res) => {
         res.sendFile(path.join(__dirname, "public", "index.html"));
-      });
-  if (!process.env.MONGODB) {
-  console.error('❌Error: Provide a MONGODB URL to continue the process');
-} else {
-  driver.connect()
-     .then(()) => {
-
+        
       app.listen(PORT, () => {
         console.log(`[🌐 AZTEC ] Web server is running on port ${PORT}`);
       });
@@ -160,4 +154,3 @@ console.log(
 }
 startAztec();
    }
-    }
