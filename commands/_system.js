@@ -1,12 +1,6 @@
-//==========
-//
-// MADE WITH LUV BY DIEGOSON 
-// GIVE CREDITS IF YOU COPY THIS CODE
-//
-//==========
-
 const { formatp, runtime } = require("../mangoes/myFunc.js");
-const { fancy, bubble } = require("@viper-x/fancytext");
+const chalk = require("chalk");
+const { bubble } = require("@viper-x/fancytext");
 const { getLatestGPTVersion } = require("../lib/myModule.js");
 const os = require("os");
 const now = require("performance-now");
@@ -32,10 +26,12 @@ module.exports = {
     aztec += `❲❒❳ *Latest GPT Version :* ${await getLatestGPTVersion()}\n\n`;
     aztec += `*©vorterx-team*`;
 
+    const formattedAztec = chalk.bold(aztec);
+
     const templates = [
-      { name: "Template 1", text: fancy(aztec, "bold") },
-      { name: "Template 2", text: fancy(aztec, "italic") },
-      { name: "Template 3", text: fancy(aztec, "underline") },
+      { name: "Template 1", text: formattedAztec },
+      { name: "Template 2", text: formattedAztec },
+      { name: "Template 3", text: formattedAztec },
       { name: "Template 4", text: bubble(aztec, "blue") },
       { name: "Template 5", text: bubble(aztec, "green") },
       { name: "Template 6", text: bubble(aztec, "purple") },
