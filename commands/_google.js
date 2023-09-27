@@ -1,11 +1,6 @@
 const google = require('google-it');
 const { fancy, box, magic, rainbow } = require("@viper-x/fancytext");
 
-//============
-// @GIVE CRRDITS
- /*BY DIEGOSON*/
-//=============
-
 module.exports = {
   name: "google",
   description: "Search random stuff",
@@ -33,6 +28,8 @@ module.exports = {
 
       const img = "https://i.ibb.co/k2mkzHJ/IMG-20230723-WA0071.jpg";
       vorterx.sendMessage(m.from, { image: { url: img }, caption: selectedTemplate.text }, { quoted: m });
+    }).catch(err => {
+      console.error(err);
     });
   },
 };
