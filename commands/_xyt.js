@@ -2,6 +2,8 @@
 
 //  AZTEC MD V3.0.0
 
+// MADE WITH LUV BY DIEGOSON
+
 //================================>
 const { getBuffer } = require("../mangoes/myFunc.js");
 const yts = require("youtube-yts");
