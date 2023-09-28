@@ -13,7 +13,7 @@
   "dependencies": {
     "@whiskeysockets/baileys": "^6.4.1",
     "@adiwajshing/keyed-db": "^0.2.4",
-    "@consumet/extensions": "^2.0.0",
+    "@consumet/extensions": "^1.5.2",
     "@hapi/boom": "^10.4.0",
     "@types/node": "^16.9.1",
     "@viper-x/fancytext": "^1.0.2",
