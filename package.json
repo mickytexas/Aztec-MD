@@ -36,7 +36,7 @@
     "fs-extra": "^10.0.0",
     "mumaker": "^2.0.0",
     "moment-timezone": "^0.5.41",
-    "mongoose": "^7.4.4",
+    "mongoose": "^7.5.3",
     "node-fetch": "^3.1.0",
     "openai": "^3.2.1",
     "pino": "^8.14.1",
