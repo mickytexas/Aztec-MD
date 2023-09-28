@@ -11,7 +11,7 @@
   },
   "author": "Diegoson",
   "dependencies": {
-    "@whiskeysockets/baileys": "^4.6.1",
+    "@whiskeysockets/baileys": "^6.4.1",
     "@adiwajshing/keyed-db": "^0.2.4",
     "@consumet/extensions": "^2.0.0",
     "@hapi/boom": "^10.4.0",
