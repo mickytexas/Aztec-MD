@@ -1,34 +1,31 @@
-//===================°°°°°°°
-//
-//AZTEC MD WABOT VERSION 3.0.0
-//MADE IN LUV BY DIEGOSON 
-//
-//===================°°°°°°°
+// AZTEC MD WABOT VERSION 3.0.0
+// MADE WITH LOVE BY DIEGOSON
 
 module.exports = {
   name: "gpt",
   alias: ["ai", "openai"],
   category: "CHATGPT",
-  desc: "To research something",
+  desc: "Research something",
   async xstart(vorterx, m, { xReact, doReply, text }) {
     if (!text) {
       await xReact("❌");
-      return m.reply("*Provide me a query ex Who is Aztec*");
+      return m.reply("*Please provide a query, e.g., 'Who is Aztec?'*");
     }
-    await xReact("🤖");
 
-    const phoneNumber = "27686881509";
-    const encodedText = encodeURIComponent(text);
-    const whatsappURL = `https://api.whatsapp.com/send/?phone=${phoneNumber}&text=${encodedText}`;
+    await xReact("🤖");
 
     const response = `
 *CHAT_GPT - GPT-4 2023*
 
-${text}
+Query: ${text}
 
-[![Thumbnail](https://i.ibb.co/C7TXRcH/photo-1678483789107-0029c61fdcca.jpg)](${whatsappURL})
+[![Thumbnail](https://i.ibb.co/C7TXRcH/photo-1678483789107-0029c61fdcca.jpg)]
+
+GPT-4 is the latest version of the Chat_GPT language model, providing even more advanced conversational capabilities and natural language understanding.
+
+Feel free to ask any question, and I'll do my best to provide a helpful response!
 `;
 
-    await vorterx.sendMessage(m.from, response, { quoted: m });
+    await doReply(vorterx, m, response);
   },
 };
