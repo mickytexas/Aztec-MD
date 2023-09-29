@@ -6,7 +6,7 @@ module.exports = {
   description: "Search random stuff",
   category: "Search",
   async xstart(vorterx, m, { xReact, text, args }) {
-    await xReact("📍");
+    await xReact("🔍");
     google({ 'query': text }).then(res => {
       let aztec = `🔎 *GOOGLE SEARCH RESULTS* 🔍\n\n${text}\n\n`;
 
