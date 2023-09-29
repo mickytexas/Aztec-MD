@@ -4,14 +4,14 @@ module.exports = {
   category: "Group",
   async xstart(vorterx, m, { isAdmin, isGroup, xReact, isBotAdmin }) {
     if (!isGroup) {
-      const reactions = ["❌", "🚫", "🙅‍♀️", "🤷‍♂️"];
-      const randomReaction = reactions[Math.floor(Math.random() * reactions.length)];
+      const reactAztec = ["❌", "🚫", "🙅‍♀️", "🤷‍♂️"];
+      const randomReaction = reactAztec[Math.floor(Math.random() * reactAztec.length)];
       await toReact(randomReaction);
       return m.reply("*🤔 Where are you heading? This command is for groups only.*");
      }
 
-    const reactions = ["👋", "👋🏼", "🤚", "✌️", "👋🏽"];
-    const randomReaction = reactions[Math.floor(Math.random() * reactions.length)];
+    const reactAztec = ["👋", "👋🏼", "🤚", "✌️", "👋🏽"];
+    const randomReaction = reactAztec[Math.floor(Math.random() * reactAztec.length)];
     await xReact(randomReaction);
 
      const Diegoson = [
