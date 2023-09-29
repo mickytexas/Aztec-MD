@@ -1,10 +1,10 @@
-const { fetchStatus, profilePictureUrl } = require('../lib/module/function');
+const { fetchStatus, profilePictureUrl } = require('../mangoes/myFunc.js');
 const { db } = require('../config');
 
 module.exports = {
     name: "profile",
     description: "Shows your profile pic information",
-    category: "Extra",
+    category: "user",
     async xstart(vorterx, m) {
         await vorterx.xReact("😘");
 
