@@ -7,6 +7,10 @@ const child_process = require("child_process");
 exports.getRandom = (Numb) => {
 return `${Math.floor(Math.random() * 10000)}${Numb}`
 }
+exports.isNumber = (number) => {
+  const int = parseInt(number);
+  return typeof int === "number" && !isNaN(int);
+};
 exports.generateProfilePicture = async (buffer) => {
 	const jimp = await jimp_1.read(buffer)
 	const min = jimp.getWidth()
