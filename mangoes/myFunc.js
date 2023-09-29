@@ -2,6 +2,7 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 const { resolve } = require("path");
 let BodyForm = require("form-data");
+let { fromBuffer } = require("file-type");
 const { sizeFormatter } = require('human-readable')
 const child_process = require("child_process");
 const jimp = require('jimp');
