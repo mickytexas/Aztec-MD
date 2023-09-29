@@ -6,8 +6,8 @@ module.exports = {
   alias: ['help'],
   category: 'General',
   description: 'Gives the full command list of the bot',
-  async xstart(vorterx,m,{args, xReact,text}) {
-    
+  async xstart(vorterx, m, { args, xReact, text }) {
+
     try {
       await vorterx.sendPresenceUpdate("composing", m.from);
       const id = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : m.chat;
@@ -36,9 +36,7 @@ module.exports = {
 
         for (const [file, ...aliases] of commands) {
           const capitalizedFile = file.replace(".js", "").charAt(0).toUpperCase() + file.replace(".js", "").slice(1);
-          const aliasesList = aliases.map((cmd) => `| ${process.env.Prefix + cmd}`).join("\n")\n\n└─────────◉\n\n`;
-
-          
+          const aliasesList = aliases.map((cmd) => `| ${process.env.Prefix + cmd}`).join("\n") + "\n\n└─────────◉\n\n";
 
           formatted += `┌─『 *${capitalizedFile}* 』─❖\n\n`;
           formatted += `\`\`\`${aliasesList}\`\`\`\n\n\n`;
