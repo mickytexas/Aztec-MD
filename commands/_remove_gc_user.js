@@ -27,8 +27,6 @@ module.exports = {
 
     await xReact("👢");
     await vorterx.groupRemove(m.from, mention[0]);
-    await vorterx.sendMessage(m.from, {
-      text: `🚫⚠️⚡️ *User kicked by ${userName}!*`,
-    }, { quoted: m });
+    await vorterx.sendMessage(m.from, {text: `🚫⚠️⚡️ *User kicked by ${userName}!*`,}, { quoted: m });
     },
    };
