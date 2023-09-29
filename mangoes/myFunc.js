@@ -7,6 +7,16 @@ const child_process = require("child_process");
 exports.getRandom = (Numb) => {
 return `${Math.floor(Math.random() * 10000)}${Numb}`
 }
+exports.generateProfilePicture = async (buffer) => {
+	const jimp = await jimp_1.read(buffer)
+	const min = jimp.getWidth()
+	const max = jimp.getHeight()
+	const cropped = jimp.crop(0, 0, min, max)
+	return {
+        img: await cropped.scaleToFit(720, 720).getBufferAsync(jimp_1.MIME_JPEG),
+	preview: await cropped.scaleToFit(720, 720).getBufferAsync(jimp_1.MIME_JPEG)
+	}
+}
 exports.runtime = function(seconds) {
 	seconds = Number(seconds);
 	var d = Math.floor(seconds / (3600 * 24));
