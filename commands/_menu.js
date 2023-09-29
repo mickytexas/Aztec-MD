@@ -63,7 +63,7 @@ module.exports = {
             
       }
           const capitalizedFile = file.replace(".js", "").charAt(0).toUpperCase() + file.replace(".js", "").slice(1);
-          const aliasesList = aliases.map((cmd) => `| ${PREFIX + cmd}`).join("\n") + "\n\n└─────────◉\n\n";
+          const aliasesList = aliases.map((cmd) => `| ${PREFIX + cmd}`).join("\n") ${ctgry_end}\n`;
 
           formatted += `┌─『 *${capitalizedFile}* 』─❖\n\n`;
           formatted += `\`\`\`${aliasesList}\`\`\`\n\n\n`;
