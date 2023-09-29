@@ -11,6 +11,15 @@ let config = {
   mongodb_urI: process.env.MONGODB_URI || 'mongodb+srv://mk:mk@new.vxtfxii.mongodb.net/?retryWrites=true&w=majority',//Replace this
   caption: process.env.CAPTION || 'By Aztec MD',
   mods: process.env.MODS ? process.env.MODS.split(',') : [],
+  neofetchOptions: {
+    os: true,
+    kernel: true,
+    uptime: true,
+    packages: true,
+    shell: true,
+  },
+  fileUrl: process.env.FILE_URL || 'https://example.com/file',
+  uploadFileUrl: process.env.UPLOAD_FILE_URL || 'https://example.com/upload',
 };
 
 module.exports = config;
@@ -28,6 +37,6 @@ function watchAndReloadConfig(filePath) {
 }
 
 process.on('SIGINT', () => {
-  console.log(chalk.yellowBright('Gracefully shutting down...'));
+  console.log(chalk.yellowBright('📴Gracefully shutting down...'));
   process.exit();
 });
