@@ -8,6 +8,11 @@ module.exports = {
   description: 'Gives the full command list of the bot',
   async xstart(vorterx, m, { args, xReact, text }) {
 
+    const BotName = process.env.BOTNAME;
+    const userName = m.pushName;
+    const PREFIX = process.env.PREFIX;
+    
+    
     try {
       await vorterx.sendPresenceUpdate("composing", m.from);
       const id = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : m.chat;
@@ -36,7 +41,7 @@ module.exports = {
 
         for (const [file, ...aliases] of commands) {
           const capitalizedFile = file.replace(".js", "").charAt(0).toUpperCase() + file.replace(".js", "").slice(1);
-          const aliasesList = aliases.map((cmd) => `| ${process.env.Prefix + cmd}`).join("\n") + "\n\n└─────────◉\n\n";
+          const aliasesList = aliases.map((cmd) => `| ${PREFIX + cmd}`).join("\n") + "\n\n└─────────◉\n\n";
 
           formatted += `┌─『 *${capitalizedFile}* 』─❖\n\n`;
           formatted += `\`\`\`${aliasesList}\`\`\`\n\n\n`;
@@ -49,16 +54,11 @@ module.exports = {
       const uniqueCommands = getUniqueCommands(pluginsDir);
       const formattedCommandList = formatCommandList(uniqueCommands);
 
-      const helpMessage = `
-        Konnichiwa *${m.pushName}* Senpai,
-        I am *DSAN*, a WhatsApp bot designed to elevate your anime experience.
-        
-        *🔖 My Prefix is:*  ${dsan.prefix}
-        
-        ${formattedCommandList}
-        
-        *©️ Team ATLAS- 2023*
-      `;
+      const helpMessage = `┏━━⟪ ${BotName}  ⟫━⦿
+┃ ✗ USER: ${userName} 
+┃ ✗ BOTNAME: ${BotName}
+┃ ✗ PREFIX: ${PREFIX}
+┗━━━━━━━━━━⦿\n\n${formattedCommandList}`;
 
       await vorterx.sendMessage(m.from, { image: { url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8IoKEDdsbryDr8GQr6gqFjgQh0APPLZsmnLuK-2_GnA&s" }, caption: helpMessage }, { quoted: m });
     } catch (err) {
