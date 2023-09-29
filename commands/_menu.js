@@ -7,11 +7,10 @@ module.exports = {
   category: 'General',
   description: 'Gives the full command list of the bot',
   async xstart(vorterx, m, { args, xReact, text }) {
-
     const BotName = process.env.BOTNAME;
     const userName = m.pushName;
     const PREFIX = process.env.PREFIX;
-    
+
     await xReact('Ⓜ️');
     try {
       await vorterx.sendPresenceUpdate("composing", m.from);
@@ -40,33 +39,43 @@ module.exports = {
         let formatted = "";
 
         for (const [file, ...aliases] of commands) {
-          var up_up, up_mid, up_btm, ctgry_L, ctgry_R, cmd_L, ctgry_end
-            var random_menu = 0 ;
-            if (!process.env.MENU) { random_menu = Math.floor(Math.random() * 0) + 1; } //make Sure to replace '2' with Exact number of how many styles you have added---- Then it takes randome_STYLE,When user did't Put any Value in 'process.env.MENU'
-            
-            if (random_menu == 1 || process.env.MENU.trim().startsWith("1") || process.env.MENU.toLowerCase().includes("suhail-md")) {            
-              up_up =  `╭────《  *${tiny(BotName)}*  》────⊷\n│ ╭──────✧❁✧──────◆`
-              up_mid = `│`
-              up_btm = `│ ╰──────✧❁✧──────◆\n╰══════════════════⊷`
-              ctgry_L =  `╭────❏`
-              ctgry_R =  `❏ \n`
-           cmd_L =     `│`
-              ctgry_end =`\n╰━━━━━━━━━━━━━━──⊷`
-            }else{
-              up_up =  `┏━━⟪ *${tiny(BotName)}* ⟫━━⦿`
-              up_mid = `┃ ✗`
-              up_btm = `┗━━━━━━━━━━━━━━⦿`
-              ctgry_L  = `\n┌──『`
-              ctgry_R  = `』──❖\n\n`
-            cmd_L = ` | `
-              ctgry_end =`\n\n└─────────◉\n`
-            
-      }
-          const capitalizedFile = file.replace(".js", "").charAt(0).toUpperCase() + file.replace(".js", "").slice(1);
-          const aliasesList = aliases.map((cmd) => ``${cmd_L} ${PREFIX + cmd}`).join("\n") ${ctgry_end}\n`;
+          let up_up, up_mid, up_btm, ctgry_L, ctgry_R, cmd_L, ctgry_end;
+          let random_menu = 0;
+          if (!process.env.MENU) {
+            random_menu = Math.floor(Math.random() * 2) + 1; // Replace '2' with the exact number of styles you have added
+          }
+
+          if (
+            random_menu === 1 ||
+            process.env.MENU.trim().startsWith("1") ||
+            process.env.MENU.toLowerCase().includes("suhail-md")
+          ) {
+            up_up = `╭────《  *${tiny(BotName)}*  》────⊷\n│ ╭──────✧❁✧──────◆`;
+            up_mid = `│`;
+            up_btm = `│ ╰──────✧❁✧──────◆\n╰══════════════════⊷`;
+            ctgry_L = `╭────❏`;
+            ctgry_R = `❏ \n`;
+            cmd_L = `│`;
+            ctgry_end = `\n╰━━━━━━━━━━━━━━──⊷`;
+          } else {
+            up_up = `┏━━⟪ *${tiny(BotName)}* ⟫━━⦿`;
+            up_mid = `┃ ✗`;
+            up_btm = `┗━━━━━━━━━━━━━━⦿`;
+            ctgry_L = `\n┌──『`;
+            ctgry_R = `』──❖\n\n`;
+            cmd_L = ` | `;
+            ctgry_end = `\n\n└─────────◉\n`;
+          }
+
+          const capitalizedFile =
+            file.replace(".js", "").charAt(0).toUpperCase() +
+            file.replace(".js", "").slice(1);
+          const aliasesList = aliases
+            .map((cmd) => `${cmd_L} ${PREFIX}${cmd}`)
+            .join("\n");
 
           formatted += `${ctgry_L} *${capitalizedFile}* ${ctgry_R}\n\n`;
-          formatted += `\`\`\`${aliasesList}\`\`\`\n\n\n`;
+          formatted += `\`\`\`${aliasesList}\`\`\`${ctgry_end}\n`;
         }
 
         return formatted.trim();
@@ -76,15 +85,16 @@ module.exports = {
       const uniqueCommands = getUniqueCommands(pluginsDir);
       const formattedCommandList = formatCommandList(uniqueCommands);
 
-    let vorterxInstant = `${up_up}
+      let vorterxInstant = `${up_up}
 ${up_mid} User: ${tiny(userName)}
 ${up_mid} BotName: ${tiny(BotName)}
-${up_mid} Prefix: ${tiny(PREFIX}
+${up_mid} Prefix: ${tiny(PREFIX)}
 ${up_mid} Runtime: ${tiny(runtime(process.uptime()))}
 ${up_mid} Time: ${tiny(time)}
 ${up_mid} Date: ${tiny(date)}
-${up_btm}\n${formattedCommandList}
-      vorterxInstant += `_📔Send ${prefix}menu <command name> to get detailed information of specific command_`;
+${up_btm}\n${formattedCommandList}`;
+
+      vorterxInstant += `_📔Send ${PREFIX}menu <command name> to get detailed information of a specific command_`;
 
       await vorterx.sendMessage(m.from, { image: { url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8IoKEDdsbryDr8GQr6gqFjgQh0APPLZsmnLuK-2_GnA&s" }, caption: vorterxInstant }, { quoted: m });
     } catch (err) {
@@ -92,4 +102,4 @@ ${up_btm}\n${formattedCommandList}
       console.log(err, 'red');
     }
   }
-};
+};        
