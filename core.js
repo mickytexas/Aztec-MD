@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const { default: AztecConnect, Browsers } = require('@whiskeysockets/baileys');
-const { QuickDB } = require('quick.db');
 const { Collection } = require('discord.js');
 const contact = require('./mangoes/contact.js');
 const fs = require('fs');
@@ -10,30 +9,31 @@ const path = require('path');
 const { say } = require('cfonts');
 const P = require('pino');
 const chalk = require('chalk');
-const { MangoClient } = require('mangoes');
+const mongoose = require('mongoose');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const MANGOES_URI = process.env.MANGOES_URI;
+const MONGODB_URI = process.env.MONGODB_URI;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-async function connectToMangoes() {
+async function connectToMongoose() {
   try {
-    const mangoClient = new MangoClient(MANGOES_URI);
-    await mangoClient.connect();
-    console.log('✔️ Connected to Mangoes');
-    return mangoClient;
+    await mongoose.connect(MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('✔️ Connected to MongoDB');
   } catch (error) {
-    console.error('➖ Failed to connect to Mangoes:', error);
+    console.error('➖ Failed to connect to MongoDB:', error);
     process.exit(1);
   }
 }
 
 async function startAztec() {
-  const mangoClient = await connectToMangoes();
+  await connectToMongoose();
 
   const sessionState = JSON.parse(fs.readFileSync('session.json'));
 
@@ -50,13 +50,15 @@ async function startAztec() {
     "font-weight: bold;font-size: 50px;color: red;text-shadow: 3px 3px 0 rgb(217,31,38) ,6px 6px 0 rgb(226,91,14) , 9px 9px 0 rgb(245,221,8) ,12px 12px 0 rgb(5,148,68) , 15px 15px 0 rgb(2,135,206) ,18px 18px 0 rgb(4,77,145) , 21px 21px 0 rgb(42,21,113); margin-bottom: 12px; padding: 5%"
   );
 
-  const quickDB = new QuickDB({
-    driver: mangoClient,
+  const contactSchema = new mongoose.Schema({
+    name: String,
+    number: String,
   });
 
+  const Contact = mongoose.model('Contact', contactSchema);
+
   vorterxInstance.cmd = new Collection();
-  vorterxInstance.DB = quickDB;
-  vorterxInstance.contactDB = quickDB.table('contacts');
+  vorterxInstance.contactDB = Contact;
   vorterxInstance.contact = contact;
 
   readCommands();
@@ -112,7 +114,7 @@ async function startAztec() {
   vorterxInstance.ev.on('qr', (qr) => {
     console.log(`[${chalk.red('!')}]`, 'white');
     vorterxInstance.QR = imageSync(qr);
-  });
+   });
 
   vorterxInstance.ev.on('chat-update', async (chatUpdate) => {
     if (chatUpdate.isNewMessage) {
