@@ -29,7 +29,7 @@ module.exports = {
 ├ ✨ Let's explore the world of automation together!
 ├
 ├ 📌 *Prefix*: ${global.prefix}
-├ 📌 *Version*: 3.0.0
+├ 📌 *Version*: ${ require(__dirname + "/package.json").version}
 │
 ├ Type ${global.prefix}menu for full command list.
 │
