@@ -54,13 +54,16 @@ module.exports = {
       const uniqueCommands = getUniqueCommands(pluginsDir);
       const formattedCommandList = formatCommandList(uniqueCommands);
 
-      const helpMessage = `┏━━⟪ ${BotName}  ⟫━⦿
-┃ ✗ USER: ${userName} 
-┃ ✗ BOTNAME: ${BotName}
-┃ ✗ PREFIX: ${PREFIX}
-┗━━━━━━━━━━⦿\n\n${formattedCommandList}`;
+    let vorterxInstant = `${up_up}
+${up_mid} User: ${tiny(userName)}
+${up_mid} BotName: ${tiny(BotName)}
+${up_mid} Prefix: ${tiny(PREFIX}
+${up_mid} Runtime: ${tiny(runtime(process.uptime()))}
+${up_mid} Time: ${tiny(time)}
+${up_mid} Date: ${tiny(date)}
+${up_btm}\n${formattedCommandList}`;
 
-      await vorterx.sendMessage(m.from, { image: { url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8IoKEDdsbryDr8GQr6gqFjgQh0APPLZsmnLuK-2_GnA&s" }, caption: helpMessage }, { quoted: m });
+      await vorterx.sendMessage(m.from, { image: { url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8IoKEDdsbryDr8GQr6gqFjgQh0APPLZsmnLuK-2_GnA&s" }, caption: vorterxInstant }, { quoted: m });
     } catch (err) {
       m.reply("👮‍♂️Oops! Something went wrong. Please try again later.");
       console.log(err, 'red');
