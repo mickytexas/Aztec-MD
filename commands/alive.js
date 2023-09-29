@@ -18,6 +18,7 @@ module.exports = {
 
     const aztec = fs.readFileSync("./lib/imogs.jpg");
     const msg = `*Hey ${m.pushName}!* 👋\n\nWelcome to ${global.BOTNAME}! 🤖\n\nI am a WhatsApp user bot developed by Diegoson.\n\n✨ Let's explore the world of automation together!\n\n📌 *Prefix*: ${global.prefix}\n📌 *Version*: 3.0.0\n\nType ${global.prefix}menu to get the full command list.`;
+    //This const msg transport the msg  to template and template receive the msg which u will see
 
     const template = `
 ╭─💗 *Bot Status*
@@ -37,7 +38,7 @@ module.exports = {
 
     const messageOptions = {
       image: aztec,
-      caption: msg,
+      caption: template,
       contextInfo: {
         externalAdReply: {
           title: 'vorterx team',
