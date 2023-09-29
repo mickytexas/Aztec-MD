@@ -38,7 +38,7 @@ async function connectToMongoDB() {
 async function startAztec() {
   await connectToMongoDB();
 
-  const sessionState = JSON.parse(fs.readFileSync('./connects/session.json'));
+  const sessionState = JSON.parse(fs.readFileSync('session.json'));
 
   const vorterxInstance = AztecConnect({
     logger: P({ level: 'silent' }),
