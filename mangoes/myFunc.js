@@ -1,6 +1,12 @@
 const axios = require("axios");
+const cheerio = require("cheerio");
+const { resolve } = require("path");
+let BodyForm = require("form-data");
 const { sizeFormatter } = require('human-readable')
 const child_process = require("child_process");
+const jimp = require('jimp');
+const ffmpeg = require("fluent-ffmpeg");
+const { unlink } = require("fs").promises;
 
 
 
