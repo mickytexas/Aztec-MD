@@ -19,7 +19,7 @@ let config = {
     shell: true,
   },
   fileUrl: process.env.FILE_URL || 'https://example.com/file',
-  uploadFileUrl: process.env.UPLOAD_FILE_URL || 'https://example.com/upload',
+  uploadFileUrl: process.env.UPLOAD_FILE_URL || 'https://example.com/upload',//https://eu.httpbin.org/stream-bytes/500000
 };
 
 module.exports = config;
