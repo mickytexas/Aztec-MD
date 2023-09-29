@@ -83,7 +83,8 @@ ${up_mid} Prefix: ${tiny(PREFIX}
 ${up_mid} Runtime: ${tiny(runtime(process.uptime()))}
 ${up_mid} Time: ${tiny(time)}
 ${up_mid} Date: ${tiny(date)}
-${up_btm}\n${formattedCommandList}`;
+${up_btm}\n${formattedCommandList}
+      vorterxInstant += `_📔Send ${prefix}menu <command name> to get detailed information of specific command_`;
 
       await vorterx.sendMessage(m.from, { image: { url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8IoKEDdsbryDr8GQr6gqFjgQh0APPLZsmnLuK-2_GnA&s" }, caption: vorterxInstant }, { quoted: m });
     } catch (err) {
