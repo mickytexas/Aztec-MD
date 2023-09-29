@@ -12,7 +12,7 @@ module.exports = {
     const userName = m.pushName;
     const PREFIX = process.env.PREFIX;
     
-    
+    await xReact('Ⓜ️');
     try {
       await vorterx.sendPresenceUpdate("composing", m.from);
       const id = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : m.chat;
