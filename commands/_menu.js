@@ -1,4 +1,7 @@
 const path = require("path");
+const os = require('os');
+const { tiny } = require("@viper-x/fancytext");
+const moment = require("moment-timezone");
 const fs = require("fs");
 
 module.exports = {
@@ -12,6 +15,9 @@ module.exports = {
     const PREFIX = process.env.PREFIX;
 
     await xReact('Ⓜ️');
+    let [date, time] = new Date()
+        .toLocaleString("en-IN", { timeZone: "Africa/Johannesburg" })
+        .split(",");
     try {
       await vorterx.sendPresenceUpdate("composing", m.from);
       const id = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : m.chat;
