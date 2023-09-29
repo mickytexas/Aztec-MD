@@ -1,111 +1,69 @@
-/*const fs = require("fs")
-const os = require('os');
-const {runtime} = require("../mangoes/myFunc.js");
-const moment = require("moment-timezone");
-const { tiny } = require("@viper-x/fancytext");
+const path = require("path");
+const fs = require("fs");
 
 module.exports = {
-  name: "menu",
-  description: "The list of all command",
-  category: "General",
- async xstart(vorterx, m, { commands, args, xReact })  {
-    await xReact("📔");
- // let aztec = fs.readFileSync("./lib/connect/vorterx.png");
-    //let anexa = fs.readFileSync("./lib/connect/anexa.png");
-     let [date, time] = new Date()
-        .toLocaleString("en-IN", { timeZone: "Africa/Johannesburg" })
-        .split(",");
-      const { pushName, sender } = m;
-    if (args) {
-      let data = [];
-      let name = args.toLowerCase();
-      let cmd =
-        commands.get(name) ||
-        Array.from(commands.values()).find((v) => v.alias.includes(name));
-} else {
-      const { pushName, sender } = m;
-      let cm = commands.push(...subCommands);
-      let category = [];
-
-      for (let cmd of cm) {
-        let info = commands.get(cmd);
-        if (!cmd) continue;
-        if (!info.category || info.category === "private")
-           continue;
-        if (Object.keys(category).includes(info.category))
-          category[info.category].push(info);
-        else {
-          category[info.category] = [];
-          category[info.category].push(info);
-        }
-      }
-//-----------------------------------------------------------------------
-       var up_up, up_mid, up_btm, ctgry_L, ctgry_R, cmd_L, ctgry_end
-            var random_menu = 0 ;
-            if (!process.env.MENU) { random_menu = Math.floor(Math.random() * 0) + 1; } //make Sure to replace '2' with Exact number of how many styles you have added---- Then it takes randome_STYLE,When user did't Put any Value in 'process.env.MENU'
-            
-            if (random_menu == 1 || process.env.MENU.trim().startsWith("1") || process.env.MENU.toLowerCase().includes("suhail-md")) {            
-              up_up =  `╭────《  *${tiny(process.env.BOTNAME)}*  》────⊷\n│ ╭──────✧❁✧──────◆`
-              up_mid = `│`
-              up_btm = `│ ╰──────✧❁✧──────◆\n╰══════════════════⊷`
-              ctgry_L =  `╭────❏`
-              ctgry_R =  `❏ \n`
-           cmd_L =     `│`
-              ctgry_end =`\n╰━━━━━━━━━━━━━━──⊷`
-            }else{
-              up_up =  `┏━━⟪ *${tiny(process.env.BOTNAME)}* ⟫━━⦿`
-              up_mid = `┃ ✗`
-              up_btm = `┗━━━━━━━━━━━━━━⦿`
-              ctgry_L  = `\n┌──『`
-              ctgry_R  = `』──❖\n\n`
-            cmd_L = ` | `
-              ctgry_end =`\n\n└─────────◉\n`
-            
-      }
-                
+  name: 'menu',
+  alias: ['help'],
+  category: 'General',
+  description: 'Gives the full command list of the bot',
+  async xstart(vorterx,m,{args, xReact,text}) {
     
-    //  ADD MORE STYLES HERE ACCORDING TO YOU AND ADD ELSE IF STATEMENT THROUGH BELLOW SYNTEX
-    // if (random_menu == 2(For_Menu_Style_no_2) || process.env.MENU.trim().startsWith("MENU_STYLE_NO") || process.env.MENU.toLowerCase().includes("Bot_NAME"))
-    // if user put NUMBER or GIVEN NAME_ Then check statement here and , select the STYLE_MENU Through that NUMBER or GIVEN NAME 
-//------------------------------------------------------------------------------
-      
-let amarok = `${up_up}
-${up_mid} User: ${tiny(m.pushName)}
-${up_mid} Botname: ${tiny(process.env.BOTNAME)}
-${up_mid} Prefix: ${tiny(process.env.Prefix)}
-${up_mid} Runtime: ${tiny(runtime(process.uptime()))}
-${up_mid} Time: ${tiny(time)}
-${up_mid} Date: ${tiny(date)}
-${up_btm}\n
-`;
+    try {
+      await vorterx.sendPresenceUpdate("composing", m.from);
+      const id = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : m.chat;
 
-const keys = Object.keys(category);
-      for (const key of keys) {
-        amarok += `${ctgry_L}  *${tiny(key.toLowerCase())}*  ${ctgry_R}${category[key]
-.map((cmd) => `${cmd_L}${prefix + cmd.name}`)
-.join("\n")} ${ctgry_end}\n`;
-      }
-      amarok += `_📔Send ${prefix}menu <command name> to get detailed information of specific command_`;
+      const getUniqueCommands = (dirPath) => {
+        const uniqueCommands = [];
+        const files = fs.readdirSync(dirPath);
 
-      let DieGosOn = {
-        image: aztec,
-        caption: tiny(amarok),
-        footer: '©aztec md',
-        headerType: 2,
-        contextInfo: {
-            externalAdReply: {
-            title: '𝑉𝑂𝑅𝑇𝐸𝑅𝑋 𝐵𝑂𝑇',
-            body: 'ʙᴇsᴛ ᴛᴏ ᴜsᴇ',
-            mediaType: 2,
-            thumbnail: anexa,
-            sourceUrl: 'wa.me/27686881509',
-            mediaUrl: 'https://github.com',
-            },
-        },
-    };
+        for (const file of files) {
+          const filePath = path.join(dirPath, file);
+          const stat = fs.statSync(filePath);
 
-await vorterx.sendMessage(m.from, DieGosOn,  { quoted: m})
-      }
+          if (stat.isDirectory()) {
+            uniqueCommands.push(...getUniqueCommands(filePath));
+          } else if (stat.isFile() && file.endsWith(".js")) {
+            const { alias = [] } = require(filePath);
+            uniqueCommands.push([file, ...alias]);
+          }
+        }
+
+        return uniqueCommands;
+      };
+
+      const formatCommandList = (commands) => {
+        let formatted = "";
+
+        for (const [file, ...aliases] of commands) {
+          const capitalizedFile = file.replace(".js", "").charAt(0).toUpperCase() + file.replace(".js", "").slice(1);
+          const aliasesList = aliases.map((cmd) => `⥼   ${global.prefix + cmd}`).join("\n");
+
+          formatted += `╟   🏮 *${capitalizedFile}* 🏮   ╢\n\n`;
+          formatted += `\`\`\`${aliasesList}\`\`\`\n\n\n`;
+        }
+
+        return formatted.trim();
+      };
+
+      const pluginsDir = path.join(process.cwd(), "Commands");
+      const uniqueCommands = getUniqueCommands(pluginsDir);
+      const formattedCommandList = formatCommandList(uniqueCommands);
+
+      const helpMessage = `
+        Konnichiwa *${m.pushName}* Senpai,
+        I am *DSAN*, a WhatsApp bot designed to elevate your anime experience.
+        
+        *🔖 My Prefix is:*  ${dsan.prefix}
+        
+        ${formattedCommandList}
+        
+        *©️ Team ATLAS- 2023*
+      `;
+
+      await vorterx.sendMessage(m.from, { image: { url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8IoKEDdsbryDr8GQr6gqFjgQh0APPLZsmnLuK-2_GnA&s" }, caption: helpMessage }, { quoted: m });
+    } catch (err) {
+      m.reply("👮‍♂️Oops! Something went wrong. Please try again later.");
+      console.log(err, 'red');
+    }
   }
-};*/
-          
+};
