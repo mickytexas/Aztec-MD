@@ -34,6 +34,22 @@ exports.fetchUrl = async (url, options) => {
     return err;
   }
 };
+exports.WAVersion = async () => {
+  let get = await exports.fetchUrl(
+    "https://web.whatsapp.com/check-update?version=1&platform=web"
+  );
+  let version = [get.currentVersion.replace(/[.]/g, ", ")];
+  return version;
+};
+exports.isUrl = (url) => {
+  return url.match(
+    new RegExp(
+      /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
+      "gi"
+    )
+  );
+};
+
 exports.generateProfilePicture = async (buffer) => {
 	const jimp = await jimp_1.read(buffer)
 	const min = jimp.getWidth()
@@ -85,7 +101,21 @@ exports.TelegraPh = (Path) => {
     }
   });
 };
+exports.buffergif = async (image) => {
+  const filename = `${Math.random().toString(36)}`;
+  await fs.writeFileSync(`./dustbin/${filename}.gif`, image);
+  child_process.exec(
+    `ffmpeg -i ./dustbin/${filename}.gif -movflags faststart -pix_fmt yuv420p -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" ./dustbin/${filename}.mp4`
+  );
+  await sleepy(4000);
 
+  var buffer5 = await fs.readFileSync(`./dustbin/${filename}.mp4`);
+  Promise.all([
+    unlink(`./dustbin/${filename}.mp4`),
+    unlink(`./dustbin/${filename}.gif`),
+  ]);
+  return buffer5;
+};
 exports.getBuffer = async (url) => {
   try {
     const response = await axios.get(url, {
