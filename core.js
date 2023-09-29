@@ -7,6 +7,7 @@ const fs = require('fs');
 const { imageSync } = require('qr-image');
 const path = require('path');
 const { say } = require('cfonts');
+const { MakeSession } = require("./lib/session");
 const P = require('pino');
 const chalk = require('chalk');
 const mongoose = require('mongoose');
