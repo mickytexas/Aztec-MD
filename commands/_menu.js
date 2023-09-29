@@ -40,6 +40,28 @@ module.exports = {
         let formatted = "";
 
         for (const [file, ...aliases] of commands) {
+          var up_up, up_mid, up_btm, ctgry_L, ctgry_R, cmd_L, ctgry_end
+            var random_menu = 0 ;
+            if (!process.env.MENU) { random_menu = Math.floor(Math.random() * 0) + 1; } //make Sure to replace '2' with Exact number of how many styles you have added---- Then it takes randome_STYLE,When user did't Put any Value in 'process.env.MENU'
+            
+            if (random_menu == 1 || process.env.MENU.trim().startsWith("1") || process.env.MENU.toLowerCase().includes("suhail-md")) {            
+              up_up =  `╭────《  *${tiny(process.env.BOTNAME)}*  》────⊷\n│ ╭──────✧❁✧──────◆`
+              up_mid = `│`
+              up_btm = `│ ╰──────✧❁✧──────◆\n╰══════════════════⊷`
+              ctgry_L =  `╭────❏`
+              ctgry_R =  `❏ \n`
+           cmd_L =     `│`
+              ctgry_end =`\n╰━━━━━━━━━━━━━━──⊷`
+            }else{
+              up_up =  `┏━━⟪ *${tiny(process.env.BOTNAME)}* ⟫━━⦿`
+              up_mid = `┃ ✗`
+              up_btm = `┗━━━━━━━━━━━━━━⦿`
+              ctgry_L  = `\n┌──『`
+              ctgry_R  = `』──❖\n\n`
+            cmd_L = ` | `
+              ctgry_end =`\n\n└─────────◉\n`
+            
+      }
           const capitalizedFile = file.replace(".js", "").charAt(0).toUpperCase() + file.replace(".js", "").slice(1);
           const aliasesList = aliases.map((cmd) => `| ${PREFIX + cmd}`).join("\n") + "\n\n└─────────◉\n\n";
 
