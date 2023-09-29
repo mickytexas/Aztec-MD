@@ -20,14 +20,16 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-const driver = new MongoClient(MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+let db; 
 
 async function connectToMongoDB() {
   try {
-    await driver.connect();
+    const client = new MongoClient(MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    await client.connect();
+    db = client.db(); 
     console.log('✔️Connected to MongoDB');
   } catch (error) {
     console.error('➖Failed to connect to MongoDB:', error);
@@ -53,13 +55,13 @@ async function startAztec() {
     "font-weight: bold;font-size: 50px;color: red;text-shadow: 3px 3px 0 rgb(217,31,38) ,6px 6px 0 rgb(226,91,14) , 9px 9px 0 rgb(245,221,8) ,12px 12px 0 rgb(5,148,68) , 15px 15px 0 rgb(2,135,206) ,18px 18px 0 rgb(4,77,145) , 21px 21px 0 rgb(42,21,113); margin-bottom: 12px; padding: 5%"
   );
 
-  const db = new QuickDB({
-    driver,
+  const quickDB = new QuickDB({
+    driver: db, 
   });
 
   vorterxInstance.cmd = new Collection();
-  vorterxInstance.DB = db;
-  vorterxInstance.contactDB = db.table('contacts');
+  vorterxInstance.DB = quickDB;
+  vorterxInstance.contactDB = quickDB.table('contacts');
   vorterxInstance.contact = contact;
 
   readCommands();
