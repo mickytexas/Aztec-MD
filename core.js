@@ -1,6 +1,5 @@
 require('dotenv').config();
 const express = require('express');
-const { MongoClient } = require('mongodb');
 const { default: AztecConnect, Browsers } = require('@whiskeysockets/baileys');
 const { QuickDB } = require('quick.db');
 const { Collection } = require('discord.js');
@@ -11,34 +10,30 @@ const path = require('path');
 const { say } = require('cfonts');
 const P = require('pino');
 const chalk = require('chalk');
+const { MangoClient } = require('mangoes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const MONGODB_URI = process.env.MONGODB_URI;
+const MANGOES_URI = process.env.MANGOES_URI;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-let db; 
-
-async function connectToMongoDB() {
+async function connectToMangoes() {
   try {
-    const client = new MongoClient(MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    await client.connect();
-    db = client.db(); 
-    console.log('✔️Connected to MongoDB');
+    const mangoClient = new MangoClient(MANGOES_URI);
+    await mangoClient.connect();
+    console.log('✔️ Connected to Mangoes');
+    return mangoClient;
   } catch (error) {
-    console.error('➖Failed to connect to MongoDB:', error);
+    console.error('➖ Failed to connect to Mangoes:', error);
     process.exit(1);
   }
 }
 
 async function startAztec() {
-  await connectToMongoDB();
+  const mangoClient = await connectToMangoes();
 
   const sessionState = JSON.parse(fs.readFileSync('session.json'));
 
@@ -56,7 +51,7 @@ async function startAztec() {
   );
 
   const quickDB = new QuickDB({
-    driver: db, 
+    driver: mangoClient,
   });
 
   vorterxInstance.cmd = new Collection();
@@ -119,41 +114,43 @@ async function startAztec() {
     vorterxInstance.QR = imageSync(qr);
   });
 
-  vorterxInstance.ev.on('disconnect', (reason) => {
-    console.log('Aztec disconnected. Reason:', reason);
-    if (reason !== 'intended') {
-      console.log('Trying to reconnect...');
-      vorterxInstance.restart();
-    }
-  });
+  vorterxInstance.ev.on('chat-update', async (chatUpdate) => {
+    if (chatUpdate.isNewMessage) {
+      const message = chatUpdate.messages.all()[0];
 
-  vorterxInstance.ev.on('message.new', async (message) => {
-    if (message.isGroup) {
-      return;
-    }
+      if (!message.message || !message.message.conversation || !message.message.conversation.startsWith('/'))
+        return;
 
-    const { id, body, fromMe, chat } = message;
+      const commandName = message.message.conversation.split(' ')[0].substring(1);
+      const args = message.message.conversation.split(' ').slice(1);
 
-    if (fromMe) {
-      return;
-    }
+      const command = vorterxInstance.cmd.get(commandName);
+      if (!command) {
+        await vorterxInstance.reply(
+          message.key.remoteJID,
+          MessageType.text
+        );
+        return;
+      }
 
-    const command = body.split(' ')[0].slice(1).toLowerCase();
-    const args = body.split(' ').slice(1);
-
-    if (vorterxInstance.cmd.has(command)) {
       try {
-        vorterxInstance.cmd.get(command).run(vorterxInstance, message, args);
+        await command.execute(vorterxInstance, message, args);
       } catch (error) {
-        console.error('Error executing command:', error);
+        console.error(`Error executing command ${commandName}:`, error);
+        await vorterxInstance.reply(
+          message.key.remoteJID,
+          MessageType.text
+        );
       }
     }
   });
 
-  await vorterxInstance.start().catch((error) => {
-    console.error('Failed to start Aztec:', error);
-    process.exit(1);
-  });
+  await vorterxInstance.ready();
+
+  fs.writeFileSync('session.json', JSON.stringify(vorterxInstance.base64EncodedAuthInfo(), null, '\t'));
 }
 
-startAztec();
+startAztec().catch((error) => {
+  console.error('An error occurred while starting Aztec:', error);
+  process.exit(1);
+});
