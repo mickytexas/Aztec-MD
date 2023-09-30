@@ -9,16 +9,16 @@ module.exports = {
       activeAutoReact();
       const reactions = ["👍", "❤️", "😄", "🔥", "🎉", "🌟", "👏", "😊", "🥳", "💯"];
       const randomReaction = reactions[Math.floor(Math.random() * reactions.length)];
-      await toReact(randomReaction + " Auto-reactions enabled!");
+      await xReact(randomReaction + " Auto-reactions enabled!");
     } else if (command === "deactive_auto react") {
       deactiveAutoReact();
       const reactions = ["👎", "💔", "😔", "🙅‍♀️", "😢", "👻", "😞", "🚫", "😕", "😭"];
       const randomReaction = reactions[Math.floor(Math.random() * reactions.length)];
-      await toReact(randomReaction + " Auto-reactions disabled!");
+      await xReact(randomReaction + " Auto-reactions disabled!");
     } else {
       const reactions = ["❌", "⚠️", "🤔", "🙄", "🔍", "🤷‍♂️", "🤦‍♀️", "👀", "💭", "👉"];
       const randomReaction = reactions[Math.floor(Math.random() * reactions.length)];
-      await toReact(randomReaction + " Invalid command. Please use `active_auto react` or `deactive_auto react`.");
+      await xReact(randomReaction + " Invalid command. Please use `active_auto react` or `deactive_auto react`.");
      }
     },
   };
