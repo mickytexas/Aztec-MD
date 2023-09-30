@@ -9,8 +9,8 @@ module.exports = {
   description: 'For playing Quiz game while being bored',
   category: 'games',
   async xstart(vorterx, m, { xReact, args, text }) {
+ 
     await xReact('🆎️');
-    
     const quizGame = {
       currentQuestionIndex: 0,
       currentPlayerIndex: 0,
