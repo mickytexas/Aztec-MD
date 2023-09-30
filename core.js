@@ -31,6 +31,12 @@ async function connectToMongoose() {
     process.exit(1);
   }
 }
+const { MakeSession } = require("./lib/session");
+    if (!fs.existsSync("./session/creds.json")) {
+        MakeSession(config.SESSION_ID, "./session/creds.json").then(
+            console.log("Vesrion : " + require("./package.json").version)
+        );
+    }
 
 async function startAztec() {
   await connectToMongoose();
