@@ -6,7 +6,7 @@ let config = {
   botName: process.env.BOTNAME || 'AZTEC MD',
   prefix: process.env.PREFIX || '.',
   owner_number: process.env.OWNER_NUMBER || '27686881509',   
-  session: process.env.SESSION || 'add something',
+  session_id: process.env.SESSION_ID || 'add something',
   menu: process.env.MENU || '', //2 Is default menu aztec 0 is Suhail md menu 
   thumb: process.env.THUMB || 'https://i.ibb.co/C7TXRcH/photo-1678483789107-0029c61fdcca.jpg',
   MONGODB_URI: process.env.MONGODB_URI || 'mongodb+srv://mk:mk@new.vxtfxii.mongodb.net/?retryWrites=true&w=majority',//Replace this
