@@ -33,7 +33,7 @@ async function connectToMongoose() {
 }
 const { MakeSession } = require("./lib/session");
     if (!fs.existsSync("./session/creds.json")) {
-        MakeSession(session, "./session/creds.json").then(
+        MakeSession(config.session, "./session/creds.json").then(
             console.log("Vesrion : " + require("./package.json").version)
         );
     }
