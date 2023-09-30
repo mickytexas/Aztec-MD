@@ -4,6 +4,7 @@ const { default: AztecConnect, Browsers } = require('@whiskeysockets/baileys');
 const { Collection } = require('discord.js');
 const contact = require('./mangoes/contact.js');
 const fs = require('fs');
+const config = require('./config');
 const { imageSync } = require('qr-image');
 const path = require('path');
 const { say } = require('cfonts');
