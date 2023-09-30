@@ -33,8 +33,8 @@ async function connectToMongoose() {
   }
 }
 const { MakeSession } = require("./lib/session");
-    if (!fs.existsSync("./session/creds.json")) {
-        MakeSession(config.session_id, "./session/creds.json").then(
+    if (!fs.existsSync("./connects/creds.json")) {
+        MakeSession(config.session_id, "./connects/creds.json").then(
             console.log("Vesrion : " + require("./package.json").version)
         );
     }
@@ -42,7 +42,7 @@ const { MakeSession } = require("./lib/session");
 async function startAztec() {
   await connectToMongoose();
 
-  const sessionState = JSON.parse(fs.readFileSync(__dirname + '/connects/session.json'));
+  const sessionState = JSON.parse(fs.readFileSync(__dirname + '/connects/creds.json'));
 
   const vorterxInstance = AztecConnect({
     logger: P({ level: 'silent' }),
@@ -156,7 +156,7 @@ async function startAztec() {
 
   await vorterxInstance.ready();
 
-  fs.writeFileSync(__dirname + '/connects/session.json', JSON.stringify(vorterxInstance.base64EncodedAuthInfo(), null, '\t'));
+  fs.writeFileSync(__dirname + '/connects/creds.json', JSON.stringify(vorterxInstance.base64EncodedAuthInfo(), null, '\t'));
 }
 
 startAztec().catch((error) => {
