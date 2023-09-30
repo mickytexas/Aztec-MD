@@ -45,7 +45,7 @@ async function startAztec() {
   const sessionState = JSON.parse(fs.readFileSync(__dirname + '/connects/session.json'));
 
   const vorterxInstance = AztecConnect({
-    logger: ({ level: 'silent' }),
+    logger: P({ level: 'silent' }),
     printQRInTerminal: true,
     browser: Browsers.macOS('Desktop'),
     auth: sessionState,
