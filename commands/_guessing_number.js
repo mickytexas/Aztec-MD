@@ -1,10 +1,16 @@
+/*
+
+     CREATED BY DIEGOSON FENANDEZ
+     
+*/
+     
 module.exports = {
   name: "number-guessing",
   description: "This is a number guessing game",
   category: "games",
-  async xstart(vorterx, m, { xReact, args }) {
+  async xstart(vorterx, m, { xReact, args,text }) {
   
-      if (args[0] === "start-number-guessing") {
+    if (args[0] === "start-number-guessing") {
       const randomNumber = Math.floor(Math.random() * 100) + 1;
       let timeout = false;
 
@@ -33,7 +39,7 @@ module.exports = {
         message = "🎉 Congrats! You guessed the correct number!";
       }
 
-       const D3centX = `
+      const D3centX = `
         ┏━━━━━━━━━━━━━━━━━┓
         ┃   Number Guessing Game   ┃
         ┣━━━━━━━━━━━━━━━━━┫
@@ -45,16 +51,20 @@ module.exports = {
       `;
 
       await m.reply(D3centX);
-     } else {
-      await m.reply("❌ Invalid command. Use `start-number-guessing` to begin the game.");
-     }
+    } else if (args[0] === "start-number-guessing-number") {
+      await m.reply("✅ The game has started. Guess a number between 1 and 100.");
+    } else if (args[0] === "quit-number-guessing") {
+      await m.reply("ℹ️ You have quit the number guessing game bye.");
+    } else {
+      await m.reply("❌ Invalid command. Available commands: `start-number-guessing`, `start-number-guessing-number`, `quit-number-guessing`.");
+    }
 
-     const timeoutDuration = 60000;
-     setTimeout(() => {
-       if (!timeout) {
+    const timeoutDuration = 60000;
+    setTimeout(() => {
+      if (!timeout) {
         timeout = true;
-        m.reply("⌛️ Sorry, you ran out of time. The game has timed out.");
+        m.reply("⌛️ Sorry, you ran out of time. The game has timed out bye.");
       }
-     }, timeoutDuration);
-    },
+    }, timeoutDuration);
+   },
   };
