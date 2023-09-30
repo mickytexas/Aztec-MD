@@ -1,10 +1,12 @@
+const config = require('../config.js');
+
 module.exports = {
   name: "auto-react",
   description: "Enable or disable auto-reactions",
   category: "user",
   async xstart(vorterx, m, { xReact, activeAutoReact, deactiveAutoReact }) {
     
-   if (m.author.id !== config.mods) { // Remove the quotes around config.mods
+   if (m.author.id !== config.mods) {
       await xReact("❌ You are not authorized to use this command.");
       return;
     }
