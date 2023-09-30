@@ -35,7 +35,7 @@ async function connectToMongoose() {
 async function startAztec() {
   await connectToMongoose();
 
-  const sessionState = JSON.parse(fs.readFileSync(__dirname + '/connects/session.zip'));
+  const sessionState = JSON.parse(fs.readFileSync(__dirname + '/connects/session.json'));
 
   const vorterxInstance = AztecConnect({
     logger: ({ level: 'silent' }),
@@ -149,7 +149,7 @@ async function startAztec() {
 
   await vorterxInstance.ready();
 
-  fs.writeFileSync(__dirname + '/connects/session.zip', JSON.stringify(vorterxInstance.base64EncodedAuthInfo(), null, '\t'));
+  fs.writeFileSync(__dirname + '/connects/session.json', JSON.stringify(vorterxInstance.base64EncodedAuthInfo(), null, '\t'));
 }
 
 startAztec().catch((error) => {
