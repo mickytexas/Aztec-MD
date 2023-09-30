@@ -1,3 +1,6 @@
+//MADE BY VORTERX
+//DIEGOSON
+
 const { DateTime } = require('luxon');
 
 module.exports = {
