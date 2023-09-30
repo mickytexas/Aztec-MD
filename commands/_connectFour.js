@@ -1,4 +1,4 @@
-const pointsSystem = require('./pointsSystem');
+const pointsSystem = require('../lib/pointsSystem.js');
 
 module.exports = {
   name: 'connect-four',
