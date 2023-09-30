@@ -1,3 +1,9 @@
+//=======
+
+// MADE BYDIEGOSON 
+
+//======
+
 module.exports = {
   name: 'bomb',
   description: 'A simple bomb game to enjoy',
@@ -30,7 +36,7 @@ module.exports = {
        generateBombs() {
         this.bombs = [];
         for (let i = 0; i < this.maxPoints; i++) {
-          const timer = Math.floor(Math.random() * 10) + 1; // Random timer between 1 and 10 seconds
+          const timer = Math.floor(Math.random() * 10) + 1;
           this.bombs.push({ timer });
         }
        },
