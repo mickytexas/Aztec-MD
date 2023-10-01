@@ -18,7 +18,7 @@ const config = require('./config.js');
 const { Collection } = require('discord.js')
 const qr = require("qr-image");
 const contact = require("./mangoes/contact.js");
-const MessageHandler = require('./lib/vorterx');
+const MessageHandler = require('./lib/meesage/vorterx');
 const mongoose = require('mongoose');
 
 const MONGODB_URI = process.env.MONGODB_URI;
