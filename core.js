@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
-const { default: AztecConnect, Browsers } = require('@whiskeysockets/baileys');
-const { Collection } = require('discord.js');
+const { default: AztecConnect, Browsers, DisconnectReason } = require('@whiskeysockets/baileys');
+const { Collection, MessageType } = require('discord.js');
 const contact = require('./mangoes/contact.js');
 const fs = require('fs');
 const config = require('./config');
@@ -32,17 +32,20 @@ async function connectToMongoose() {
     process.exit(1);
   }
 }
+
 const { MakeSession } = require("./lib/session");
-    if (!fs.existsSync("./connects/creds.json")) {
-        MakeSession(config.session_id, "./connects/creds.json").then(
-            console.log("Vesrion : " + require("./package.json").version)
-        );
-    }
+
+const sessionCredentialsPath = "./connects/creds.json";
 
 async function startAztec() {
   await connectToMongoose();
 
-  const sessionState = JSON.parse(fs.readFileSync(__dirname + '/connects/creds.json'));
+  if (!fs.existsSync(sessionCredentialsPath)) {
+    await MakeSession(config.session_id, sessionCredentialsPath);
+    console.log("Version: " + require("./package.json").version);
+  }
+
+  const sessionState = JSON.parse(fs.readFileSync(sessionCredentialsPath));
 
   const vorterxInstance = AztecConnect({
     logger: P({ level: 'silent' }),
@@ -121,11 +124,11 @@ async function startAztec() {
   vorterxInstance.ev.on('qr', (qr) => {
     console.log(`[${chalk.red('!')}]`, 'white');
     vorterxInstance.QR = imageSync(qr);
-   });
+  });
 
   vorterxInstance.ev.on('chat-update', async (chatUpdate) => {
     if (chatUpdate.isNewMessage) {
-      const message = chatUpdate.messages.all()[0];
+   const message = chatUpdate.messages.all()[0];
 
       if (!message.message || !message.message.conversation || !message.message.conversation.startsWith('/'))
         return;
@@ -156,10 +159,10 @@ async function startAztec() {
 
   await vorterxInstance.ready();
 
-  fs.writeFileSync(__dirname + '/connects/creds.json', JSON.stringify(vorterxInstance.base64EncodedAuthInfo(), null, '\t'));
+  fs.writeFileSync(sessionCredentialsPath, JSON.stringify(vorterxInstance.base64EncodedAuthInfo(), null, '\t'));
 }
 
-startAztec().catch((error) => {
+ startAztec().catch((error) => {
   console.error('An error occurred while starting Aztec:', error);
   process.exit(1);
 });
