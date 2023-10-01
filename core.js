@@ -1,5 +1,5 @@
-require('/lib/message/vorterx');
-require('/config');
+require('./lib/message/vorterx');
+require('./config');
 
 const app = require("express")();
 const {
