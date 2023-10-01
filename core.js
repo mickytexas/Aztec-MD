@@ -49,7 +49,7 @@ const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: '
     printQRInTerminal: false,
     browser: ["Aztec", "Firefox", "1.0.0"],
     qrTimeout: undefined,
-    auth: state,
+    auth: authstate,
     version
   })
 
