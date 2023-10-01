@@ -38,7 +38,7 @@ const chalk = require('chalk');
 const { remove } = require('fs-extra');
 const contact = require("./mangoes/contact.js");
 const MessageHandler = require('./lib/message/vorterx.js');
-const driver = new MongoDriver(config.MONGODB_URI)
+const driver = new MongoDriver(process.env.MONGODB_URI)
 const store = makeInMemoryStore({
   logger: P().child({
     level: 'silent',
