@@ -27,6 +27,7 @@ const { imageSync } = require('qr-image');
 const path = require('path');
 const { say } = require('cfonts');
 const express = require("express");
+const { MongoDriver } = require('quickmongo');
 const config = require('./config');
 const vorterx = require('./lib/message/vorterx.js');
 const { QuickDB } = require('quick.db');
