@@ -17,7 +17,6 @@ const fs = require("fs");
 const config = require('./config.js');
 const { Collection } = require('discord.js')
 const qr = require("qr-image");
-const { creds } = authState;
 const contact = require("./mangoes/contact.js");
 const MessageHandler = require('./lib/message/vorterx');
 const mongoose = require('mongoose');
