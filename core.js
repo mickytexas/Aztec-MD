@@ -20,9 +20,9 @@ const {
 } = require('@whiskeysockets/baileys');
 const { Boom } = require('@hapi/boom');
 const P = require('pino');
-const PORT = global.port;
-const PREFIX = global.prefix;
-const BOTNAME = global.botname;
+const PORT = (process.env.PORT);
+const PREFIX = (process.env.PREFIX);
+const BOTNAME = (process.env.BOTNAME);
 const { imageSync } = require('qr-image');
 const path = require('path');
 const { say } = require('cfonts');
@@ -30,7 +30,6 @@ const express = require("express");
 const config = require('./config');
 const vorterx = require('./lib/message/vorterx.js');
 const { QuickDB } = require('quick.db');
-const MONGODB = global.mongodb;
 const mongoose = require('mongoose');
 const fs = require("fs");
 const { Collection } = require('discord.js');
@@ -38,7 +37,7 @@ const chalk = require('chalk');
 const { remove } = require('fs-extra');
 const contact = require("./mangoes/contact.js");
 const MessageHandler = require('./lib/message/vorterx.js');
-const driver = new MongoDriver(process.env.MONGODB);
+const driver = new MongoDriver(process.env.MONGODB_URI);
 const store = makeInMemoryStore({
   logger: P().child({
     level: 'silent',
@@ -46,7 +45,7 @@ const store = makeInMemoryStore({
   })
 });
 
- (!process.env.MONGODB) {
+if (!process.env.MONGODB_URI) {
   console.error('❌Error: Provide a MONGODB URL to continue the process');
   process.exit(1);
 }
