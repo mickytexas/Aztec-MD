@@ -1,11 +1,3 @@
-/*
-
-AZTEC WABOT V3.0.0
-
-MULTI AUTH STATE
-
-*/
-
 require('./lib/message/vorterx.js');
 require('./config');
 
@@ -20,9 +12,9 @@ const {
 } = require('@whiskeysockets/baileys');
 const { Boom } = require('@hapi/boom');
 const P = require('pino');
-const PORT = (process.env.PORT);
-const PREFIX = (process.env.PREFIX);
-const BOTNAME = (process.env.BOTNAME);
+const PORT = process.env.PORT;
+const PREFIX = process.env.PREFIX;
+const BOTNAME = process.env.BOTNAME;
 const { imageSync } = require('qr-image');
 const path = require('path');
 const { say } = require('cfonts');
@@ -51,7 +43,7 @@ if (!process.env.MONGODB_URI) {
   process.exit(1);
 }
 
-mongoose.connect(MONGODB_URI, {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -118,51 +110,31 @@ async function startAztec() {
     }
   });
 
-  vorterxInstance.ev.on('connection.update', (update) => {
-    if (update.connection === 'close') {
-      console.log('🔌 Connection closed. Reason:', update.lastDisconnect);
+  vorterxInstance.ev.on('connection.update, async (update) => {
+    const { connection, lastDisconnect } = update;
+
+    if (update.qr) {
+      console.log(`[${chalk.red('!')}]`, 'white');
+      vorterxInstance.QR = imageSync(update.qr);
+    }
+
+    if (connection === "open") {
+      console.log("💗 You have successfully logged in to Aztec");
+    }
+
+    if (connection === "close" && lastDisconnect === DisconnectReason.invalidSession) {
+      console.log("🔒 InvalidSession detected. Please reauthenticate.");
     }
   });
 
-  vorterxInstance.ev.on('qr.update', (update) => {
-    console.log('📲 QR Code updated. Scan QR code to log in.');
-  });
-
-  vorterxInstance.ev.on('auth-state.update', (update) => {
-    console.log('🔐 Authentication state updated:', update);
-  });
-
-  vorterxInstance.ev.on('error', (error) => {
-    console.error('❌ Error:', error);
-  });
-
-  vorterxInstance.ev.on('message.new', async (message) => {
-    try {
-      await MessageHandler(vorterxInstance, message);
-    } catch (error) {
-      console.error('❌ Error handling message:', error);
-    }
-  });
-
-  app.use(express.json());
-
-  app.post("/vorterx", async (req, res) => {
-    const message = req.body;
-    try {
-      await MessageHandler(vorterxInstance, message);
-      res.status(200).json({ success: true });
-    } catch (error) {
-      console.error('❌ Error handling message:', error);
-      res.status(500).json({ success: false, error: 'Internal Server Error' });
-    }
-  });
+  await vorterxInstance.start();
 
   app.listen(PORT, () => {
-   console.log(`🚀 Vorterx API listening on port ${PORT}`);
+    console.log(`⚡️Bot is Running on Port: ${PORT}`);
   });
 }
 
 startAztec().catch((error) => {
-  console.error('❌ Error starting Aztec:', error);
+  console.error('❌Error starting Aztec:', error);
   process.exit(1);
 });
