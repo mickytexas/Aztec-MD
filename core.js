@@ -110,23 +110,6 @@ async function startAztec() {
     }
   });
 
-  vorterxInstance.ev.on('connection.update, async (update) => {
-    const { connection, lastDisconnect } = update;
-
-    if (update.qr) {
-      console.log(`[${chalk.red('!')}]`, 'white');
-      vorterxInstance.QR = imageSync(update.qr);
-    }
-
-    if (connection === "open") {
-      console.log("💗 You have successfully logged in to Aztec");
-    }
-
-    if (connection === "close" && lastDisconnect === DisconnectReason.invalidSession) {
-      console.log("🔒 InvalidSession detected. Please reauthenticate.");
-    }
-  });
-
   await vorterxInstance.start();
 
   app.listen(PORT, () => {
