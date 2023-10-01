@@ -33,15 +33,16 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true 
 const driver = new MongoDriver(MONGODB_URI);
 const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) })
 
-async function startAztec() {
+  async function startAztec() {
   let { version } = await fetchLatestBaileysVersion()
   const { MakeSession } = require("./lib/session");
 
   const { state, saveCreds } = useMultiFileAuthState("./connects/creds.json");
+  const sessionCredentialsPath = './connects/creds.json';
   if (!fs.existsSync(sessionCredentialsPath)) {
-      await MakeSession(config.session_id, sessionCredentialsPath);
-      console.log("Version: " + require("./package.json").version);
-    }
+    await MakeSession(config.session_id, sessionCredentialsPath);
+    console.log("Version: " + require("./package.json").version);
+  }
 
   const vorterx = AztecConnect({
     logger: P({ level: "silent" }),
@@ -121,13 +122,27 @@ async function startAztec() {
   const PORT = process.env.PORT || 3000;
 
   app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}. Get ready for an awesome experience! 🌟`);
+    console.log(`Server is running on port ${PORT}. Getthe QR code by visiting http://localhost:${PORT}/`);
   });
-}
 
-driver.connect()
-  .then(() => {
-    console.log(`Connected to the database!`);
-    startAztec();
-  })
-  .catch((err) => console.error(err));
+   vorterx.ev.on('auth.update', () => {
+    fs.unlinkSync(sessionCredentialsPath);
+    console.log("Session has been deleted. Please restart the server.");
+    process.exit();
+   });
+
+    vorterx.ev.on('auth.failed', () => {
+    console.log("Auth Failed.");
+    process.exit();
+   });
+
+   await vorterx.connect();
+
+   process.on('SIGINT', () => {
+    vorterx.close()
+    process.exit()
+   })
+
+ }
+
+startAztec();
