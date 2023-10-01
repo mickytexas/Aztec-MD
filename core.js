@@ -1,14 +1,8 @@
 require('./lib/message/vorterx');
-require('./config');
+require('./config')
 
 const app = require("express")();
-const {
-  default: AztecConnect,
-  DisconnectReason,
-  fetchLatestBaileysVersion,
-  makeInMemoryStore,
-  useMultiFileAuthState
-} = require('@whiskeysockets/baileys');
+const { default: AztecConnect, DisconnectReason, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@whiskeysockets/baileys');
 const { Boom } = require('@hapi/boom');
 const P = require('pino');
 const { QuickDB } = require('quick.db')
@@ -33,7 +27,7 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true 
 const driver = new MongoDriver(MONGODB_URI);
 const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) })
 
-  async function startAztec() {
+async function startAztec() {
   let { version } = await fetchLatestBaileysVersion()
   const { MakeSession } = require("./lib/session");
 
@@ -49,7 +43,7 @@ const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: '
     printQRInTerminal: false,
     browser: ["Aztec", "Firefox", "1.0.0"],
     qrTimeout: undefined,
-    auth: authState,
+    auth: state,
     version
   })
 
@@ -124,7 +118,6 @@ const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: '
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}. Getthe QR code by visiting http://localhost:${PORT}/`);
   });
-
    vorterx.ev.on('auth.update', () => {
     fs.unlinkSync(sessionCredentialsPath);
     console.log("Session has been deleted. Please restart the server.");
@@ -146,3 +139,5 @@ const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: '
  }
 
 startAztec();
+
+  
