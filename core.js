@@ -2,7 +2,7 @@ require('./lib/message/vorterx');
 require('./config')
 
 const app = require("express")();
-const { default: AztecConnect, DisconnectReason, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@whiskeysockets/baileys');
+const { default: AztecConnect, DisconnectReason, Browsers, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@whiskeysockets/baileys');
 const { Boom } = require('@hapi/boom');
 const P = require('pino');
 const { QuickDB } = require('quick.db')
@@ -41,7 +41,7 @@ async function startAztec() {
   const vorterx = AztecConnect({
     logger: P({ level: "silent" }),
     printQRInTerminal: false,
-    browser: ["Aztec", "Firefox", "1.0.0"],
+    browser: Browsers.firefox('Desktop'),
     qrTimeout: undefined,
     auth: state,
     version
