@@ -1,7 +1,3 @@
-//
-Certainly! I have modified the code to include the replying number method. When the user sends the `menu` command, the bot will send the menu with categories and command numbers. The user can reply with a number like `1.2` to get the commands from that specific category.
-
-Here's the const path = require("path");
 const os = require('os');
 const { tiny } = require("@viper-x/fancytext");
 const moment = require("moment-timezone");
