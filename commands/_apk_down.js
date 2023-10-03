@@ -20,14 +20,14 @@ module.exports = {
       const scraper = new AptoideScraper();
       const searchResults = await scraper.search(appName);
       if (!searchResults || searchResults.length === 0) {
-      return 'App not found.';
+      return m.reply(`Sorry ${m.pushName} but ${!args[0]} could not be found.`);
       }
 
       const BotName = config.botName;
       const app = searchResults[0];      
      const appDetails = await scraper.appDetails(app.appId);
      if (!appDetails) {
-        return 'Could not found app sorry.';
+        return m.reply('Could not found the app sorry.');
       }
 
       const downloadLink = appDetails.file.url;
