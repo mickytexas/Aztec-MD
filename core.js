@@ -28,7 +28,7 @@ const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: '
 
 async function startAztec() {
   let { version } = await fetchLatestBaileysVersion();
-  
+
   const { state, saveCreds } = useMultiFileAuthState("./connects/creds.json");
   const sessionCredentialsPath = './connects/creds.json';
   
@@ -36,6 +36,7 @@ async function startAztec() {
     logger: P({ level: "silent" }),
     printQRInTerminal: false,
     browser: Browsers.maCos('Desktop'),
+    userAgent: Browsers.firefox('Desktop').userAgent,
     qrTimeout: undefined,
     auth: state,
     version
