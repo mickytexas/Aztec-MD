@@ -1,10 +1,14 @@
+//*APK DOWNLOADER 
+
+//*MADE BY DIEGOSON
+
 const { getBuffer } = require('../mangoes/myFunc.js');
 const { AptoideScraper } = require('aptoide-scraper');
 const config = require('../config.js');
 
 module.exports = {
   name: 'apk',
-  alias: ['app','getpack'],
+  alias: ['app', 'getpack'],
   description: 'Download APKs using Aptoide Scraper',
   category: 'Downloads',
   async xstart(vorterx, m, { xReact, args, text }) {
@@ -20,14 +24,14 @@ module.exports = {
       const scraper = new AptoideScraper();
       const searchResults = await scraper.search(appName);
       if (!searchResults || searchResults.length === 0) {
-      return m.reply(`Sorry ${m.pushName} but ${!args[0]} could not be found.`);
+        return m.reply(`Sorry ${m.pushName} but ${!args[0]} could not be found.`);
       }
 
       const BotName = config.botName;
-      const app = searchResults[0];      
-     const appDetails = await scraper.appDetails(app.appId);
-     if (!appDetails) {
-        return m.reply('Could not found the app sorry.');
+      const app = searchResults[0];
+      const appDetails = await scraper.appDetails(app.appId);
+      if (!appDetails) {
+        return m.reply('Could not find the app, sorry.');
       }
 
       const downloadLink = appDetails.file.url;
@@ -45,13 +49,12 @@ module.exports = {
         + `*🤖 BotName:* ${BotName}\n\n\n*POWERED BY VORTERX*`;
 
       const imageBuffer = await axios.get(appDetails.image, { responseType: 'arraybuffer' });
-      await vorterx.sendImage( m.from, Buffer.from(imageBuffer.data, 'binary'),`${appDetails.name}.jpg`, D3centX);
+      await vorterx.sendImage(m.from, Buffer.from(imageBuffer.data, 'binary'), `${appDetails.name}.jpg`, D3centX);
 
       await vorterx.sendFile(m.from, apkFilePath, `${appDetails.file.name}.apk`);
-      return 'APK file sent successfully.';
+      return;
     } catch (error) {
-      console.error('Error:', error);
-      return 'An error occurred while downloading your App.';
-     }
-    },
+      await vorterx.sendMessage(m.from, { text: 'Could not download the app an error occurre while processing' });
+    }
+   },
   };
