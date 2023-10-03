@@ -1,5 +1,6 @@
 const { getBuffer } = require('../mangoes/myFunc.js');
 const { AptoideScraper } = require('aptoide-scraper');
+const config = require('../config.js');
 
 module.exports = {
   name: 'apk',
@@ -22,7 +23,8 @@ module.exports = {
       return 'App not found.';
       }
 
-     const app = searchResults[0];      
+      const BotName = config.botName;
+      const app = searchResults[0];      
      const appDetails = await scraper.appDetails(app.appId);
      if (!appDetails) {
         return 'Could not found app sorry.';
@@ -36,25 +38,20 @@ module.exports = {
       require('fs').writeFileSync(apkFilePath, response.data);
 
       await xReact('👍');
-      const firstCaption = `*📚 Name:* ${appDetails.name}\n`
+      const D3centX = `*📚 App Name:* ${appDetails.name}\n`
         + `*📦 Developer:* ${appDetails.developer}\n`
         + `*⬆️ Last update:* ${appDetails.updated}\n`
         + `*📥 Size:* ${appDetails.file.size}\n`
-        + `*🤖 BotName:* ${BotName}`;
+        + `*🤖 BotName:* ${BotName}\n\n\n*POWERED BY VORTERX*`;
 
       const imageBuffer = await axios.get(appDetails.image, { responseType: 'arraybuffer' });
-      await vorterx.sendImage(
-      m.from,
-      Buffer.from(imageBuffer.data, 'binary'),
-     `${appDetails.name}.jpg`,
-      firstCaption
-      );
+      await vorterx.sendImage( m.from, Buffer.from(imageBuffer.data, 'binary'),`${appDetails.name}.jpg`, D3centX);
 
       await vorterx.sendFile(m.from, apkFilePath, `${appDetails.file.name}.apk`);
       return 'APK file sent successfully.';
     } catch (error) {
       console.error('Error:', error);
-      return 'An error occurred while downloading the APK file.';
+      return 'An error occurred while downloading your App.';
      }
     },
   };
