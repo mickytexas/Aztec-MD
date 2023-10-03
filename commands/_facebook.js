@@ -5,7 +5,7 @@ module.exports = {
   alias: ['facebook'],
   description: 'To download facebook video',
   category: 'Downloads',
-  async xstart(vorterx, m, { xReact, text, args, waitForMessage }) {
+  async xstart(vorterx, m, { xReact, text, sendText, args, waitForMessage }) {
     
     try {
       const videoURL = args[0];
