@@ -10,7 +10,6 @@ const { MongoDriver } = require('quickmongo');
 const fs = require("fs");
 const config = require('./config.js');
 const { Collection } = require('discord.js')
-const qr = require("qr-image");
 const contact = require("./mangoes/contact.js");
 const MessageHandler = require('./lib/message/vorterx');
 const mongoose = require('mongoose');
@@ -29,15 +28,10 @@ const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: '
 
 async function startAztec() {
   let { version } = await fetchLatestBaileysVersion()
-  const { MakeSession } = require("./lib/session");
-
+  
   const { state, saveCreds } = useMultiFileAuthState("./connects/creds.json");
   const sessionCredentialsPath = './connects/creds.json';
-  if (!fs.existsSync(sessionCredentialsPath)) {
-    await MakeSession(config.session_id, sessionCredentialsPath);
-    console.log("Version: " + require("./package.json").version);
-  }
-
+  
   const vorterx = AztecConnect({
     logger: P({ level: "silent" }),
     printQRInTerminal: false,
@@ -99,16 +93,7 @@ async function startAztec() {
         console.log(`Server Disconnected: Maybe Your WhatsApp Account got banned !`);
       }
     }
-    if (update.qr) {
-      vorterx.QR = qr.imageSync(update.qr, { size: 10 });
-    }
-  });
-
-  app.get("/", (req, res) => {
-    res.type('png');
-    res.end(vorterx.QR, 'binary');
-  });
-
+    
   vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx))
 
   vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx))
@@ -116,25 +101,9 @@ async function startAztec() {
   const PORT = process.env.PORT || 3000;
 
   app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}. Getthe QR code by visiting http://localhost:${PORT}/`);
+    console.log(`Server is running on port ${PORT}/`);
   });
-   vorterx.ev.on('auth.update', () => {
-    fs.unlinkSync(sessionCredentialsPath);
-    console.log("Session has been deleted. Please restart the server.");
-    process.exit();
-   });
-
-    vorterx.ev.on('auth.failed', () => {
-    console.log("Auth Failed.");
-    process.exit();
-   });
-
    await vorterx.connect();
-
-   process.on('SIGINT', () => {
-    vorterx.close()
-    process.exit()
-   })
 
  }
 
