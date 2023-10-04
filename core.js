@@ -1,5 +1,5 @@
 const express = require('express');
-const { default: AztecConnect, DisconnectReason, Browsers, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@adiwajshing/baileys');
+const { WAConnection, DisconnectReason, Browsers, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@adiwajshing/baileys');
 const { Boom } = require('@hapi/boom');
 const P = require('pino');
 const { QuickDB } = require('quick.db');
@@ -17,13 +17,12 @@ async function startAztec() {
   const { version } = await fetchLatestBaileysVersion();
   const { state, saveCreds } = useMultiFileAuthState('./connects/creds.json');
 
-  const vorterx = new AztecConnect({
-    logger: P({ level: 'silent' }),
-    printQRInTerminal: true,
-    browser: Browsers.macOS("Desktop"),
-    auth: state,
-    version,
-  });
+  const vorterx = new WAConnection();
+  vorterx.logger.level = 'silent';
+  vorterx.browserDescription = Browsers.macOS("Desktop");
+  vorterx.autoReconnect = true;
+  vorterx.version = version;
+  vorterx.logger = P({ level: 'silent' });
 
   store.bind(vorterx.ev);
 
@@ -34,19 +33,19 @@ async function startAztec() {
 
   await readCommands(vorterx);
 
-  vorterx.ev.on('creds.update', saveCreds);
+  vorterx.ev.on('credentials-updated', saveCreds);
 
-  vorterx.ev.on('connection.update', async (update) => {
-     const { connection, lastDisconnect } = update;
+  vorterx.ev.on('connection-update', async (update) => {
+      const { connection, lastDisconnect } = update;
 
-     if (connection === 'close' || connection === 'lost' || connection === 'restart' || connection === 'timeout') {
-     let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
+      if (connection === 'close' || connection === 'lost' || connection === 'restart' || connection === 'timeout') {
+      let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
 
-     console.log(`Connection ${connection}, reconnecting...`);
+      console.log(`Connection ${connection}, reconnecting...`);
 
-     if (reason === DisconnectReason.loggedOut) {
-     console.log('Device Logged Out, Please Delete Session and Scan Again.');
-     process.exit();
+      if (reason === DisconnectReason.loggedOut) {
+      console.log('Device Logged Out, Please Delete Session and Scan Again.');
+      process.exit();
     }
 
       await startAztec();
@@ -65,9 +64,9 @@ async function startAztec() {
     } else {
       console.log(`[ 🦅 AZTEC ] Server Disconnected: Maybe Your WhatsApp Account has got banned`);
     }
-    });
+   });
 
-    vorterx.ev.on('connection.open', async () => {
+    vorterx.ev.on('connection-open', async () => {
     console.log('✔️ Aztec has been connected successfully');
     let D3centX = `╭────❰AZTEC CONNECTED\n
     |BOTNAME: ${process.env.BOTNAME}\n
@@ -75,20 +74,20 @@ async function startAztec() {
     |VERSION: ${require(__dirname + "/package.json").version}\n
     |SERVER: maCos
     ╰─────────────⭓`;
-    vorterx.sendMessage(vorterx.user.id, { image: Diego }, { text: D3centX });
-   });
- 
-   vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx));
+    vorterx.sendMessage(vorterx.user.jid, { url: Diego }, { text: D3centX });
+    });
 
-   vorterx.ev.on('contacts.update', async (update) => await contact.saveContacts(update, vorterx));
+    vorterx.ev.on('messages-upsert', async (messages) => await MessageHandler(messages, vorterx));
 
-   const app = express();
-   app.listen(PORT, () => {
-   console.log(`♻️Server is running on port ${PORT}/`);
-   });
+    vorterx.ev.on('contacts-update', async (update) => await contact.saveContacts(update, vorterx));
 
-    await vorterx.connect();
-    }
+    const app = express();
+    app.listen(PORT, () => {
+    console.log(`♻️Server is running on port ${PORT}/`);
+    });
+
+     await vorterx.connect();
+     }
 
     async function readCommands(vorterx) {
     const commandFiles = fs.readdirSync('./Commands').filter((file) => file.endsWith('.js'));
@@ -96,7 +95,7 @@ async function startAztec() {
     for (const file of commandFiles) {
     const command = require(`./Commands/${file}`);
     vorterx.cmd.set(command.name, command);
-  }
-  }
+    }
+    }
 
   startAztec();
