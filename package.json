@@ -11,7 +11,7 @@
   },
   "author": "Diegoson",
   "dependencies": {
-    "@whiskeysockets/baileys": "github:WhiskeySockets/Baileys",
+    "@adiwajshing/baileys": "github:WhiskeySockets/Baileys",
     "@adiwajshing/keyed-db": "^0.2.4",
     "@consumet/extensions": "^1.5.2",
     "@hapi/boom": "^10.0.1",
