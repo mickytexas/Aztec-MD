@@ -64,7 +64,17 @@ const MessageHandler = require('./lib/message/vorterx');
   await startAztec();
   } else {
   console.log(`[ 🦅 AZTEC ] Server Disconnected: Maybe Your WhatsApp Account has got banned`);
-  }
+  } else if (connection === 'open') {
+  console.log('✔️ Aztec has been connected successfully');
+      let D3centX = `\`\`\`X-Asena connected \nversion : ${
+                    require(__dirname + "/package.json").version
+                    }\nTotal Plugins : ${plugins.commands.length}\nWorktype: ${
+                    config.WORK_TYPE
+                    }\`\`\``;
+                    conn.sendMessage(conn.user.id,
+                        {
+                            text: str
+                        });
   });
 
     vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx));
