@@ -49,21 +49,21 @@ const MessageHandler = require('./lib/message/vorterx');
    process.exit();
    }
 
-  await startAztec();
+  await startAzt();
   } else if (connection === 'close') {
-  console.log('Connection closed, reconnecting...');
+  console.log(`[ 🐲AZTEC ] Connection closed, reconnecting...`);
   await startAztec();
   } else if (connection === 'lost') {
-  console.log('Connection Lost from Server, reconnecting...');
+  console.log(`[ 🦅AZTEC ] Connection Lost from Server, reconnecting...`);
   await startAztec();
   } else if (connection === 'restart') {
-  console.log('Server starting...');
+  console.log(`[ 🦅AZTEC ] Server has just started...`);
   await startAztec();
   } else if (connection === 'timeout') {
-  console.log('Connection Timed Out, Trying to Reconnect....');
+  console.log(`[ 🐲 AZTEC ] Connection Timed Out, Trying to Reconnect...`);
   await startAztec();
   } else {
-  console.log('Server Disconnected: Maybe Your WhatsApp Account got banned!');
+  console.log(`[ 🦅 AZTEC ] Server Disconnected: Maybe Your WhatsApp Account has got banned`);
   }
   });
 
