@@ -18,8 +18,8 @@ module.exports = {
 
     let urlYt = text;
     if (!urlYt.startsWith("https")) {
-      await toReact("⛔");
-      return m.reply("*Provide me with an XNXXVD link.*");
+      await xReact("⛔");
+      return m.reply("*😏 Provide me with an XNXXVD link.*");
     }
 
     await xReact("💦");
