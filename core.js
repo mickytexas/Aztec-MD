@@ -8,6 +8,7 @@ const config = require('./config');
 const { Collection } = require('discord.js');
 const contact = require('./mangoes/contact.js');
 const MessageHandler = require('./lib/message/vorterx');
+const Diego = 'https://i.imgur.com/XnOaCsE.jpeg',
 
   const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
   const PORT = process.env.PORT || 3000;
