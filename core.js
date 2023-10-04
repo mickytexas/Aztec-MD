@@ -85,7 +85,7 @@ async function startAztec() {
 
    const app = express();
    app.listen(PORT, () => {
-   console.log(`Server is running on port ${PORT}/`);
+   console.log(`♻️Server is running on port ${PORT}/`);
    });
 
     await vorterx.connect();
@@ -100,4 +100,4 @@ async function startAztec() {
   }
   }
 
-startAztec();
+  startAztec();
