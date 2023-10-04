@@ -66,21 +66,14 @@ const MessageHandler = require('./lib/message/vorterx');
   console.log(`[ 🦅 AZTEC ] Server Disconnected: Maybe Your WhatsApp Account has got banned`);
   } else if (connection === 'open') {
   console.log('✔️ Aztec has been connected successfully');
-      let D3centX = `╭────❰AZTEC CONNECTED
-      |BOTNAME: 
-      |PREFIX:
-      |VERSION:
-      |SERVER:
-      X-Asena connected \nversion : ${
-                    require(__dirname + "/package.json").version
-                    }\nTotal Plugins : ${plugins.commands.length}\nWorktype: ${
-                    config.WORK_TYPE
-                    }\`\`\``;
-                    conn.sendMessage(conn.user.id,
-                        {
-                            text: str
-                        });
-  });
+      let D3centX = `╭────❰AZTEC CONNECTED\n
+      |BOTNAME: ${process.env.BOTNAME}\n
+      |PREFIX: ${process.env.PREFIX}\n
+      |VERSION: ${require(__dirname + "/package.json").version}\n
+      |SERVER: maCos
+      ╰─────────────⭓`;
+      vorterx.sendMessage(vorterx.user.id,{ image: Diego }, {text: D3centX });
+    });
 
     vorterx.ev.on('messages.upsert', async (messages) => await MessageHandler(messages, vorterx));
 
