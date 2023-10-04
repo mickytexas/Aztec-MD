@@ -14,27 +14,28 @@ module.exports = {
   category: "Download",
   async xstart(vorterx, m, { xReact, text, args }) {
     let me = fs.readFileSync("./lib/imogs.jpg");
+  
     if (!text) {
-      await xReact("⛔");
-      return m.reply("Please provide a search term.");
+    await xReact("⛔");
+    return m.reply("Please provide a search term.");
     }
     await xReact("🍑");
 
     const res = (await axios(
-      `https://raganork-network.vercel.app/api/xvideos/search?query=${text}`
+   `https://raganork-network.vercel.app/api/xvideos/search?query=${text}`
     )).data;
 
-    let textt = `🔎 *XNXXV SEARCH RESULTS* 🔎\n\n🔍 Search Term: ${text}\n\n`;
+  let textt = `🔎 *XNXXV SEARCH RESULTS* 🔎\n\n🔍 Search Term: ${text}\n\n`;
 
-    for (const [index, video] of res.result.entries()) {
-      const template = `
+ for (const [index, video] of res.result.entries()) {
+ const D3centX = `
 📽️ *Video ${index + 1}*
 🎬 Title: ${video.title}
 ⏰ Duration: ${video.duration}
 🔗 [Watch Here](${video.url})
 `;
 
-      textt += template;
+    textt += D3centX;
     }
 
     return vorterx.sendMessage(m.from, {
@@ -43,16 +44,14 @@ module.exports = {
       captionType: 1,
       captionInfo: {
         markdown: {
-          bold: [[textt.indexOf("🔎 XNXXV SEARCH RESULTS 🔎"), textt.indexOf("\n\n")]],
-          italic: [[textt.indexOf("🔍 Search Term"), textt.indexOf("\n\n")]],
+        bold: [[textt.indexOf("🔎 XNXXV SEARCH RESULTS 🔎"), textt.indexOf("\n\n")]],
+        italic: [[textt.indexOf("🔍 Search Term"), textt.indexOf("\n\n")]],
         },
-      },
+        },
         messageOptions: {
         textColor: "#ffffff", 
         backgroundColor: "#333333", 
-        footerBackgroundColor: "#222222",    },
-    }, {
-      quoted: m,
-    });
-  },
-};
+        footerBackgroundColor: "#222222", },  }, {quoted: m,
+      });
+     },
+    };
