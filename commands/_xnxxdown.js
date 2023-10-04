@@ -27,7 +27,7 @@ module.exports = {
     const res = await axios(`https://raganork-network.vercel.app/api/xvideos/download?url=${text}`);
     const video = res.data;
 
-    let template = `
+    let D3centX = `
 🎬 *XNXX VIDEO DOWNLOAD*
 
 |   |   |
@@ -41,7 +41,7 @@ module.exports = {
       video: video,
       mimetype: "video/mp4",
       fileName: `vorterx.mp4`,
-      caption: template,
+      caption: D3centX,
       gifPlayback: false,
       height: 496,
       width: 640,
