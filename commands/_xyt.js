@@ -33,7 +33,7 @@ module.exports = {
 🔗 [Watch on YouTube](${randomVideo.url})
     `;
 
-    const template = `
+    const D3centX = `
 ╭─🎵 *Music Search Results*
 │
 ├ 🎧 *Title*: ${randomVideo.title}
@@ -47,7 +47,7 @@ module.exports = {
 ╰─────────⭑ ©vorterx
     `;
 
-    vorterx.sendMessage(m.from, { image: thumbnail, caption: caption }, { quoted: m });
+    vorterx.sendMessage(m.from, { image: thumbnail, caption: D3centX }, { quoted: m });
     }
 }
   
