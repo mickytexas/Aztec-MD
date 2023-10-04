@@ -67,6 +67,10 @@ const MessageHandler = require('./lib/message/vorterx');
   } else if (connection === 'open') {
   console.log('✔️ Aztec has been connected successfully');
       let D3centX = `╭────❰AZTEC CONNECTED
+      |BOTNAME: 
+      |PREFIX:
+      |VERSION:
+      |SERVER:
       X-Asena connected \nversion : ${
                     require(__dirname + "/package.json").version
                     }\nTotal Plugins : ${plugins.commands.length}\nWorktype: ${
