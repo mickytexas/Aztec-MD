@@ -26,9 +26,6 @@
     "MODS": {
     "description": "Put any phone number without + , () and spaces \",\" Ex: 27686881509 )",
     "required": false
-    },
-    "MONGODB_URI": {
-    "description": "Mongodb Url is required add mongoUrl."
     }
    },
   "buildpacks": [
