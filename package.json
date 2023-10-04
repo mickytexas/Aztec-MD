@@ -25,6 +25,7 @@
     "cfonts": "^3.2.0",
     "child_process": "^1.0.2",
     "curve25519-js": "^0.0.4",
+    "chess.js": "1.0.0-beta.6",
     "express": "^4.17.1",
     "btch-downloader": "^2.0.8",
     "@bochilteam/scraper": "^4.2.3",
