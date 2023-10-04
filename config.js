@@ -9,8 +9,6 @@ let config = {
   session_id: process.env.SESSION_ID || 'add something',
   menu: process.env.MENU || '', //2 Is default menu aztec 0 is Suhail md menu 
   thumb: process.env.THUMB || 'https://i.ibb.co/C7TXRcH/photo-1678483789107-0029c61fdcca.jpg',
-  MONGODB_URI: process.env.MONGODB_URI || 'mongodb+srv://mk:mk@new.vxtfxii.mongodb.net/?retryWrites=true&w=majority',//Replace this
-  caption: process.env.CAPTION || 'By Aztec MD',
   mods: process.env.MODS ? process.env.MODS.split(',') : [],
   neofetchOptions: {
     os: true,
