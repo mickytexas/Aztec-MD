@@ -41,9 +41,10 @@ if (!fs.existsSync(__dirname + './lib/auth_info_baileys/creds.json')) {
    }
   const { version } = await fetchLatestBaileysVersion();
   
- const vorterx = WAConnection();
-
- const { state, saveCreds } = await useMultiFileAuthState(__dirname + './lib/auth_info_baileys/')
+ 
+  const { state, saveCreds } = await useMultiFileAuthState(__dirname + './lib/auth_info_baileys/')
+	  
+       const vorterx = WAConnection();
             vorterx.logger: pino({ level: 'fatal' }),
             vorterx.printQRInTerminal: true,
             vorterx.browserDescription = Browsers.macOS("Desktop");
@@ -60,7 +61,7 @@ if (!fs.existsSync(__dirname + './lib/auth_info_baileys/creds.json')) {
             }return { conversation: 'An Error Occurred, Repeat Command!'
             }
           } 
-        })
+        });
   store.bind(vorterx.ev);
 
   vorterx.cmd = new Collection();
