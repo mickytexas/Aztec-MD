@@ -18,6 +18,9 @@
     "SESSION_ID": {
     "description": "A sessionld that you scanned paste it here."
     },
+    "LEVEL_UP": {
+    "description": "To enable auto level up set true or false or enable or disable",
+    },
     "MENU": {
     "description": "Choose number between 0 and 2 were 2 is aztec menu 0 suhail menu or if you want it to change randomly leave it blank",
     "value": "2",
