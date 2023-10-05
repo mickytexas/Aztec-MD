@@ -13,14 +13,14 @@ const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: '
 const PORT = process.env.PORT || 3000;
 let cc = config.sessionName.replace(/Vorterx;;;/g, "");
 async function MakeSession(){
-if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
+if (!fs.existsSync(__dirname + './lib/auth_info_baileys/creds.json')) {
     if(cc.length<30){
     const axios = require('axios');
     let { data } = await axios.get('https://paste.c-net.org/'+cc)
-    await fs.writeFileSync(__dirname + '/auth_info_baileys/creds.json', atob(data), "utf8")    
+    await fs.writeFileSync(__dirname + './lib/auth_info_baileys/creds.json', atob(data), "utf8")    
     } else {
 	 var c = atob(cc)
-   await fs.writeFileSync(__dirname + '/auth_info_baileys/creds.json', c, "utf8")    
+   await fs.writeFileSync(__dirname + './lib/auth_info_baileys/creds.json', c, "utf8")    
     }
     }
     }
@@ -28,7 +28,7 @@ if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
     setTimeout(() => {
     const moment = require('moment-timezone')
     async function main() {
-  	if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
+  	if (!fs.existsSync(__dirname + './lib/auth_info_baileys/creds.json')) {
 	  }
   async function startAztec() {
   require("events").EventEmitter.defaultMaxListeners = 600;
@@ -40,15 +40,27 @@ if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
    }return version
    }
   const { version } = await fetchLatestBaileysVersion();
-  const { state, saveCreds } = useMultiFileAuthState('./connects/creds.json');
+  
+ const vorterx = WAConnection();
 
-  const vorterx = WAConnection();
-  vorterx.logger.level = 'silent';
-  vorterx.browserDescription = Browsers.macOS("Desktop");
-  vorterx.autoReconnect = true;
-  vorterx.version = version;
-  vorterx.logger = P({ level: 'silent' });
-
+ const { state, saveCreds } = await useMultiFileAuthState(__dirname + './lib/auth_info_baileys/')
+            vorterx.logger: pino({ level: 'fatal' }),
+            vorterx.printQRInTerminal: true,
+            vorterx.browserDescription = Browsers.macOS("Desktop");
+            vorterx.fireInitQueries: false,
+            vorterx.shouldSyncHistoryMessage: false,
+            vorterx.downloadHistory: false,
+            vorterx.syncFullHistory: false,
+            vorterx.generateHighQualityLinkPreview: true,
+            vorterx.auth: state,
+            vorterx.version: getVersionWaweb() || [2, 2242, 6],
+            getMessage: async key => {if (store) {
+            const msg = await store.loadMessage(key.remoteJid, key.id, undefined)
+            return msg.message || undefined
+            }return { conversation: 'An Error Occurred, Repeat Command!'
+            }
+          } 
+        })
   store.bind(vorterx.ev);
 
   vorterx.cmd = new Collection();
