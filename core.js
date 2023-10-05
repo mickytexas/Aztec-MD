@@ -52,7 +52,7 @@ setTimeout(() => {
 
       const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/lib/auth_info_baileys/');
 
-      const vorterx = new WAConnection();
+      const vorterx = WAConnection();
       vorterx.logger = P({ level: 'fatal' });
       vorterx.printQRInTerminal = true;
       vorterx.browserDescription = Browsers.macOS("Desktop");
