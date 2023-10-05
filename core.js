@@ -9,11 +9,30 @@ const { Collection } = require('discord.js');
 const contact = require('./mangoes/contact.js');
 const MessageHandler = require('./lib/message/vorterx');
 const Diego = 'https://i.imgur.com/XnOaCsE.jpeg';
-
 const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
 const PORT = process.env.PORT || 3000;
+let cc = config.sessionName.replace(/Vorterx;;;/g, "");
+async function MakeSession(){
+if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
+    if(cc.length<30){
+    const axios = require('axios');
+    let { data } = await axios.get('https://paste.c-net.org/'+cc)
+    await fs.writeFileSync(__dirname + '/auth_info_baileys/creds.json', atob(data), "utf8")    
+    } else {
+	 var c = atob(cc)
+   await fs.writeFileSync(__dirname + '/auth_info_baileys/creds.json', c, "utf8")    
+    }
+    }
+    }
+    MakeSession()
+    setTimeout(() => {
+    const moment = require('moment-timezone')
+    async function main() {
+  	if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
+	  }
+  	try{
 
-async function startAztec() {
+  async function startAztec() {
   const { version } = await fetchLatestBaileysVersion();
   const { state, saveCreds } = useMultiFileAuthState('./connects/creds.json');
 
