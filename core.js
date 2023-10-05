@@ -30,9 +30,15 @@ if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
     async function main() {
   	if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
 	  }
-  	try{
-
   async function startAztec() {
+  require("events").EventEmitter.defaultMaxListeners = 600;
+  const getVersionWaweb = () => {
+  let version
+  try { let a = fetchJson('https://web.whatsapp.com/check-update?version=1&platform=web')
+            version = [a.currentVersion.replace(/[.]/g, ', ')]
+   } catch {version = [2, 2204, 13]
+   }return version
+   }
   const { version } = await fetchLatestBaileysVersion();
   const { state, saveCreds } = useMultiFileAuthState('./connects/creds.json');
 
