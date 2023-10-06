@@ -10,6 +10,7 @@ let config = {
   level_up: process.env.LEVEL_UP || '', //Set true or false or enable/ disable
   menu: process.env.MENU || '', //2 Is default menu aztec 0 is Suhail md menu 
   thumb: process.env.THUMB || 'https://i.ibb.co/C7TXRcH/photo-1678483789107-0029c61fdcca.jpg',
+  LANG: process.env.IMAGES || 'VOR_TERX', //changethis and add yours
   mods: process.env.MODS ? process.env.MODS.split(',') : [],
   neofetchOptions: {
     os: true,
