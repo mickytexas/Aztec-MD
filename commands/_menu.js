@@ -102,7 +102,7 @@ ${up_btm}\n${formattedCommandList}`;
 
       vorterxInstant += `_📔Send ${PREFIX}menu <command name> to get detailed information of a specific command_`;
 
-      await vorterx.sendMessage(m.from, { image: await aztec_images() }, caption: vorterxInstant }, { quoted: m });
+      await vorterx.sendMessage(m.from, { image: { url:  await aztec_images() }, caption: vorterxInstant }, { quoted: m });
     } catch (err) {
       m.reply("👮‍♂️Oops! Something went wrong. Please try again later.");
       console.log(err, 'red');
