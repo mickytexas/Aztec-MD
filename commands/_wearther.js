@@ -1,4 +1,7 @@
-//
+//BY DIEGOSON 
+
+//_@AZTEC MD
+
 module.exports = {
   name: 'weather',
   category: 'Search',
