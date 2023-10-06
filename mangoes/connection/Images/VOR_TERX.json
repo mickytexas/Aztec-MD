@@ -1,21 +1,21 @@
     {
     "__JSON__": true,
     "AUTHOR": "Diegoson",
-    "theme": "VOR_TERX",
+    "images": "VOR_TERX",
     "LANGUAGE": "English",
     "LANGCODE": "en",
         "config": {
         "botName": " AZTEC-MD",
-        "image1": "https://telegra.ph/file/693d471682edefa187dae.jpg",
-        "image2": "https://telegra.ph/file/03e49e6e2057568db8926.jpg",
-        "image": "https://telegra.ph/file/2ca599cf20ac50ba941f6.jpg",
-        "image4": "https://telegra.ph/file/4324bdbb7ad78d5b8ea06.jpg",
-        "image5": "https://telegra.ph/file/d4c69d050852e5dfae667.jpg",
-        "image6": "https://telegra.ph/file/4c817d1ed0a49c32e444b.jpg",
-        "image7": "https://telegra.ph/file/ef11ea4f27597cc9b5520.jpg",
-        "image8": "https://telegra.ph/file/d626edd87bec67c59bb75.jpg",
-        "image9": "https://telegra.ph/file/a85163c1310b7eb2c88b3.jpg",
-        "image10": "https://telegra.ph/file/6c29ee341d097704d7e88.jpg",
+        "image1": "https://i.ibb.co/grM9VLh/091e4657090fdaa14cb3fb9f69cfa7e6.jpg",
+        "image2": "https://i.ibb.co/njLmCSk/lmmrqxb9ech21.png",
+        "image3": "https://i.ibb.co/wrH7gDJ/ac3254d3d1c18219d28b4c716a2a2330.jpg",
+        "image4": "https://i.ibb.co/4Fj4PPT/images.jpg",
+        "image5": "https://i.ibb.co/Bwqv82Q/images-1.jpg",
+        "image6": "https://i.ibb.co/hgW5Z7H/20230823-180854.jpg",
+        "image7": "https://i.ibb.co/BsYCSRV/Screenshot-20230918-093130.jpg",
+        "image8": "https://i.ibb.co/SfbyJdC/vortex-gaming-logo-vortex-v-3-x.jpg",
+        "image9": "https://i.ibb.co/BwZZ2NN/ec5d0fba-ddc7-476c-afad-01e5fb9a4e7c-channel-offline-image-1920x1080.jpg",
+        "image10": "https://i.ibb.co/Bc7f99L/T0s-Ay-RIh-T6-Ni4v-Uw.jpg",
         "images": "VOR_TERX"
     }
    }
