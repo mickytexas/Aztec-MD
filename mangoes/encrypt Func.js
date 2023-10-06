@@ -57,17 +57,17 @@ function loadLanguage() {
       return new Promise((resolve, reject) => {
       let LangG = getString("config");
       let max_up = [
-      `${LangG.pic1}`,
-      `${LangG.pic2}`,
-      `${LangG.pic3}`,
-      `${LangG.pic4}`,
-      `${LangG.pic5}`,
-      `${LangG.pic6}`,
-      `${LangG.pic7}`,
-      `${LangG.pic8}`,
-      `${LangG.pic9}`,
-      `${LangG.pic9}`,
-      `${LangG.pic10}`
+      `${LangG.image1}`,
+      `${LangG.image2}`,
+      `${LangG.image3}`,
+      `${LangG.image4}`,
+      `${LangG.image5}`,
+      `${LangG.image6}`,
+      `${LangG.image7}`,
+      `${LangG.image8}`,
+      `${LangG.image9}`,
+      `${LangG.image9}`,
+      `${LangG.image10}`
     ];
     const image_vorterx = max_up[Math.floor(Math.random() * max_up.length)];
     resolve(image_vorterx);
