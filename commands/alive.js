@@ -7,7 +7,7 @@
 const fs = require("fs");
 const BOTNAME = global.botName;
 const PREFIX = global.prefix;
-const { aztec_images } = require('../mangoose/encryptMyFunc.js');
+const { aztec_images } = require('../mangoose/encryptFunc.js');
 require("../config");
 
 module.exports = {
