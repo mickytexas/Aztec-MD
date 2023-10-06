@@ -14,8 +14,9 @@ module.exports = {
   category: 'General',
   description: 'Check if the bot is online',
   async xstart(vorterx, message, { args, xReact }) {
+    
     await xReact("💙");
-
+    const image = fs.readFileSync('../lib/imogs.jpg');
     const userName = m.pushName;
     const botName = process.env.BOTNAME;
     const version = require(__dirname + "/package.json").version;
@@ -37,13 +38,13 @@ module.exports = {
     `;
 
     const messageOptions = {
-      image: { url: ${aztec_images.title()}},
+      image: image,
       caption: cap,
       contextInfo: {
         externalAdReply: {
           title: 'Powerd by Aztec',
           body: 'Unlash your imagination',
-          thumbnail: ${aztec_images.title()},
+          thumbnail: image,
           mediaType: 1,
           mediaUrl: '',
           sourceUrl: 'https://vorterx.com',
