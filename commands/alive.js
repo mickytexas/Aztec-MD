@@ -37,7 +37,7 @@ module.exports = {
     `;
 
     const messageOptions = {
-      image: { url: ${aztec_images.title()},
+      image: { url: ${aztec_images.title()}},
       caption: cap,
       contextInfo: {
         externalAdReply: {
