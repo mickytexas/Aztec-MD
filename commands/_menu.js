@@ -1,5 +1,6 @@
 const path = require("path");
 const os = require('os');
+const { aztec_images, cou_ntry } = require('../mangoes/encryptFunc.js');
 const { tiny } = require("@viper-x/fancytext");
 const moment = require("moment-timezone");
 const fs = require("fs");
