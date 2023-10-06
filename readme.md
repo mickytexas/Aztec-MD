@@ -13,12 +13,12 @@
 
 ---
 
-### Deployment Methods 
+### DEPLOYMENT METHOD
 [![Deploy with Heroku](https://www.herokucdn.com/deploy/button.svg "Deploy with Heroku")](https://heroku.com/deploy?template=https://github.com/Vorterx/Aztec-MD/blob/master/ "Deploy with Heroku")
 --- 
 </a>
 
 </br>
 
-## Thanks To
+## THANKS TO
 * [`Neko | Senpai`](https://github.com/LuckyYam/)
