@@ -7,6 +7,7 @@
 const fs = require("fs");
 const BOTNAME = global.botName;
 const PREFIX = global.prefix;
+const { aztec_images } = require('../mangoose/encryptMyFunc.js');
 require("../config");
 
 module.exports = {
@@ -38,7 +39,7 @@ module.exports = {
     `;
 
     const messageOptions = {
-      image: image,
+      image: { url: await aztec_images()},
       caption: cap,
       contextInfo: {
         externalAdReply: {
