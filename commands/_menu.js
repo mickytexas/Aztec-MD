@@ -94,6 +94,7 @@ module.exports = {
       let vorterxInstant = `${up_up}
 ${up_mid} User: ${tiny(userName)}
 ${up_mid} BotName: ${tiny(BotName)}
+${up_mid} Images: ${tiny(cou_ntry().title)}
 ${up_mid} Prefix: ${tiny(PREFIX)}
 ${up_mid} Runtime: ${tiny(runtime(process.uptime()))}
 ${up_mid} Time: ${tiny(time)}
