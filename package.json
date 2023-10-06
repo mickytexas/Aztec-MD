@@ -2,12 +2,12 @@
   "name": "vorterx",
   "version": "3.0.0",
   "engines": {
-    "node": "16.11.0"
+  "node": "16.11.0"
   },
   "main": "core.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --max-old-space-size=4096 core.js"
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "start": "node --max-old-space-size=4096 core.js"
   },
   "author": "Diegoson",
   "dependencies": {
@@ -66,14 +66,14 @@
     "mongodb": "^5.9.0"
   },
   "directories": {
-    "lib": "lib"
+   "lib": "lib"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Vorterx/Aztec-MD.git"
   },
   "bugs": {
-    "url": "https://github.com/Vorterx/Aztec-MD/issues"
+  "url": "https://github.com/Vorterx/Aztec-MD/issues"
   },
   "homepage": "https://github.com/Vorterx/Aztec-MD#readme",
   "description": "An awesome WhatsApp User Bot made by the Vorterx Team! Power up your chats with cool features."
