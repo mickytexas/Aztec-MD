@@ -1,1 +1,22 @@
-
+    {
+    "__JSON__": true,
+    "AUTHOR": "Diegoson",
+    "theme": "VOR_TERX",
+    "LANGUAGE": "English",
+    "LANGCODE": "en",
+        "config": {
+        "botName": " AZTEC-MD",
+        "image1": "https://telegra.ph/file/693d471682edefa187dae.jpg",
+        "image2": "https://telegra.ph/file/03e49e6e2057568db8926.jpg",
+        "image": "https://telegra.ph/file/2ca599cf20ac50ba941f6.jpg",
+        "image4": "https://telegra.ph/file/4324bdbb7ad78d5b8ea06.jpg",
+        "image5": "https://telegra.ph/file/d4c69d050852e5dfae667.jpg",
+        "image6": "https://telegra.ph/file/4c817d1ed0a49c32e444b.jpg",
+        "image7": "https://telegra.ph/file/ef11ea4f27597cc9b5520.jpg",
+        "image8": "https://telegra.ph/file/d626edd87bec67c59bb75.jpg",
+        "image9": "https://telegra.ph/file/a85163c1310b7eb2c88b3.jpg",
+        "image10": "https://telegra.ph/file/6c29ee341d097704d7e88.jpg",
+        "images": "VOR_TERX"
+    }
+   }
+  
