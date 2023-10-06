@@ -30,21 +30,63 @@ function loadLanguage() {
     console.log('Message:', message);
     }
 
-    async function init() {
+    async function Decent() {
     try {
     const jsonData = await loadLanguage();
     json = jsonData;
     let LangG = getString('global');
     displayMessage('Loading ' + config.LANG + ' language...');
     } catch (error) {
-    console.error('Failed to load language:', error);
+    console.error('Failed to load language for Aztec:', error);
     }
     }
 
-  init();
+  Decent();
+
+  function getString(file) {
+  return json['STRINGS'][file];
+  }
+
+  function cou_ntry() {
+  let LangG = getString("global");
+  return LangG;
+  }
+
+  function aztec_images() {
+      return new Promise((resolve, reject) => {
+      let LangG = getString("global");
+      let max_up = [
+      `${LangG.pic1}`,
+      `${LangG.pic2}`,
+      `${LangG.pic3}`,
+      `${LangG.pic4}`,
+      `${LangG.pic5}`,
+      `${LangG.pic6}`,
+      `${LangG.pic7}`,
+      `${LangG.pic8}`,
+      `${LangG.pic9}`,
+      `${LangG.pic9}`,
+      `${LangG.pic10}`
+    ];
+    const image_vorterx = max_up[Math.floor(Math.random() * max_up.length)];
+    resolve(image_vorterx);
+    });
+    }
+
+    async function displayAztecPicture() {
+    try {
+    let AztecPicture = await aztec_images();
+    } catch (error) {
+    console.error("Failed to fetch the  picture for Aztec:", error);
+    }
+    }
+
+   displayAztecPicture();
 
 
   module.exports = {
-  language: json,
-  getString: getString
+   cou_ntry,
+   aztec_images,
+   language: json,
+   getString: getString
 };
