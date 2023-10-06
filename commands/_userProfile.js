@@ -37,7 +37,7 @@ module.exports = {
           */
 
       
-        const template = `🔥🌟⚡️ *User Profile* ⚡️🌟🔥\n\n` +
+        const caption = `🔥🌟⚡️ *User Profile* ⚡️🌟🔥\n\n` +
             `👤 *Name:* ${userName}\n` +
             `💬 *Contact:* ${m.sender.split('@')[0]}\n` +
             `🌍 *Country Code:* ${countryCode}\n\n` + //Shows your country code
@@ -50,6 +50,6 @@ module.exports = {
         const userType = await db.get(`${user}ooicon-y`) || "img";
         const mediaType = (userType === "img") ? { image: { url: userProfilePic } } : { video: { url: userProfileIcon }, gifPlayback: true };
 
-        return vorterx.sendMessage(m.from, mediaType, { caption: template, quoted: m });
+        return vorterx.sendMessage(m.from, mediaType, { caption: caption, quoted: m });
     }
 };
