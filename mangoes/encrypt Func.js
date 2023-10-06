@@ -5,11 +5,11 @@ const config = require('../config.js');
 
 function loadLanguage() {
   return new Promise((resolve, reject) => {
-      let langFile = './Images/' + config.LANG + '.json';
+      let langFile = './connection/Images/' + config.LANG + '.json';
 
       fs.readFile(langFile, 'utf8', (err, data) => {
       if (err) {
-      fs.readFile('./Images/VOR_TERX.json', 'utf8', (err, data) => {
+      fs.readFile('./connection/Images/VOR_TERX.json', 'utf8', (err, data) => {
       if (err) {
       reject(err);
       } else {
@@ -35,7 +35,7 @@ function loadLanguage() {
     try {
     const jsonData = await loadLanguage();
     json = jsonData;
-    let LangG = getString('global');
+    let LangG = getString('config');
     displayMessage('Loading ' + config.LANG + ' language...');
     } catch (error) {
     console.error('Failed to load language for Aztec:', error);
@@ -49,13 +49,13 @@ function loadLanguage() {
   }
 
   function cou_ntry() {
-  let LangG = getString("global");
+  let LangG = getString("config");
   return LangG;
   }
 
   function aztec_images() {
       return new Promise((resolve, reject) => {
-      let LangG = getString("global");
+      let LangG = getString("config");
       let max_up = [
       `${LangG.pic1}`,
       `${LangG.pic2}`,
