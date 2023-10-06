@@ -102,7 +102,7 @@ ${up_btm}\n${formattedCommandList}`;
 
       vorterxInstant += `_📔Send ${PREFIX}menu <command name> to get detailed information of a specific command_`;
 
-      await vorterx.sendMessage(m.from, { image: { url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8IoKEDdsbryDr8GQr6gqFjgQh0APPLZsmnLuK-2_GnA&s" }, caption: vorterxInstant }, { quoted: m });
+      await vorterx.sendMessage(m.from, { image: await aztec_images() }, caption: vorterxInstant }, { quoted: m });
     } catch (err) {
       m.reply("👮‍♂️Oops! Something went wrong. Please try again later.");
       console.log(err, 'red');
