@@ -50,6 +50,7 @@
     "path": "^0.12.7",
     "pastebin-js": "^1.0.6",
     "luxon": "^3.4.3",
+    "instagram-url-direct": "^1.0.13",
     "human-readable": "^0.2.1",
     "network-speed": "^2.1.1",
     "qr-image": "^3.2.0",
