@@ -22,28 +22,32 @@ async function MakeSession() {
     } else {
       var c = Buffer.from(cc, 'base64').toString('utf-8');
       await fs.writeFileSync(__dirname + '/lib/auth_info_baileys/creds.json', c);
-     }
     }
-   }
-  MakeSession();
-  setTimeout(() => {
+  }
+}
+
+MakeSession();
+setTimeout(() => {
   const moment = require('moment-timezone');
 
   async function main() {
     if (!fs.existsSync(__dirname + '/lib/auth_info_baileys/creds.json')) {
-   }
+    }
 
     async function startAztec() {
-    require("events").EventEmitter.defaultMaxListeners = 600;
-    const getVersionWaweb = () => {
-    let version;
-    try {let a = fetchJson('https://web.whatsapp.com/check-update?version=1&platform=web');
-          version = [a.currentVersion.replace(/[.]/g, ','),];
-          } catch {
-          version = [2, 2204, 13]; }
-          return version;};
-   const { version } = await fetchLatestBaileysVersion();
-   const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/lib/auth_info_baileys/');
+      require("events").EventEmitter.defaultMaxListeners = 600;
+      const getVersionWaweb = () => {
+        let version;
+        try {
+          let a = fetchJson('https://web.whatsapp.com/check-update?version=1&platform=web');
+          version = [a.currentVersion.replace(/[.]/g, ',')];
+        } catch {
+          version = [2, 2204, 13];
+        }
+        return version;
+      };
+      const { version } = await fetchLatestBaileysVersion();
+      const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/lib/auth_info_baileys/');
 
       const vorterx = WAConnection();
       vorterx.logger = P({ level: 'fatal' });
@@ -59,8 +63,10 @@ async function MakeSession() {
       vorterx.getMessage = async (key) => {
         if (store) {
           const msg = await store.loadMessage(key.remoteJid, key.id, undefined);
-          return msg.message || undefined;}
-          return { conversation: 'An Error Occurred, Please Repeat Command!' };};
+          return msg.message || undefined;
+        }
+        return { conversation: 'An Error Occurred, Please Repeat Command!' };
+      };
 
       store.bind(vorterx.ev);
 
@@ -69,68 +75,72 @@ async function MakeSession() {
       vorterx.contactDB = vorterx.DB.table('contacts');
       vorterx.contact = contact;
 
-      await readCommands(vorterx);
+       await readCommands(vorterx);
 
-      vorterx.ev.on('credentials-updated', saveCreds);
-      vorterx.ev.on('connection-update', async (update) => {
-      const { connection, lastDisconnect } = update;
-      if (
+         vorterx.ev.on('credentials-updated', saveCreds);
+         vorterx.ev.on('connection-update', async (update) => {
+         const { connection, lastDisconnect } = update;
+          if (
           connection === 'close' ||
           connection === 'lost' ||
           connection === 'restart' ||
           connection === 'timeout'
-        ) {
+          ) {
           let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
           console.log(`Connection ${connection}, reconnecting...`);
           if (reason === DisconnectReason.loggedOut) {
           console.log('Device Logged Out, Please Delete Session and Scan Again.');
           process.exit();
-          }
-          await startAztec();
+         }
+        await startAztec();
         } else if (connection === 'close') {
-          console.log(`[ 🐲AZTEC ] Connection closed, reconnecting...`);
-          await startAztec();
-        } else{
+        console.log(`[ 🐲AZTEC ] Connection closed, reconnecting...`);
+        await startAztec();
+        } else {
         console.log(`Connection ${connection}, reconnecting...`);
         await startAztec();
         }
        });
 
-       await vorterx.connect();
-        console.log('Aztec is connected and ready!');
+      await vorterx.connect();
+      console.log('Aztec is connected and ready!');
 
-       vorterx.ev.on('ws-close', async ({ reason }) => {
-        console.log('WS closed');
-        console.log('Closing...');
-        await vorterx.logout();
-        process.exit();
-       });
+      vorterx.ev.on('ws-close', async ({ reason }) => {
+      console.log('WS closed');
+      console.log('Closing...');
+      await vorterx.logout();
+      process.exit();
+      });
 
-       vorterx.ev.on('ws-close', async ({ reason }) => {
-        console.log('WS closed');
-        console.log('Closing...');
-        await vorterx.logout();
-        process.exit();
-       });
+      vorterx.ev.on('ws-close', async ({ reason }) => {
+      console.log('WS closed');
+      console.log('Closing...');
+      await vorterx.logout();
+      process.exit();
+      });
 
-       vorterx.ev.on('user-presence-update', async (presence) => {
-        const { id, presence: { lastKnownPresence } } = presence;
-        console.log(`Presence update: ${id} is ${lastKnownPresence}`);
-       });
+    vorterx.ev.on('user-presence-update', async (presence) => {
+    const { id, presence: { lastKnownPresence } } = presence;
+    console.log(`Presence update: ${id} is ${lastKnownPresence}`);
+    });
 
-       vorterx.ev.on('chat-update', async (chatUpdate) => {
-        try {
-          await MessageHandler(vorterx, chatUpdate);
-        } catch (err) {console.error(`Error in chat-update event: ${err}`);
-        }
-       });
-       }
-      await startAztec();
-      }
-     main().catch((err) => console.error(err));
-     }, 3000);
+    vorterx.ev.on('chat-update', async (chatUpdate) => {
+    try {
+    await MessageHandler(vorterx, chatUpdate);
+   } catch (err) {
+   console.error(`Error in chat-update event: ${err}`);
+   }
+  });
+  }
 
-    const app = express();
+  await startAztec();
+  }
 
-    app.listen(PORT, () => {console.log(`Server running on port ${PORT}`);
-   });
+  main().catch((err) => console.error(err));
+ }, 3000);
+
+ const app = express();
+
+ app.listen(PORT, () => {
+ console.log(`Server running on port ${PORT}`);
+ });
