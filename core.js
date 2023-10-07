@@ -1,5 +1,5 @@
 const express = require('express');
-const { default: WAConnection, DisconnectReason, Browsers, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState, authState } = require('@adiwajshing/baileys');
+const { default: WAConnection, DisconnectReason, Browsers, fetchLatestBaileysVersion, makeInMemoryStore, useMultiFileAuthState } = require('@adiwajshing/baileys');
 const { Boom } = require('@hapi/boom');
 const P = require('pino');
 const { QuickDB } = require('quick.db');
@@ -32,6 +32,8 @@ setTimeout(() => {
 
   async function main() {
     if (!fs.existsSync(__dirname + '/lib/auth_info_baileys/creds.json')) {
+      console.error("Credentials file not found.");
+      return;
     }
 
     async function startAztec() {
@@ -48,6 +50,11 @@ setTimeout(() => {
       };
       const { version } = await fetchLatestBaileysVersion();
       const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/lib/auth_info_baileys/');
+
+      if (!state || !state.creds) {
+        console.error("No credentials found in authState.");
+        return;
+      }
 
       const vorterx = WAConnection();
       vorterx.logger = P({ level: 'fatal' });
@@ -67,7 +74,7 @@ setTimeout(() => {
         }
         return { conversation: 'An Error Occurred, Please Repeat Command!' };
       };
-
+      
       store.bind(vorterx.ev);
 
       vorterx.cmd = new Collection();
@@ -75,72 +82,66 @@ setTimeout(() => {
       vorterx.contactDB = vorterx.DB.table('contacts');
       vorterx.contact = contact;
 
-       await readCommands(vorterx);
+      await readCommands(vorterx);
 
-         vorterx.ev.on('credentials-updated', saveCreds);
-         vorterx.ev.on('connection-update', async (update) => {
-         const { connection, lastDisconnect } = update;
-          if (
+      vorterx.ev.on('credentials-updated', saveCreds);
+      vorterx.ev.on('connection-update', async (update) => {
+        const { connection, lastDisconnect } = update;
+        if (
           connection === 'close' ||
           connection === 'lost' ||
           connection === 'restart' ||
           connection === 'timeout'
-          ) {
+        ) {
           let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
           console.log(`Connection ${connection}, reconnecting...`);
           if (reason === DisconnectReason.loggedOut) {
-          console.log('Device Logged Out, Please Delete Session and Scan Again.');
-          process.exit();
-         }
-        await startAztec();
+            console.log('Device Logged Out, Please Delete Session and Scan Again.');
+            process.exit();
+          }
+          await startAztec();
         } else if (connection === 'close') {
-        console.log(`[ 🐲AZTEC ] Connection closed, reconnecting...`);
-        await startAztec();
+          console.log(`[ 🐲AZTEC ] Connection closed, reconnecting...`);
+          await startAztec();
         } else {
-        console.log(`Connection ${connection}, reconnecting...`);
-        await startAztec();
+          console.log(`Connection ${connection}, reconnecting...`);
+          await startAztec();
         }
-       });
+      });
 
       await vorterx.connect();
       console.log('Aztec is connected and ready!');
 
       vorterx.ev.on('ws-close', async ({ reason }) => {
-      console.log('WS closed');
-      console.log('Closing...');
-      await vorterx.logout();
-      process.exit();
+        console.log('WS closed');
+        console.log('Closing...');
+        await vorterx.logout();
+        process.exit();
       });
 
-      vorterx.ev.on('ws-close', async ({ reason }) => {
-      console.log('WS closed');
-      console.log('Closing...');
-      await vorterx.logout();
-      process.exit();
+      vorterx.ev.on('user-presence-update', async (presence) => {
+        const { id, presence: { lastKnownPresence } } = presence;
+        console.log(`Presence update: ${id} is ${lastKnownPresence}`);
       });
 
-    vorterx.ev.on('user-presence-update', async (presence) => {
-    const { id, presence: { lastKnownPresence } } = presence;
-    console.log(`Presence update: ${id} is ${lastKnownPresence}`);
-    });
+      vorterx.ev.on('chat-update', async (chatUpdate) => {
+        try {
+          await MessageHandler(vorterx, chatUpdate);
+        } catch (err) {
+          console.error(`Error in chat-update event: ${err}`);
+        }
+      });
+    }
 
-    vorterx.ev.on('chat-update', async (chatUpdate) => {
-    try {
-    await MessageHandler(vorterx, chatUpdate);
-   } catch (err) {
-   console.error(`Error in chat-update event: ${err}`);
-   }
-  });
-  }
-
-  await startAztec();
+    await startAztec();
   }
 
   main().catch((err) => console.error(err));
- }, 3000);
+}, 3000);
 
- const app = express();
+const app = express();
 
- app.listen(PORT, () => {
- console.log(`Server running on port ${PORT}`);
- });
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+l
