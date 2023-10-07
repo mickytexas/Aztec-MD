@@ -1,3 +1,5 @@
+//MADE BY DIEGOSON FENANDES 
+
 const config = require('../config.js')
 
 module.exports = {
@@ -40,7 +42,7 @@ module.exports = {
         command: 'anti_badword-on',
         category: this.category,
         description: 'Enables the bad word detection to the gc',
-        executor: async (vorterx, m) {
+        executor: async (vorterx, m) => {
           if (!this.enabled) {
           this.enabled = true;
           await m.reply('Bad word detection is now enabled to the gc');
@@ -51,7 +53,7 @@ module.exports = {
         command: 'anti_badword-off',
         category: this.category,
         description: 'Disables the bad word detection.',
-        executor: async (vorterx, m) {
+        executor: async (vorterx, m) => {
           if (this.enabled) {
           this.enabled = false;
           await m.reply('Bad word detection is now disabled to the group');
