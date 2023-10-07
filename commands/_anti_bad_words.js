@@ -15,7 +15,7 @@ module.exports = {
     return;
     }
     
-    const badWords = ['offensive', 'badword2', 'badword3'];
+    const badWords = ['offensive', 'vulgarity', 'profanity'];
     const message = text.toLowerCase();
 
     
