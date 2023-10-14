@@ -20,16 +20,16 @@ module.exports = {
       ╭──────────────────────╮
       │ *乂 AZTEC M D- REPO 乂*│
       ├──────────────────────┤
-      │ 🌟 Total Stars: ${repoData.stargazers_count}   │\n
-      │ 🛸 Users: ${repoData.forks_count}                │\n
-      │ 🌲 Last Updated: ${repoData.updated_at}        │\n
-      │ 🌲 Repo URL: ${repoData.html_url}              │\n
-      │ 📧 Email: amdablack63@gmail.com       │\n
-      │ 🆕 Latest Commit: ${commitData[0].commit.message} │\n
-      │ 📅 Commit Date: ${commitData[0].commit.author.date} │\n
-      │ ⌚ Time: 10:00 AM                          │\n
-      │ 👤 Author: Diegoson                        │\n
-      │ *© aztec wabot*         │\n
+      │ 🌟 Total Stars: ${repoData.stargazers_count}\n
+      │ 🛸 Users: ${repoData.forks_count}\n
+      │ 🌲 Last Updated: ${repoData.updated_at}\n
+      │ 🌲 Repo URL: ${repoData.html_url}\n
+      │ 📧 Email: amdablack63@gmail.com\n
+      │ 🆕 Latest Commit: ${commitData[0].commit.message}\n
+      │ 📅 Commit Date: ${commitData[0].commit.author.date}\n
+      │ ⌚ Time: 10:00 AM\n
+      │ 👤 Author: Diegoson\n
+      │ *© aztec wabot*
       ╰──────────────────────╯
     `);
 
