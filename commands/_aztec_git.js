@@ -9,7 +9,7 @@ module.exports = {
   async xstart(vorterx, m, { xReact, text,args }) {
      
       const fs = require("fs");
-      const { aztec_images } = require('../mangoes/
+      const { aztec_images } = require("../mangoes/encryptFunc.js");
       const aztecImage = fs.readFileSync("./lib/aztec.png");
     
       await toReact("🙋‍♂️");
