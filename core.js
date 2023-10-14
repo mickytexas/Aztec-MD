@@ -11,7 +11,7 @@ const MessageHandler = require('./lib/message/vorterx');
 const Diego = 'https://i.imgur.com/XnOaCsE.jpeg';
 const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
 const PORT = process.env.PORT || 3000;
-let cc = config.session_id.replace(/SIGMA-MD;;;/g, "");
+let cc = config.session_id.replace(/Vorterx;;;/g, "");
 
 async function MakeSession() {
   if (!fs.existsSync(__dirname + '/lib/auth_info_baileys/creds.json')) {
