@@ -10,7 +10,7 @@ module.exports = {
      
       const fs = require("fs");
       const { aztec_images } = require("../mangoes/encryptFunc.js");
-      const aztecImage = fs.readFileSync("./lib/aztec.png");
+      const aztecImage = fs.readFileSync("./lib/imogs.jpg");
     
       await toReact("🙋‍♂️");
       const { data: repoData } = await axios.get("https://api.github.com/repos/Vorterx/Aztec-MD");
@@ -20,16 +20,16 @@ module.exports = {
       ╭──────────────────────╮
       │ *乂 AZTEC M D- REPO 乂*│
       ├──────────────────────┤
-      │ 🌟 Total Stars: ${repoData.stargazers_count}   │
-      │ 🛸 Users: ${repoData.forks_count}                │
-      │ 🌲 Last Updated: ${repoData.updated_at}        │
-      │ 🌲 Repo URL: ${repoData.html_url}              │
-      │ 📧 Email: amdablack63@gmail.com       │
-      │ 🆕 Latest Commit: ${commitData[0].commit.message} │
-      │ 📅 Commit Date: ${commitData[0].commit.author.date} │
-      │ ⌚ Time: 10:00 AM                          │
-      │ 👤 Author: Diegoson                        │
-      │ © aztec wabot         │
+      │ 🌟 Total Stars: ${repoData.stargazers_count}   │\n
+      │ 🛸 Users: ${repoData.forks_count}                │\n
+      │ 🌲 Last Updated: ${repoData.updated_at}        │\n
+      │ 🌲 Repo URL: ${repoData.html_url}              │\n
+      │ 📧 Email: amdablack63@gmail.com       │\n
+      │ 🆕 Latest Commit: ${commitData[0].commit.message} │\n
+      │ 📅 Commit Date: ${commitData[0].commit.author.date} │\n
+      │ ⌚ Time: 10:00 AM                          │\n
+      │ 👤 Author: Diegoson                        │\n
+      │ *© aztec wabot*         │\n
       ╰──────────────────────╯
     `);
 
